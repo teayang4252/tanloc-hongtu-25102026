@@ -302,6 +302,28 @@ body {
   transform: scale(1.04);
 }
 
+.hero-hy-fallback {
+  width: min(190px, 52vw);
+  color: #8C2628;
+  font-family: var(--font-serif-heading);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: 1.5px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.hero-hy-fallback em {
+  display: inline-block;
+  margin-left: 3px;
+  font-family: var(--font-script-display);
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 0.8;
+  text-transform: none;
+}
+
 /* Lời mời trang trọng cá nhân hóa (Cụm Compact - Visual Priority #3) */
 .hero-guest-invitation {
   position: relative;
@@ -1818,6 +1840,44 @@ body {
 
 .dock-btn.featured:hover {
   background: var(--dark-olive);
+}
+
+@media (max-width: 520px) {
+  .floating-bottom-dock {
+    bottom: max(10px, env(safe-area-inset-bottom));
+    width: calc(100vw - 20px);
+    max-width: 460px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 3px;
+    padding: 6px;
+    border-radius: 26px;
+  }
+
+  .dock-btn {
+    min-width: 0;
+    min-height: 50px;
+    padding: 6px 2px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3px;
+    font-size: clamp(9px, 2.7vw, 10.5px);
+    line-height: 1.1;
+    text-align: center;
+  }
+
+  .dock-btn svg {
+    width: 18px;
+    height: 18px;
+    flex: 0 0 auto;
+  }
+
+  .dock-btn span {
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 
 /* ==========================================================================

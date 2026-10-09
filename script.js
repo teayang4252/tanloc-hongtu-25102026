@@ -126,56 +126,37 @@ function initAudioPlayer() {
   const promptPill = document.getElementById('audio-prompt-pill');
   if (!audio || !musicBtn) return;
 
-  let isPlaying = false;
-  let audioCtx = null;
-
-  // Web Audio Context unlocker (crucial for iOS Safari & Android Chrome)
-  function unlockAudioContext() {
-    try {
-      if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      }
-      if (audioCtx.state === 'suspended') {
-        audioCtx.resume();
-      }
-    } catch (e) {}
+  function syncPlaybackUi(playing) {
+    musicBtn.classList.toggle('playing', playing);
+    musicBtn.classList.toggle('paused', !playing);
+    musicBtn.setAttribute('aria-pressed', String(playing));
+    if (promptPill) promptPill.classList.toggle('hidden', playing);
   }
 
   function playMusic() {
-    unlockAudioContext();
     audio.volume = 1.0;
+    audio.muted = false;
     const playPromise = audio.play();
     if (playPromise !== undefined) {
       playPromise.then(() => {
-        isPlaying = true;
-        musicBtn.classList.add('playing');
-        musicBtn.classList.remove('paused');
-        if (promptPill) {
-          promptPill.classList.add('hidden');
-        }
+        syncPlaybackUi(true);
         removeGestureFallbacks();
-      }).catch((err) => {
+      }).catch(() => {
         // Autoplay policy: unmuted playback requires first user gesture
-        isPlaying = false;
-        musicBtn.classList.remove('playing');
-        musicBtn.classList.add('paused');
-        if (promptPill) {
-          promptPill.classList.remove('hidden');
-        }
+        syncPlaybackUi(false);
       });
     }
+    return playPromise;
   }
 
   function pauseMusic() {
     audio.pause();
-    isPlaying = false;
-    musicBtn.classList.remove('playing');
-    musicBtn.classList.add('paused');
+    syncPlaybackUi(false);
   }
 
   musicBtn.addEventListener('click', (e) => {
     e.stopPropagation();
-    if (isPlaying) {
+    if (!audio.paused && !audio.ended) {
       pauseMusic();
       showToast('Đã tạm dừng nhạc ♫');
     } else {
@@ -194,40 +175,43 @@ function initAudioPlayer() {
 
   // 1. Immediate Autoplay Attempt (fires on initial link click)
   try { audio.load(); } catch (e) {}
+  syncPlaybackUi(false);
   playMusic();
-  window.addEventListener('load', () => { if (!isPlaying) playMusic(); }, { once: true });
-  document.addEventListener('DOMContentLoaded', () => { if (!isPlaying) playMusic(); }, { once: true });
-  window.addEventListener('pageshow', () => { if (!isPlaying) playMusic(); });
-  window.addEventListener('focus', () => { if (!isPlaying) playMusic(); });
+  window.addEventListener('load', () => { if (audio.paused) playMusic(); }, { once: true });
+  window.addEventListener('pageshow', () => { if (audio.paused) playMusic(); });
   document.addEventListener('visibilitychange', () => {
-    if (!document.hidden && !isPlaying) playMusic();
+    if (!document.hidden && audio.paused) playMusic();
   });
 
-  // 2. Gesture Fallback: ANY touch, tap, scroll or key anywhere on screen triggers music
+  // 2. First real in-page gesture unlocks audio on mobile browsers.
   const gestureEvents = [
-    'pointerdown', 'pointerup',
-    'touchstart', 'touchend',
-    'click', 'mousedown', 'mouseup',
-    'keydown', 'wheel'
+    'pointerdown', 'touchend', 'click', 'keydown'
   ];
 
-  function handleFirstGesture() {
-    if (!isPlaying) {
+  function handleFirstGesture(event) {
+    // These controls call playMusic themselves. Skipping them here prevents
+    // pointerdown from starting audio and the following click from pausing it.
+    if (event.target instanceof Element && event.target.closest('#floating-music-btn, #audio-prompt-pill')) {
+      return;
+    }
+    if (audio.paused) {
       playMusic();
     }
   }
 
   function removeGestureFallbacks() {
     gestureEvents.forEach(evt => {
-      window.removeEventListener(evt, handleFirstGesture, true);
       document.removeEventListener(evt, handleFirstGesture, true);
     });
   }
 
   gestureEvents.forEach(evt => {
-    window.addEventListener(evt, handleFirstGesture, { capture: true, passive: true });
     document.addEventListener(evt, handleFirstGesture, { capture: true, passive: true });
   });
+
+  audio.addEventListener('playing', () => syncPlaybackUi(true));
+  audio.addEventListener('pause', () => syncPlaybackUi(false));
+  audio.addEventListener('error', () => syncPlaybackUi(false));
 }
 
 /* ==========================================================================

@@ -40,7 +40,7 @@
   <div class="ambient-glow"></div>
 
   <!-- Floating Audio Player Button -->
-  <button id="floating-music-btn" class="floating-audio-control playing" aria-label="Bật/Tắt nhạc nền" title="Phát: Em Đồng Ý (I Do) - Đức Phúc x 911">
+  <button id="floating-music-btn" class="floating-audio-control paused" aria-label="Bật/Tắt nhạc nền" title="Phát: Em Đồng Ý (I Do) - Đức Phúc x 911">
     <div class="disc-wrapper">
       <div class="disc-center"></div>
     </div>
@@ -69,9 +69,13 @@
         <div class="hero-hy-badge" data-anim="fade-in" style="--anim-delay: 0.05s;">
           <img 
             src="assets/images/hom_nay_nha_co_hy_red.png" 
-            alt="Hôm nay nhà có hỷ" 
+            alt="Hôm nay nhà có hỷ"
             class="hero-hy-img"
+            width="692"
+            height="454"
+            onerror="this.hidden=true; this.nextElementSibling.hidden=false"
           />
+          <span class="hero-hy-fallback" hidden>HÔM NAY NHÀ CÓ <em>HỶ</em></span>
         </div>
 
         <!-- Lời mời trang trọng cá nhân hóa (Luxury/Minimal 10/10) -->
