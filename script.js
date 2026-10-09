@@ -303,15 +303,17 @@ function initGuestPersonalization() {
   if (toParam) {
     try {
       const guestMap = JSON.parse(localStorage.getItem('wedding_guest_map') || '{}');
-      if (guestMap[toParam]) {
-        if (!guestName) guestName = guestMap[toParam].name;
-        if (!guestSide) guestSide = guestMap[toParam].side;
+      const found = guestMap[toParam] || guestMap[toParam.toLowerCase()];
+      if (found) {
+        if (!guestName) guestName = found.name;
+        if (!guestSide) guestSide = found.side;
       }
     } catch (e) {}
 
-    // Fallback: If still no guestName, check toParam
+    // Fallback: If still no guestName, decode toParam and Title-case
     if (!guestName) {
-      guestName = toParam.replace(/_nhatrai|_nhagai|-nhatrai|-nhagai/gi, '').replace(/[-_]+/g, ' ');
+      const rawSlug = toParam.replace(/_nhatrai|_nhagai|-nhatrai|-nhagai/gi, '').replace(/[-_]+/g, ' ').trim();
+      guestName = rawSlug.split(/\s+/).map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
     }
 
     // Auto-detect side from slug format like banhien_nhatrai / banhien_nhagai

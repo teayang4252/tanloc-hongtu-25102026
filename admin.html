@@ -731,6 +731,32 @@
         <!-- Single Generator -->
         <div class="form-grid-2">
           <div>
+            <!-- Domain Selector for Guest Links -->
+            <div class="form-group" style="background: #F4F1EA; padding: 14px 16px; border-radius: var(--radius-sm); border: 1.5px solid var(--border-gold); margin-bottom: 16px;">
+              <label for="cfg-base-domain" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                <span style="font-weight: 700; color: var(--primary-olive);">🌐 Tên Miền Thiệp Cưới (Base Domain)</span>
+                <span style="font-size: 11.5px; font-weight: 600; color: var(--gold-accent);">Dùng tạo link gửi khách</span>
+              </label>
+              <div style="display: flex; gap: 8px;">
+                <input 
+                  type="text" 
+                  id="cfg-base-domain" 
+                  class="form-control" 
+                  value="https://tanloc-hongtu.vercel.app" 
+                  placeholder="https://tanloc-hongtu.vercel.app" 
+                  style="font-family: monospace; font-size: 13.5px;" 
+                />
+                <button type="button" class="btn btn-secondary btn-sm" id="btn-reset-domain" title="Khôi phục tên miền mặc định">
+                  Mặc định
+                </button>
+              </div>
+              <div style="display: flex; gap: 8px; margin-top: 8px; font-size: 12px; color: var(--text-muted); align-items: center; flex-wrap: wrap;">
+                <span>Chọn nhanh:</span>
+                <button type="button" class="badge-domain-quick" onclick="setBaseDomain('https://tanloc-hongtu.vercel.app')" style="background: #FFF; border: 1px solid var(--border-color); padding: 2px 8px; border-radius: 4px; cursor: pointer; color: var(--primary-olive); font-size: 11.5px;">Vercel (Chính thức)</button>
+                <button type="button" class="badge-domain-quick" onclick="setBaseDomain('http://tanloc-hongtu-25102026.103.166.184.127.sslip.io')" style="background: #FFF; border: 1px solid var(--border-color); padding: 2px 8px; border-radius: 4px; cursor: pointer; color: var(--primary-olive); font-size: 11.5px;">VPS Dự Phòng</button>
+              </div>
+            </div>
+
             <div class="form-group">
               <label for="input-guest-name">
                 Nhập tên khách mời (có dấu tiếng Việt)
@@ -739,10 +765,10 @@
                 type="text" 
                 id="input-guest-name" 
                 class="form-control" 
-                placeholder="Ví dụ: Anh Nguyễn Văn A, Gia đình Bác Ba, Bạn Thân Tuấn Anh..."
-                value="Anh Nguyễn Văn A"
+                placeholder="Ví dụ: Em Tú Tôn, Chú Sáu, Anh Nguyễn Văn A..."
+                value="Em Tú Tôn"
               />
-              <span class="field-hint">Tự động loại bỏ dấu mũ, sắc, huyền, hỏi, ngã, nặng, đ/Đ để tạo slug sạch đẹp.</span>
+              <span class="field-hint">Hệ thống sẽ tự động tạo link thiệp cá nhân hoá trang trọng cho khách mời.</span>
             </div>
 
             <div class="form-group">
@@ -764,15 +790,31 @@
             </div>
 
             <div class="form-group">
-              <label>Định dạng URL</label>
+              <label>Định dạng đường link</label>
               <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 4px;">
-                <label style="display: flex; align-items: center; gap: 8px; font-weight: normal; font-size: 13.5px; text-transform: none; cursor: pointer;">
-                  <input type="radio" name="url_format" value="unaccented" checked style="accent-color: var(--primary-olive);" />
-                  <span><strong>Chuẩn hoá không dấu (Khuyên dùng):</strong> <code>?to=Anh+Nguyen+Van+A</code></span>
+                <label style="display: flex; align-items: flex-start; gap: 8px; font-weight: normal; font-size: 13px; cursor: pointer;">
+                  <input type="radio" name="url_format" value="clean_slug" checked style="accent-color: var(--primary-olive); margin-top: 3px;" />
+                  <div>
+                    <strong>Link Ngắn Gọn Sạch Đẹp (Khuyên Dùng):</strong><br>
+                    <code style="background: #EFECE4; padding: 1px 6px; border-radius: 4px;">/Em-Tu-Ton</code>
+                    <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 2px;">Không có dấu ?, không có ?to=, cực kỳ chuyên nghiệp và sang trọng khi chia sẻ Zalo/Facebook.</div>
+                  </div>
                 </label>
-                <label style="display: flex; align-items: center; gap: 8px; font-weight: normal; font-size: 13.5px; text-transform: none; cursor: pointer;">
-                  <input type="radio" name="url_format" value="accented" style="accent-color: var(--primary-olive);" />
-                  <span><strong>Giữ nguyên có dấu (URL encode):</strong> <code>?to=Anh+Nguyễn+Văn+A</code></span>
+                <label style="display: flex; align-items: flex-start; gap: 8px; font-weight: normal; font-size: 13px; cursor: pointer;">
+                  <input type="radio" name="url_format" value="unicode_slug" style="accent-color: var(--primary-olive); margin-top: 3px;" />
+                  <div>
+                    <strong>Link Trực Tiếp Có Dấu Tiếng Việt:</strong><br>
+                    <code style="background: #EFECE4; padding: 1px 6px; border-radius: 4px;">/Em-Tú-Tôn</code>
+                    <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 2px;">Giữ nguyên 100% dấu tiếng Việt trên URL thanh lịch.</div>
+                  </div>
+                </label>
+                <label style="display: flex; align-items: flex-start; gap: 8px; font-weight: normal; font-size: 13px; cursor: pointer;">
+                  <input type="radio" name="url_format" value="compat" style="accent-color: var(--primary-olive); margin-top: 3px;" />
+                  <div>
+                    <strong>Link Tương Thích Tuyệt Đối (Kèm tham số):</strong><br>
+                    <code style="background: #EFECE4; padding: 1px 6px; border-radius: 4px;">/?to=Em-Tu-Ton&name=Em+Tú+Tôn</code>
+                    <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 2px;">Đảm bảo 100% mọi trình duyệt cũ đều nạp đúng dấu tiếng Việt.</div>
+                  </div>
                 </label>
               </div>
             </div>
@@ -869,7 +911,7 @@ Cô Chú Sáu"></textarea>
                     <th>Tên Chuẩn Hoá (URL)</th>
                     <th>Phía Mời</th>
                     <th>Link Thiệp Cưới</th>
-                    <th style="width: 140px; text-align: center;">Hành Động</th>
+                    <th style="width: 230px; text-align: center;">Hành Động</th>
                   </tr>
                 </thead>
                 <tbody id="bulk-table-body"></tbody>
@@ -1669,50 +1711,123 @@ Cô Chú Sáu"></textarea>
     }
 
     /**
-     * Build Base URL for the invitation (Removes /index.html and /admin.html)
+     * Domain Management for Guest Links
+     */
+    window.setBaseDomain = function(domain) {
+      const input = document.getElementById('cfg-base-domain');
+      if (input) {
+        input.value = domain;
+        localStorage.setItem('wedding_base_domain', domain);
+        updateSingleGenerator();
+        showToast(`✓ Đã chọn tên miền: ${domain}`);
+      }
+    };
+
+    /**
+     * Build Base URL for the invitation
+     * Prioritizes the user-selected domain, falls back to location.origin
      */
     function getInvitationBaseUrl() {
-      const loc = window.location;
-      let path = loc.pathname.replace(/\/admin\.html$/i, '').replace(/\/index\.html$/i, '');
-      if (!path.endsWith('/')) {
-        path += '/';
+      const customDomainInput = document.getElementById('cfg-base-domain');
+      let base = customDomainInput ? customDomainInput.value.trim() : '';
+      
+      if (!base) {
+        const loc = window.location;
+        if (loc.origin && loc.origin.startsWith('http')) {
+          let path = loc.pathname.replace(/\/admin\.html$/i, '').replace(/\/index\.html$/i, '');
+          if (!path.endsWith('/')) path += '/';
+          base = `${loc.origin}${path}`;
+        } else {
+          base = 'https://tanloc-hongtu.vercel.app/';
+        }
       }
-      return `${loc.origin}${path}`;
+
+      if (!base.endsWith('/')) {
+        base += '/';
+      }
+      return base;
     }
 
     /**
-     * Generate Link for a single guest name
-     * Ultra-clean aesthetic link: e.g. https://tanloc-hongtu.vercel.app/?to=Em-Tu-Ton
+     * Generate Link and Personalized Message for a guest
      */
     function generateGuestLink(rawName, side) {
       const baseUrl = getInvitationBaseUrl();
-      const trimmedName = rawName.trim();
-      if (!trimmedName) return { url: baseUrl, slug: '', rawName: '', normalizedName: '' };
+      const trimmedName = (rawName || '').trim();
+      if (!trimmedName) return { url: baseUrl, slug: '', rawName: '', normalizedName: '', message: '' };
 
-      // Slug creation: Clean Title-Cased Hyphenated Name without % escape codes
-      // e.g. "Em Tú Tôn" -> "Em-Tu-Ton"
+      const formatRadio = document.querySelector('input[name="url_format"]:checked');
+      const format = formatRadio ? formatRadio.value : 'clean_slug';
+
+      // 1. Clean ASCII slug (e.g. "Em Tú Tôn" -> "Em-Tu-Ton")
       const cleanSlug = removeVietnameseTones(trimmedName)
         .replace(/[^a-zA-Z0-9\s]/g, '')
         .trim()
         .replace(/\s+/g, '-');
 
-      // Save to guest map dictionary in localStorage so that slug can be resolved locally
+      // 2. Unicode accented slug (e.g. "Em Tú Tôn" -> "Em-Tú-Tôn")
+      const unicodeSlug = trimmedName
+        .replace(/[\/\\?#%&]/g, '')
+        .trim()
+        .replace(/\s+/g, '-');
+
+      let url = '';
+      let displaySlug = cleanSlug;
+
+      if (format === 'unicode_slug') {
+        displaySlug = unicodeSlug;
+        url = `${baseUrl}${encodeURI(unicodeSlug)}`;
+      } else if (format === 'compat') {
+        const sideQuery = side ? `&side=${encodeURIComponent(side)}` : '';
+        displaySlug = `${cleanSlug}?name=${encodeURIComponent(trimmedName)}`;
+        url = `${baseUrl}?to=${cleanSlug}&name=${encodeURIComponent(trimmedName)}${sideQuery}`;
+      } else {
+        // clean_slug (Default recommended)
+        displaySlug = cleanSlug;
+        url = `${baseUrl}${cleanSlug}`;
+      }
+
+      // Save to guest map dictionary in localStorage for local lookups
       try {
         const guestMap = JSON.parse(localStorage.getItem('wedding_guest_map') || '{}');
         guestMap[cleanSlug] = { name: trimmedName, side: side };
         guestMap[cleanSlug.toLowerCase()] = { name: trimmedName, side: side };
+        guestMap[unicodeSlug] = { name: trimmedName, side: side };
         localStorage.setItem('wedding_guest_map', JSON.stringify(guestMap));
       } catch (e) {}
 
-      // Clean, elegant URL: https://tanloc-hongtu.vercel.app/?to=Em-Tu-Ton
-      const url = `${baseUrl}${cleanSlug}`;
+      // Personalized invitation message
+      const displayGuestName = trimmedName || 'Quý Khách';
+      const sideText = side === 'trai' ? 'gia đình Nhà Trai' : side === 'gai' ? 'gia đình Nhà Gái' : 'gia đình chúng tôi';
+      const message = 
+`💌 THƯ MỜI CƯỚI TRÂN TRỌNG
+Kính gửi: ${displayGuestName}
+
+Hôn lễ của Tấn Lộc & Hồng Tú sẽ được tổ chức vào Chủ Nhật, ngày 25.10.2026.
+Sự hiện diện của ${displayGuestName} là niềm vinh hạnh to lớn cho ${sideText}!
+
+Trân trọng kính mời ${displayGuestName} xem thiệp cưới online và thông tin chi tiết tại link:
+${url}
+
+Rất mong được đón tiếp ${displayGuestName}!`;
+
       return {
         url,
-        slug: cleanSlug,
+        slug: displaySlug,
         normalizedName: cleanSlug,
-        rawName: trimmedName
+        rawName: trimmedName,
+        side,
+        message
       };
     }
+
+    /**
+     * Copy Personalized Guest Invitation Message
+     */
+    window.copyGuestMsg = function(name, url, side) {
+      const item = generateGuestLink(name, side);
+      copyText(item.message, `✓ Đã sao chép tin nhắn mời cho ${name}!`);
+    };
 
     /**
      * Update Single Link Generator Output
@@ -1735,21 +1850,8 @@ Cô Chú Sáu"></textarea>
         slugTag.textContent = res.slug ? `✓ Link: /${res.slug} · Thiệp: ${res.rawName}` : 'Chưa nhập tên';
       }
 
-      // Guest greeting name
-      const displayGuestName = res.rawName || 'Quý Khách';
-
       if (msgBox) {
-        msgBox.textContent = 
-`💌 THƯ MỜI CƯỚI TRÂN TRỌNG
-Kính gửi: ${displayGuestName}
-
-Hôn lễ của Tấn Lộc & Hồng Tú sẽ được tổ chức vào Chủ Nhật, ngày 25.10.2026.
-Sự hiện diện của ${displayGuestName} là niềm vinh hạnh to lớn cho gia đình chúng tôi!
-
-Trân trọng kính mời ${displayGuestName} xem thiệp cưới online và thông tin chi tiết tại link:
-${res.url}
-
-Rất mong được đón tiếp ${displayGuestName}!`;
+        msgBox.textContent = res.message;
       }
     }
 
@@ -1791,9 +1893,14 @@ Rất mong được đón tiếp ${displayGuestName}!`;
             </a>
           </td>
           <td style="text-align: center;">
-            <button type="button" class="btn btn-secondary btn-sm" onclick="copyText('${item.url}', 'Đã sao chép link của ${item.rawName}!')">
-              Copy Link
-            </button>
+            <div style="display: flex; gap: 6px; justify-content: center; flex-wrap: wrap;">
+              <button type="button" class="btn btn-secondary btn-sm" onclick="copyText('${item.url}', 'Đã sao chép link của ${item.rawName}!')">
+                Copy Link
+              </button>
+              <button type="button" class="btn btn-gold btn-sm" onclick="copyGuestMsg('${item.rawName}', '${item.url}', '${side}')">
+                Copy Tin Nhắn
+              </button>
+            </div>
           </td>
         `;
         tbody.appendChild(tr);
@@ -1816,9 +1923,11 @@ Rất mong được đón tiếp ${displayGuestName}!`;
     // Export Bulk to CSV
     function exportBulkCsv() {
       if (!window._currentBulkItems || window._currentBulkItems.length === 0) return;
-      let csvContent = '\uFEFFSTT,Ten_Goc,Ten_Khong_Dau,Link_Thiep\n';
+      let csvContent = '\uFEFFSTT,Ten_Khach,Phia_Moi,Link_Thiep,Tin_Nhan_Moi\n';
       window._currentBulkItems.forEach((it, idx) => {
-        csvContent += `${idx + 1},"${it.rawName}","${it.normalizedName}","${it.url}"\n`;
+        const safeMsg = (it.message || '').replace(/"/g, '""');
+        const sideLabel = it.side === 'trai' ? 'Nhà Trai' : it.side === 'gai' ? 'Nhà Gái' : 'Hai Bên';
+        csvContent += `${idx + 1},"${it.rawName}","${sideLabel}","${it.url}","${safeMsg}"\n`;
       });
       const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
       const url = URL.createObjectURL(blob);
@@ -2041,8 +2150,37 @@ Rất mong được đón tiếp ${displayGuestName}!`;
       });
     }
 
+    // Domain listeners
+    const domainInput = document.getElementById('cfg-base-domain');
+    if (domainInput) {
+      domainInput.addEventListener('input', () => {
+        localStorage.setItem('wedding_base_domain', domainInput.value.trim());
+        updateSingleGenerator();
+      });
+    }
+
+    const btnResetDomain = document.getElementById('btn-reset-domain');
+    if (btnResetDomain) {
+      btnResetDomain.addEventListener('click', () => {
+        setBaseDomain('https://tanloc-hongtu.vercel.app');
+      });
+    }
+
     // Initial load
     window.addEventListener('DOMContentLoaded', () => {
+      // Load saved base domain if exists
+      const savedDomain = localStorage.getItem('wedding_base_domain');
+      const dInput = document.getElementById('cfg-base-domain');
+      if (dInput) {
+        if (savedDomain) {
+          dInput.value = savedDomain;
+        } else if (window.location.origin && window.location.origin.startsWith('http')) {
+          let path = window.location.pathname.replace(/\/admin\.html$/i, '').replace(/\/index\.html$/i, '');
+          if (!path.endsWith('/')) path += '/';
+          dInput.value = `${window.location.origin}${path}`;
+        }
+      }
+
       const currentCfg = getConfig();
       populateForm(currentCfg);
       updateSingleGenerator();
