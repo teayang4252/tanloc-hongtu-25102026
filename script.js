@@ -281,13 +281,23 @@ let currentGuest = {
 
 function initGuestPersonalization() {
   const urlParams = new URLSearchParams(window.location.search);
+
+  // 0. Clean path-based slug (e.g. /Em-Tu-Ton or /Ban-Hien without ?to=)
+  let pathSlug = window.location.pathname.replace(/^\/+|\/+$/g, '');
+  if (pathSlug && !pathSlug.includes('.') && pathSlug.toLowerCase() !== 'admin' && pathSlug.toLowerCase() !== 'index') {
+    try {
+      pathSlug = decodeURIComponent(pathSlug);
+    } catch (e) {}
+  } else {
+    pathSlug = '';
+  }
   
   // 1. Explicit Vietnamese accented name parameter (e.g. ?name=Bạn+Hiển or ?ten=Bạn+Hiển)
   let guestName = urlParams.get('name') || urlParams.get('ten') || '';
   let guestSide = urlParams.get('side') || urlParams.get('nha') || '';
 
   // 2. Slug parameter (e.g. ?to=banhien_nhatrai)
-  const toParam = urlParams.get('to') || urlParams.get('guest') || urlParams.get('khach') || '';
+  const toParam = pathSlug || urlParams.get('to') || urlParams.get('guest') || urlParams.get('khach') || '';
 
   // 3. Resolve slug from admin guest map dictionary if available
   if (toParam) {
