@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="assets/fonts/fonts.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Great+Vibes&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      width: 1200px;
+      height: 630px;
+      overflow: hidden;
+      background: radial-gradient(circle at 50% 45%, #EBE8E3 0%, #D8D4CC 55%, #BFB9AE 100%);
+      font-family: 'Playfair Display', serif;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Ambient soft background decoration */
+    .bg-ambient-glow {
+      position: absolute;
+      width: 850px;
+      height: 850px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Subtle blurred background photo */
+    .bg-blur-photo {
+      position: absolute;
+      inset: -40px;
+      background: url('heo_/NAD00171.jpg') center 20% / cover no-repeat;
+      filter: blur(35px) brightness(0.92) opacity(0.3);
+      z-index: 0;
+    }
+
+    /* The Luxury Floating Hero Card (Ratio ~ 4 / 5.5) */
+    .hero-card {
+      position: relative;
+      width: 460px;
+      height: 604px;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 26px 65px -10px rgba(24, 28, 36, 0.4), 0 8px 25px rgba(0, 0, 0, 0.14);
+      border: 3px solid rgba(255, 255, 255, 0.96);
+      z-index: 10;
+      background: #C4C2C8;
+    }
+
+    /* Platinum / Silver Outer Hairline */
+    .hero-card::before {
+      content: '';
+      position: absolute;
+      inset: 6px;
+      border: 1.2px solid rgba(220, 224, 232, 0.9);
+      border-radius: 18px;
+      pointer-events: none;
+      z-index: 5;
+      box-shadow: inset 0 0 4px rgba(255, 255, 255, 0.5), 0 0 2px rgba(180, 185, 195, 0.25);
+    }
+
+    /* Inner Pearl Hairline */
+    .hero-card::after {
+      content: '';
+      position: absolute;
+      inset: 12px;
+      border: 0.9px solid rgba(240, 243, 248, 0.65);
+      border-radius: 13px;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    /* Couple Photo */
+    .card-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 3.5%;
+      display: block;
+    }
+
+    /* Bottom Dark Charcoal Gradient */
+    .card-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, 
+        rgba(0, 0, 0, 0) 44%, 
+        rgba(26, 29, 34, 0.38) 66%, 
+        rgba(16, 18, 22, 0.88) 100%
+      );
+      z-index: 2;
+    }
+
+    /* Card Text Container */
+    .card-content {
+      position: absolute;
+      bottom: 22px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      z-index: 3;
+      color: #FFFFFF;
+      padding: 0 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .card-script-wedding {
+      font-family: 'Arcittya Begatri', 'Great Vibes', cursive;
+      font-size: 82px;
+      line-height: 1;
+      color: rgba(255, 255, 255, 0.98);
+      margin-bottom: 10px;
+      text-shadow: 0 3px 16px rgba(0, 0, 0, 0.65);
+      letter-spacing: 1px;
+    }
+
+    .card-names-stacked {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .card-name-line {
+      font-family: 'Playfair Display', serif;
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: #FFFFFF;
+      line-height: 1.2;
+      text-shadow: 0 3px 16px rgba(0, 0, 0, 0.9);
+    }
+
+    .card-date {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: 5px;
+      color: rgba(255, 255, 255, 0.96);
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85);
+      margin-top: 24px;
+      line-height: 1.2;
+    }
+
+    /* Left & Right Editorial Accents for 1200x630 banner */
+    .banner-side-left, .banner-side-right {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 320px;
+      z-index: 5;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .banner-side-left {
+      left: 36px;
+    }
+
+    .banner-side-right {
+      right: 36px;
+    }
+
+    .side-subtitle {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: #546B38;
+      margin-bottom: 8px;
+    }
+
+    .side-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 27px;
+      font-weight: 700;
+      color: #2D3B1E;
+      line-height: 1.35;
+      margin-bottom: 12px;
+    }
+
+    .side-quote {
+      font-family: 'Lora Regular', 'Lora', serif;
+      font-style: italic;
+      font-size: 15px;
+      color: #5C6753;
+      line-height: 1.6;
+    }
+
+    .side-divider {
+      width: 48px;
+      height: 1.8px;
+      background: #C5A059;
+      margin: 14px auto;
+    }
+
+    .side-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1.2px solid rgba(197, 160, 89, 0.5);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: #3F502B;
+      letter-spacing: 1.2px;
+      box-shadow: 0 4px 12px rgba(45, 59, 30, 0.08);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Blurred Ambient Layer -->
+  <div class="bg-blur-photo"></div>
+  <div class="bg-ambient-glow"></div>
+
+  <!-- Left Editorial Touch -->
+  <div class="banner-side-left">
+    <div class="side-badge">🌸 HÔM NAY NHÀ CÓ HỶ</div>
+    <div class="side-divider"></div>
+    <div class="side-title">Trân Trọng<br>Kính Mời</div>
+    <div class="side-quote">“Hôn nhân là chuyện cả đời,<br>Yêu người vừa ý, cưới người mình thương...”</div>
+  </div>
+
+  <!-- The Exact Floating Wedding Card -->
+  <div class="hero-card">
+    <img src="heo_/NAD00171.jpg" alt="Tấn Lộc & Hồng Tú" class="card-photo">
+    <div class="card-gradient"></div>
+    <div class="card-content">
+      <div class="card-script-wedding">Wedding</div>
+      <div class="card-names-stacked">
+        <div class="card-name-line">TẤN LỘC</div>
+        <div class="card-name-line">HỒNG TÚ</div>
+      </div>
+      <div class="card-date">25.10.2026</div>
+    </div>
+  </div>
+
+  <!-- Right Editorial Touch -->
+  <div class="banner-side-right">
+    <div class="side-subtitle">HÔN LỄ NGÀY</div>
+    <div class="side-title" style="font-size: 29px; color: #3F502B; letter-spacing: 2px;">25 · 10 · 2026</div>
+    <div class="side-divider"></div>
+    <div class="side-quote">Sự hiện diện của Quý khách<br>là niềm vinh hạnh to lớn<br>của gia đình chúng tôi!</div>
+  </div>
+
+</body>
+</html>
