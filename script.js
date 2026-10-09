@@ -4,18 +4,30 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  loadSavedConfig();
-  initAudioPlayer();
-  initCountdown();
-  initGuestPersonalization();
-  initWishesSection();
-  initGiftModal();
-  initPhotoLightbox();
-  initScrollAnimations();
-  init3DPhotoTilt();
-  initAmbientAtmosphere();
-  initHeroDoves();
-  initCinematicAutoScroll();
+  const initializers = [
+    loadSavedConfig,
+    initAudioPlayer,
+    initCountdown,
+    initGuestPersonalization,
+    initWishesSection,
+    initGiftModal,
+    initPhotoLightbox,
+    initScrollAnimations,
+    init3DPhotoTilt,
+    initAmbientAtmosphere,
+    initHeroDoves,
+    initCinematicAutoScroll
+  ];
+
+  // Facebook/Zalo WebView có thể thiếu một API trình duyệt. Một hiệu ứng lỗi
+  // không được phép làm dừng toàn bộ phần còn lại của thiệp.
+  initializers.forEach(initializer => {
+    try {
+      initializer();
+    } catch (error) {
+      console.warn(`Không thể khởi tạo ${initializer.name}:`, error);
+    }
+  });
 });
 
 /* ==========================================================================
@@ -332,6 +344,8 @@ function initGuestPersonalization() {
       heroName.textContent = cleanName;
     }
 
+    document.title = `${cleanName} | Thiệp cưới Tấn Lộc & Hồng Tú`;
+
     // Update Section 7 badge
     if (greetingName) {
       greetingName.textContent = cleanName;
@@ -439,6 +453,7 @@ function initGiftModal() {
    4. Personalized Wishes & Live Guestbook Stream
    ========================================================================== */
 const defaultWishesList = []; // Clean empty by default for real wedding guests
+let wishesCache = [];
 
 function getStoredWishes() {
   try {
@@ -461,15 +476,55 @@ function getStoredWishes() {
   }
 }
 
-function addWish(wish) {
-  const current = getStoredWishes();
-  current.unshift(wish);
-  localStorage.setItem('wedding_wishes_list', JSON.stringify(current));
+function saveLocalWishes(wishes) {
+  try {
+    localStorage.setItem('wedding_wishes_list', JSON.stringify(wishes));
+  } catch (error) {
+    console.warn('Không thể lưu sổ lưu bút cục bộ:', error);
+  }
+}
+
+async function loadSharedWishes() {
+  const response = await fetch('/api/wishes', {
+    headers: { Accept: 'application/json' },
+    cache: 'no-store'
+  });
+  if (!response.ok) throw new Error(`Guestbook unavailable (${response.status})`);
+
+  const payload = await response.json();
+  if (!payload.ok || !Array.isArray(payload.wishes)) throw new Error('Invalid guestbook response');
+  wishesCache = payload.wishes;
+  saveLocalWishes(wishesCache);
+  renderLiveWishes();
+}
+
+async function addWish(wish) {
+  try {
+    const response = await fetch('/api/wishes', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(wish)
+    });
+    const payload = await response.json().catch(() => ({}));
+    if (!response.ok || !payload.ok || !payload.wish) {
+      throw new Error(payload.message || `Guestbook unavailable (${response.status})`);
+    }
+    wishesCache.unshift(payload.wish);
+    saveLocalWishes(wishesCache);
+    return { shared: true, wish: payload.wish };
+  } catch (error) {
+    console.warn('Đang dùng sổ lưu bút cục bộ:', error);
+    const localWish = { ...wish, id: `local-${Date.now()}`, createdAt: new Date().toISOString() };
+    wishesCache.unshift(localWish);
+    saveLocalWishes(wishesCache);
+    return { shared: false, wish: localWish };
+  }
 }
 
 // Global helper to wipe wishes clean
 window.clearAllWishes = function() {
-  localStorage.setItem('wedding_wishes_list', JSON.stringify([]));
+  wishesCache = [];
+  saveLocalWishes(wishesCache);
   renderLiveWishes();
 };
 
@@ -477,7 +532,7 @@ function renderLiveWishes() {
   const stream = document.getElementById('live-wishes-stream');
   const countBadge = document.getElementById('wishes-count-badge');
   const modalList = document.getElementById('wishes-list');
-  const wishes = getStoredWishes();
+  const wishes = wishesCache;
 
   if (countBadge) {
     countBadge.textContent = `${wishes.length} lời chúc`;
@@ -506,7 +561,7 @@ function renderLiveWishes() {
             <div class="author-avatar">${escapeHtml(initials)}</div>
             <strong class="author-name">${escapeHtml(w.name)}</strong>
           </div>
-          <span class="live-wish-time">${escapeHtml(w.time || 'Vừa xong')}</span>
+          <span class="live-wish-time">${escapeHtml(formatWishTime(w.createdAt) || w.time || 'Vừa xong')}</span>
         </div>
         <div class="live-wish-text">${escapeHtml(w.text)}</div>
       </div>
@@ -515,6 +570,16 @@ function renderLiveWishes() {
 
   if (stream) stream.innerHTML = html;
   if (modalList) modalList.innerHTML = html;
+}
+
+function formatWishTime(createdAt) {
+  if (!createdAt) return '';
+  const date = new Date(createdAt);
+  if (Number.isNaN(date.getTime())) return '';
+  return new Intl.DateTimeFormat('vi-VN', {
+    day: '2-digit', month: '2-digit', year: 'numeric',
+    hour: '2-digit', minute: '2-digit'
+  }).format(date);
 }
 
 function initWishesSection() {
@@ -527,7 +592,11 @@ function initWishesSection() {
   const textarea = document.getElementById('wishes-message-input');
   const attendanceInput = document.getElementById('attendance-hidden-input');
 
+  wishesCache = getStoredWishes();
   renderLiveWishes();
+  loadSharedWishes().catch(error => {
+    console.info('Sổ lưu bút dùng dữ liệu cục bộ:', error.message);
+  });
 
   // Quick Chips
   const chips = document.querySelectorAll('.quick-wish-chips .chip-btn');
@@ -574,7 +643,7 @@ function initWishesSection() {
 
   // Form Submit
   if (form) {
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
       let guestName = currentGuest.hasCustomName ? currentGuest.name : '';
@@ -596,25 +665,34 @@ function initWishesSection() {
         return;
       }
 
-      // Add to store
-      addWish({
+      const submitBtn = document.getElementById('btn-submit-wish');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.setAttribute('aria-busy', 'true');
+      }
+
+      // Add to shared store, with a local fallback when the database is offline.
+      const saveResult = await addWish({
         name: guestName,
         text: wishText,
-        time: 'Vừa xong',
         side: currentGuest.side,
         attendance: attendance
       });
 
       // Save submission to RSVP record
-      const storedRsvp = JSON.parse(localStorage.getItem('wedding_rsvp_list') || '[]');
-      storedRsvp.push({
-        name: guestName,
-        side: currentGuest.side,
-        attendance: attendance,
-        wishes: wishText,
-        timestamp: new Date().toISOString()
-      });
-      localStorage.setItem('wedding_rsvp_list', JSON.stringify(storedRsvp));
+      try {
+        const storedRsvp = JSON.parse(localStorage.getItem('wedding_rsvp_list') || '[]');
+        storedRsvp.push({
+          name: guestName,
+          side: currentGuest.side,
+          attendance: attendance,
+          wishes: wishText,
+          timestamp: new Date().toISOString()
+        });
+        localStorage.setItem('wedding_rsvp_list', JSON.stringify(storedRsvp));
+      } catch (error) {
+        console.warn('Không thể lưu RSVP cục bộ:', error);
+      }
 
       // Launch Confetti
       launchConfetti();
@@ -628,7 +706,13 @@ function initWishesSection() {
         successName.textContent = guestName;
       }
 
-      showToast(`Cảm ơn ${guestName} đã gửi lời chúc mừng! ❤️`);
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.removeAttribute('aria-busy');
+      }
+      showToast(saveResult.shared
+        ? `Cảm ơn ${guestName}, lời chúc đã được lưu! ❤️`
+        : 'Đã lưu lời chúc trên thiết bị này. Cơ sở dữ liệu chung đang ngoại tuyến.');
       renderLiveWishes();
     });
   }
@@ -833,26 +917,43 @@ function initScrollAnimations() {
   const animatedElements = document.querySelectorAll('[data-anim]');
   if (!animatedElements.length) return;
 
-  // Immediately mark Hero & top visible elements as anim-in-view
-  document.querySelectorAll('.hero-section [data-anim], .quote-section [data-anim]').forEach(el => {
-    el.classList.add('anim-in-view');
-  });
+  const revealAll = () => animatedElements.forEach(el => el.classList.add('anim-in-view'));
+  const reducedMotion = typeof window.matchMedia === 'function' &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Nội dung luôn phải đọc được trên WebView cũ hoặc khi người dùng tắt chuyển động.
+  if (reducedMotion || typeof window.IntersectionObserver !== 'function') {
+    revealAll();
+    return;
+  }
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        // Enters viewport: animate in smoothly and stay active
         entry.target.classList.add('anim-in-view');
+      } else if (entry.boundingClientRect.top > 0) {
+        // Cho phép hiệu ứng chạy lại khi cuộn lên rồi quay xuống, nhưng không
+        // làm các khối phía trên giật ngược trong lúc tiếp tục cuộn xuống.
+        entry.target.classList.remove('anim-in-view');
       }
     });
   }, {
-    threshold: 0.01,
-    rootMargin: '120px 0px 120px 0px'
+    threshold: 0.08,
+    rootMargin: '0px 0px -7% 0px'
   });
 
   animatedElements.forEach(el => {
-    observer.observe(el);
+    if (!el.closest('.hero-section, .quote-section')) observer.observe(el);
   });
+
+  // Đợi trình duyệt vẽ trạng thái ban đầu rồi mới mở phần đầu trang. Điều này
+  // làm hiệu ứng nhìn thấy được cả khi mở link từ Facebook in-app browser.
+  const revealTop = () => {
+    document.querySelectorAll('.hero-section [data-anim], .quote-section [data-anim]').forEach(el => {
+      el.classList.add('anim-in-view');
+    });
+  };
+  requestAnimationFrame(() => requestAnimationFrame(revealTop));
 }
 
 /* ==========================================================================

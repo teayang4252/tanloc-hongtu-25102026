@@ -238,8 +238,11 @@ body {
   .audio-toast-pill {
     top: 16px;
     right: 56px;
+    max-width: calc(100vw - 72px);
     padding: 4px 10px;
     font-size: 10.5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 
@@ -1845,13 +1848,17 @@ body {
 @media (max-width: 520px) {
   .floating-bottom-dock {
     bottom: max(10px, env(safe-area-inset-bottom));
-    width: calc(100vw - 20px);
-    max-width: 460px;
+    left: max(10px, env(safe-area-inset-left));
+    right: max(10px, env(safe-area-inset-right));
+    width: auto;
+    max-width: none;
+    transform: none;
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 3px;
     padding: 6px;
     border-radius: 26px;
+    overflow: hidden;
   }
 
   .dock-btn {
@@ -2543,6 +2550,21 @@ body {
 
 /* Prefers Reduced Motion: Disable dove animation */
 @media (prefers-reduced-motion: reduce) {
+  [data-anim],
+  [data-anim].anim-in-view {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    will-change: auto;
+  }
+
+  .anim-pulse,
+  .anim-pulse-fast,
+  .sparkle-twinkle,
+  .dove-photo-asset {
+    animation: none !important;
+  }
+
   .hero-doves-overlay {
     display: none !important;
   }

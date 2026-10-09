@@ -795,9 +795,9 @@
                 <label style="display: flex; align-items: flex-start; gap: 8px; font-weight: normal; font-size: 13px; cursor: pointer;">
                   <input type="radio" name="url_format" value="clean_slug" checked style="accent-color: var(--primary-olive); margin-top: 3px;" />
                   <div>
-                    <strong>Link Ngắn Gọn Sạch Đẹp (Khuyên Dùng):</strong><br>
-                    <code style="background: #EFECE4; padding: 1px 6px; border-radius: 4px;">/Em-Tu-Ton</code>
-                    <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 2px;">Không có dấu ?, không có ?to=, cực kỳ chuyên nghiệp và sang trọng khi chia sẻ Zalo/Facebook.</div>
+                    <strong>Link Cá Nhân Hoá An Toàn (Khuyên Dùng):</strong><br>
+                    <code style="background: #EFECE4; padding: 1px 6px; border-radius: 4px;">/Em-Tu-Ton?name=Em+Tú+Tôn</code>
+                    <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 2px;">Đường dẫn chính vẫn ngắn, đồng thời giữ đúng tên có dấu trên mọi điện thoại.</div>
                   </div>
                 </label>
                 <label style="display: flex; align-items: flex-start; gap: 8px; font-weight: normal; font-size: 13px; cursor: pointer;">
@@ -842,6 +842,9 @@
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                   Mở Xem
                 </a>
+                <button type="button" id="btn-save-guest" class="btn btn-secondary btn-sm">
+                  Lưu / Cập Nhật Khách
+                </button>
               </div>
 
               <!-- Message Template -->
@@ -915,6 +918,29 @@ Cô Chú Sáu"></textarea>
                   </tr>
                 </thead>
                 <tbody id="bulk-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div style="margin-top: 28px; padding-top: 22px; border-top: 1px solid var(--border-color);">
+            <div class="bulk-actions-toolbar">
+              <div>
+                <strong style="color: var(--primary-olive); font-size: 15px;">Danh Sách Khách Đã Lưu</strong>
+                <div class="field-hint">Có thể sửa tên, phía mời hoặc xoá từng người rồi tạo lại link.</div>
+              </div>
+              <span id="saved-guests-count" class="vietnamese-clean-tag">0 khách</span>
+            </div>
+            <div class="bulk-table-container">
+              <table class="bulk-table">
+                <thead>
+                  <tr>
+                    <th>Khách mời</th>
+                    <th>Phía mời</th>
+                    <th>Link cá nhân</th>
+                    <th style="width: 150px; text-align: center;">Chỉnh sửa</th>
+                  </tr>
+                </thead>
+                <tbody id="saved-guests-body"></tbody>
               </table>
             </div>
           </div>
@@ -1776,7 +1802,8 @@ Cô Chú Sáu"></textarea>
 
       if (format === 'unicode_slug') {
         displaySlug = unicodeSlug;
-        url = `${baseUrl}${encodeURI(unicodeSlug)}`;
+        const sideQuery = side ? `&side=${encodeURIComponent(side)}` : '';
+        url = `${baseUrl}${encodeURI(unicodeSlug)}?name=${encodeURIComponent(trimmedName)}${sideQuery}`;
       } else if (format === 'compat') {
         const sideQuery = side ? `&side=${encodeURIComponent(side)}` : '';
         displaySlug = `${cleanSlug}?name=${encodeURIComponent(trimmedName)}`;
@@ -1784,7 +1811,8 @@ Cô Chú Sáu"></textarea>
       } else {
         // clean_slug (Default recommended)
         displaySlug = cleanSlug;
-        url = `${baseUrl}${cleanSlug}`;
+        const sideQuery = side ? `&side=${encodeURIComponent(side)}` : '';
+        url = `${baseUrl}${cleanSlug}?name=${encodeURIComponent(trimmedName)}${sideQuery}`;
       }
 
       // Save to guest map dictionary in localStorage for local lookups
@@ -1819,6 +1847,100 @@ Rất mong được đón tiếp ${displayGuestName}!`;
         side,
         message
       };
+    }
+
+    const SAVED_GUESTS_KEY = 'wedding_saved_guests';
+    let editingGuestKey = '';
+
+    function escapeAdminHtml(value) {
+      const div = document.createElement('div');
+      div.textContent = String(value || '');
+      return div.innerHTML;
+    }
+
+    function getSavedGuests() {
+      try {
+        const guests = JSON.parse(localStorage.getItem(SAVED_GUESTS_KEY) || '[]');
+        return Array.isArray(guests) ? guests : [];
+      } catch (error) {
+        return [];
+      }
+    }
+
+    function setSavedGuests(guests) {
+      localStorage.setItem(SAVED_GUESTS_KEY, JSON.stringify(guests));
+    }
+
+    function saveGuestItem(item, silent = false) {
+      if (!item || !item.rawName) return;
+      const guests = getSavedGuests();
+      const key = item.normalizedName.toLowerCase();
+      const lookupKey = editingGuestKey || key;
+      const existingIndex = guests.findIndex(guest => guest.normalizedName.toLowerCase() === lookupKey);
+      const savedItem = { ...item, updatedAt: new Date().toISOString() };
+      if (existingIndex >= 0) guests[existingIndex] = savedItem;
+      else guests.unshift(savedItem);
+      editingGuestKey = '';
+      setSavedGuests(guests);
+      renderSavedGuests();
+      if (!silent) showToast(`✓ Đã lưu khách mời ${item.rawName}`);
+    }
+
+    function renderSavedGuests() {
+      const tbody = document.getElementById('saved-guests-body');
+      const count = document.getElementById('saved-guests-count');
+      if (!tbody) return;
+      const guests = getSavedGuests();
+      if (count) count.textContent = `${guests.length} khách`;
+
+      if (!guests.length) {
+        tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:var(--text-muted);padding:22px;">Chưa có khách nào được lưu.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = guests.map((guest, index) => {
+        const fresh = generateGuestLink(guest.rawName, guest.side);
+        const sideLabel = guest.side === 'trai' ? 'Nhà Trai' : guest.side === 'gai' ? 'Nhà Gái' : 'Hai Bên';
+        return `<tr>
+          <td><strong>${escapeAdminHtml(guest.rawName)}</strong></td>
+          <td>${sideLabel}</td>
+          <td><a href="${escapeAdminHtml(fresh.url)}" target="_blank" rel="noopener" style="color:var(--primary-olive);word-break:break-all;">${escapeAdminHtml(fresh.url)}</a></td>
+          <td style="text-align:center;white-space:nowrap;">
+            <button type="button" class="btn btn-secondary btn-sm saved-guest-edit" data-index="${index}">Sửa</button>
+            <button type="button" class="btn btn-secondary btn-sm saved-guest-delete" data-index="${index}">Xoá</button>
+          </td>
+        </tr>`;
+      }).join('');
+
+      tbody.querySelectorAll('.saved-guest-edit').forEach(button => {
+        button.addEventListener('click', () => {
+          const guest = guests[Number(button.dataset.index)];
+          if (!guest) return;
+          editingGuestKey = guest.normalizedName.toLowerCase();
+          document.getElementById('input-guest-name').value = guest.rawName;
+          const sideRadio = document.querySelector(`input[name="guest_side"][value="${guest.side || ''}"]`);
+          if (sideRadio) {
+            sideRadio.checked = true;
+            document.querySelectorAll('.side-choice-card').forEach(card => card.classList.remove('selected'));
+            sideRadio.closest('.side-choice-card')?.classList.add('selected');
+          }
+          updateSingleGenerator();
+          document.getElementById('input-guest-name').focus();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      });
+
+      tbody.querySelectorAll('.saved-guest-delete').forEach(button => {
+        button.addEventListener('click', () => {
+          const index = Number(button.dataset.index);
+          const guest = guests[index];
+          if (!guest || !confirm(`Xoá ${guest.rawName} khỏi danh sách đã lưu?`)) return;
+          guests.splice(index, 1);
+          setSavedGuests(guests);
+          renderSavedGuests();
+          showToast('Đã xoá khách mời khỏi danh sách.');
+        });
+      });
     }
 
     /**
@@ -1859,6 +1981,7 @@ Rất mong được đón tiếp ${displayGuestName}!`;
      * Bulk Guest List Generator
      */
     function generateBulkList() {
+      editingGuestKey = '';
       const rawText = document.getElementById('bulk-names-input').value;
       const lines = rawText.split('\n').map(l => l.trim()).filter(l => l.length > 0);
 
@@ -1880,6 +2003,7 @@ Rất mong được đón tiếp ${displayGuestName}!`;
       lines.forEach((name, idx) => {
         const item = generateGuestLink(name, side);
         window._currentBulkItems.push(item);
+        saveGuestItem(item, true);
 
         const tr = document.createElement('tr');
         tr.innerHTML = `
@@ -2030,6 +2154,18 @@ Rất mong được đón tiếp ${displayGuestName}!`;
     document.getElementById('btn-copy-msg').addEventListener('click', () => {
       const msg = document.getElementById('output-guest-message').textContent;
       copyText(msg, '✓ Đã sao chép tin nhắn Zalo!');
+    });
+
+    document.getElementById('btn-save-guest').addEventListener('click', () => {
+      const inputName = document.getElementById('input-guest-name').value;
+      const sideRadio = document.querySelector('input[name="guest_side"]:checked');
+      const item = generateGuestLink(inputName, sideRadio ? sideRadio.value : '');
+      if (!item.rawName) {
+        showToast('Vui lòng nhập tên khách mời trước khi lưu.');
+        document.getElementById('input-guest-name').focus();
+        return;
+      }
+      saveGuestItem(item);
     });
 
     document.getElementById('btn-generate-bulk').addEventListener('click', generateBulkList);
@@ -2184,6 +2320,7 @@ Rất mong được đón tiếp ${displayGuestName}!`;
       const currentCfg = getConfig();
       populateForm(currentCfg);
       updateSingleGenerator();
+      renderSavedGuests();
     });
   </script>
 
