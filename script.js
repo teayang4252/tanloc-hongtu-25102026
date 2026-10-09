@@ -301,7 +301,7 @@ function initGuestPersonalization() {
 
     // Fallback: If still no guestName, check toParam
     if (!guestName) {
-      guestName = toParam;
+      guestName = toParam.replace(/_nhatrai|_nhagai|-nhatrai|-nhagai/gi, '').replace(/[-_]+/g, ' ');
     }
 
     // Auto-detect side from slug format like banhien_nhatrai / banhien_nhagai

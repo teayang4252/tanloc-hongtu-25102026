@@ -1669,57 +1669,43 @@ Cô Chú Sáu"></textarea>
     }
 
     /**
-     * Build Base URL for the invitation
+     * Build Base URL for the invitation (Removes /index.html and /admin.html)
      */
     function getInvitationBaseUrl() {
       const loc = window.location;
-      let path = loc.pathname;
-      if (path.endsWith('admin.html')) {
-        path = path.replace(/admin\.html$/, 'index.html');
-      } else {
-        path = path.substring(0, path.lastIndexOf('/') + 1) + 'index.html';
+      let path = loc.pathname.replace(/\/admin\.html$/i, '').replace(/\/index\.html$/i, '');
+      if (!path.endsWith('/')) {
+        path += '/';
       }
       return `${loc.origin}${path}`;
     }
 
     /**
      * Generate Link for a single guest name
-     * Clean slug in URL (e.g. /banhien_nhatrai) while preserving accented name (Bạn Hiển) on the card!
+     * Ultra-clean aesthetic link: e.g. https://tanloc-hongtu.vercel.app/?to=Em-Tu-Ton
      */
     function generateGuestLink(rawName, side) {
       const baseUrl = getInvitationBaseUrl();
       const trimmedName = rawName.trim();
       if (!trimmedName) return { url: baseUrl, slug: '', rawName: '', normalizedName: '' };
 
-      // Slug creation: remove accents, lowercase, remove special characters
-      // e.g. "Bạn Hiển" -> "banhien"
-      let cleanSlug = removeVietnameseTones(trimmedName)
-        .toLowerCase()
-        .replace(/[^a-z0-9]/g, '');
-
-      // Add side suffix for clarity: banhien_nhatrai / banhien_nhagai
-      if (side === 'trai') {
-        cleanSlug += '_nhatrai';
-      } else if (side === 'gai') {
-        cleanSlug += '_nhagai';
-      }
+      // Slug creation: Clean Title-Cased Hyphenated Name without % escape codes
+      // e.g. "Em Tú Tôn" -> "Em-Tu-Ton"
+      const cleanSlug = removeVietnameseTones(trimmedName)
+        .replace(/[^a-zA-Z0-9\s]/g, '')
+        .trim()
+        .replace(/\s+/g, '-');
 
       // Save to guest map dictionary in localStorage so that slug can be resolved locally
       try {
         const guestMap = JSON.parse(localStorage.getItem('wedding_guest_map') || '{}');
         guestMap[cleanSlug] = { name: trimmedName, side: side };
+        guestMap[cleanSlug.toLowerCase()] = { name: trimmedName, side: side };
         localStorage.setItem('wedding_guest_map', JSON.stringify(guestMap));
       } catch (e) {}
 
-      // Build safe URL: contains normalized slug in ?to= and proper accented name in &name=
-      const params = new URLSearchParams();
-      params.set('to', cleanSlug);
-      params.set('name', trimmedName);
-      if (side) {
-        params.set('side', side);
-      }
-
-      const url = `${baseUrl}?${params.toString().replace(/%20/g, '+')}`;
+      // Clean, elegant URL: https://tanloc-hongtu.vercel.app/?to=Em-Tu-Ton
+      const url = `${baseUrl}?to=${cleanSlug}`;
       return {
         url,
         slug: cleanSlug,
