@@ -1,0 +1,277 @@
+{
+  "ol1c8xAbpl": {
+    "type": "GeometricBox",
+    "props": {
+      "top": 1064.9982,
+      "left": 0,
+      "width": 430,
+      "height": 309.6,
+      "shapeType": "rectangle",
+      "color": "rgba(93, 115, 63, 1.00)",
+      "opacity": 1,
+      "rotation": 0,
+      "borderRadius": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "borderPosition": "all",
+      "borderSize": 0,
+      "borderStyle": "solid",
+      "borderColor": "#d9d9d9",
+      "hasShadow": false,
+      "boxShadow": {
+        "offsetX": 0,
+        "offsetY": 2,
+        "blur": 8,
+        "spread": 0,
+        "color": "rgba(0,0,0,0.25)"
+      },
+      "zIndex": 0,
+      "locked": false,
+      "transition": {
+        "effectType": "fade-in",
+        "effectEnabled": false,
+        "effectDuration": 1,
+        "effectDelay": 0.5,
+        "effectEasing": "ease"
+      },
+      "continuousAnimation": {
+        "type": "none",
+        "duration": 1,
+        "delay": 0.5
+      }
+    }
+  },
+  "y2FS9p8HgW": {
+    "type": "GeometricBox",
+    "props": {
+      "top": 2544.0004,
+      "left": 0,
+      "width": 430,
+      "height": 1485.22,
+      "shapeType": "rectangle",
+      "color": "rgba(93, 115, 63, 1.00)",
+      "opacity": 1,
+      "rotation": 0,
+      "borderRadius": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "borderPosition": "all",
+      "borderSize": 0,
+      "borderStyle": "solid",
+      "borderColor": "#d9d9d9",
+      "hasShadow": false,
+      "boxShadow": {
+        "offsetX": 0,
+        "offsetY": 2,
+        "blur": 8,
+        "spread": 0,
+        "color": "rgba(0,0,0,0.25)"
+      },
+      "zIndex": 0,
+      "locked": false,
+      "transition": {
+        "effectType": "fade-in",
+        "effectEnabled": false,
+        "effectDuration": 1,
+        "effectDelay": 0.5,
+        "effectEasing": "ease"
+      },
+      "continuousAnimation": {
+        "type": "none",
+        "duration": 1,
+        "delay": 0.5
+      }
+    }
+  },
+  "uqJtsnHl2X": {
+    "type": "GeometricBox",
+    "props": {
+      "top": 4819.999,
+      "left": 0,
+      "width": 430,
+      "height": 215,
+      "shapeType": "rectangle",
+      "color": "linear-gradient(180deg, rgba(255, 255, 255, 0.00) 0%, rgba(0, 0, 0, 0.60) 100%)",
+      "opacity": 1,
+      "rotation": 0,
+      "borderRadius": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "borderPosition": "all",
+      "borderSize": 0,
+      "borderStyle": "solid",
+      "borderColor": "#d9d9d9",
+      "hasShadow": false,
+      "boxShadow": {
+        "offsetX": 0,
+        "offsetY": 2,
+        "blur": 8,
+        "spread": 0,
+        "color": "rgba(0,0,0,0.25)"
+      },
+      "zIndex": 19,
+      "locked": false,
+      "transition": {
+        "effectType": "fade-in",
+        "effectEnabled": false,
+        "effectDuration": 1,
+        "effectDelay": 0.5,
+        "effectEasing": "ease"
+      },
+      "continuousAnimation": {
+        "type": "none",
+        "duration": 1,
+        "delay": 0.5
+      }
+    }
+  },
+  "jjPTgwqDkR": {
+    "type": "GeometricBox",
+    "props": {
+      "top": 400.0032,
+      "left": 0,
+      "width": 430,
+      "height": 245.1,
+      "shapeType": "rectangle",
+      "color": "linear-gradient(180deg, rgba(255, 255, 255, 0.00) 0%, rgba(0, 0, 0, 0.60) 100%)",
+      "opacity": 1,
+      "rotation": 0,
+      "borderRadius": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "borderPosition": "all",
+      "borderSize": 0,
+      "borderStyle": "solid",
+      "borderColor": "#d9d9d9",
+      "hasShadow": false,
+      "boxShadow": {
+        "offsetX": 0,
+        "offsetY": 2,
+        "blur": 8,
+        "spread": 0,
+        "color": "rgba(0,0,0,0.25)"
+      },
+      "zIndex": 20,
+      "locked": false,
+      "transition": {
+        "effectType": "fade-in",
+        "effectEnabled": false,
+        "effectDuration": 1,
+        "effectDelay": 0.5,
+        "effectEasing": "ease"
+      },
+      "continuousAnimation": {
+        "type": "none",
+        "duration": 1,
+        "delay": 0.5
+      }
+    }
+  },
+  "OVf-eSZ3wp": {
+    "type": "PluginCountDown",
+    "props": {
+      "top": 4608.9636,
+      "left": 39.56,
+      "width": 350.5274,
+      "height": 79.4554,
+      "backgroundColor": "rgba(93, 115, 63, 1.00)",
+      "color": "rgb(255, 255, 255)",
+      "padding": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "opacity": 1,
+      "borderRadius": [
+        10,
+        10,
+        10,
+        10
+      ],
+      "rotation": 0,
+      "borderPosition": "all",
+      "borderSize": 0,
+      "borderStyle": "solid",
+      "borderColor": "",
+      "hasShadow": false,
+      "boxShadow": {
+        "offsetX": 0,
+        "offsetY": 0,
+        "blur": 10,
+        "spread": 0,
+        "color": "rgba(0, 0, 0, 0.5)"
+      },
+      "fontSize": 14.62,
+      "fontFamily": "\"Lora Regular\"",
+      "selectedDate": "2026-12-29",
+      "selectedTime": "18:30",
+      "direction": "horizontal",
+      "spacing": 10,
+      "zIndex": 63,
+      "locked": false,
+      "transition": {
+        "effectType": "fade-in",
+        "effectEnabled": false,
+        "effectDuration": 1.5,
+        "effectDelay": 0,
+        "effectEasing": "ease"
+      },
+      "semanticField": "eventDateTime"
+    }
+  },
+  "HVShPRnNFi": {
+    "type": "PluginRsvp",
+    "props": {
+      "top": 4156.7412,
+      "left": 23.8478,
+      "width": 382.6828,
+      "height": 337.9628,
+      "opacity": 1,
+      "rotation": 0,
+      "buttonColor": "rgba(93, 115, 63, 1.00)",
+      "buttonTextColor": "#ffffff",
+      "buttonPadding": [
+        10,
+        18,
+        10,
+        18
+      ],
+      "buttonBorderRadius": [
+        999,
+        999,
+        999,
+        999
+      ],
+      "buttonBorderPosition": "all",
+      "buttonBorderSize": 0,
+      "buttonBorderStyle": "solid",
+      "buttonBorderColor": "#eeeeee",
+      "rsvpTitle": "Xác nhận tham dự",
+      "rsvpDescription": "",
+      "rsvpShowHeader": true,
+      "rsvpButtonName": "Gửi xác nhận",
+      "zIndex": 64,
+      "locked": false,
+      "transition": {
+        "effectType": "fade-in",
+        "effectEnabled": false,
+        "effectDuration": 1.5,
+        "effectDelay": 0,
+        "effectEasing": "ease"
+      }
+    }
+  }
+}

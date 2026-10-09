@@ -1,0 +1,63 @@
+@font-face {
+  font-family: 'Alisheia';
+  src: url('./alisheia-1781916204564-mpl41n.woff2') format('woff2'), url('./alisheia-1781916204564-mpl41n.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Arcittya Begatri';
+  src: url('./arcittya-begatri-1765171541178-9e42kz.woff2') format('woff2'), url('./arcittya-begatri-1765171541178-9e42kz.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'HoaTay1';
+  src: url('./hoatay1-1760784393832-7yv8a1.woff2') format('woff2'), url('./hoatay1-1760784393832-7yv8a1.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Hastegi';
+  src: url('./hastegi-1765171543799-gxal6i.woff2') format('woff2'), url('./hastegi-1765171543799-gxal6i.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'UVN Ke Chuyen2';
+  src: url('./uvn-ke-chuyen2-1781917785545-uc0iz3.woff2') format('woff2'), url('./uvn-ke-chuyen2-1781917785545-uc0iz3.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'UVN';
+  src: url('./uvn-ke-chuyen2-1781917785545-uc0iz3.woff2') format('woff2'), url('./uvn-ke-chuyen2-1781917785545-uc0iz3.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pinyon';
+  src: url('./pinyon-1786424974218-blxctg.woff2') format('woff2'), url('./pinyon-1786424974218-blxctg.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lora Regular';
+  src: url('./lora-regular-1765171536658-xs6f6j.woff2') format('woff2'), url('./lora-regular-1765171536658-xs6f6j.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}

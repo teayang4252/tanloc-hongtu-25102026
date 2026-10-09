@@ -1,0 +1,2067 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trang Quản Trị Thiệp Cưới & Tạo Link Khách Mời | Tấn Lộc & Hồng Tú</title>
+  
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💍</text></svg>">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Alex+Brush&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary-olive: #2D3B1E;
+      --secondary-olive: #3F502B;
+      --light-olive: #4E6336;
+      --gold-accent: #C5A059;
+      --gold-light: #DFC188;
+      --cream-bg: #F7F5F0;
+      --card-bg: #FFFFFF;
+      --text-dark: #1E2419;
+      --text-muted: #5C6753;
+      --border-color: rgba(63, 80, 43, 0.15);
+      --border-gold: rgba(197, 160, 89, 0.35);
+      --shadow-sm: 0 4px 14px rgba(45, 59, 30, 0.06);
+      --shadow-md: 0 10px 28px rgba(45, 59, 30, 0.09);
+      --shadow-lg: 0 20px 45px rgba(45, 59, 30, 0.14);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--cream-bg);
+      color: var(--text-dark);
+      line-height: 1.5;
+      padding: 24px 16px 80px;
+      min-height: 100vh;
+    }
+
+    .admin-container {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    /* Top Brand Header */
+    .admin-header {
+      background: linear-gradient(135deg, var(--primary-olive) 0%, var(--secondary-olive) 100%);
+      color: #FFFFFF;
+      border-radius: var(--radius-lg);
+      padding: 28px 32px;
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .admin-header::after {
+      content: '';
+      position: absolute;
+      right: -40px;
+      top: -40px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      border: 1px solid rgba(223, 193, 136, 0.25);
+      pointer-events: none;
+    }
+
+    .admin-header-titles h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .admin-header-titles p {
+      font-size: 13.5px;
+      color: var(--gold-light);
+      margin-top: 5px;
+      letter-spacing: 0.3px;
+    }
+
+    .header-quick-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      z-index: 2;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13.5px;
+      font-weight: 600;
+      padding: 10px 18px;
+      border-radius: 30px;
+      cursor: pointer;
+      border: none;
+      transition: all 0.25s ease;
+      text-decoration: none;
+    }
+
+    .btn-gold {
+      background: linear-gradient(135deg, #E5C37A 0%, #C5A059 100%);
+      color: #1A2411;
+      box-shadow: 0 4px 14px rgba(197, 160, 89, 0.35);
+    }
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(197, 160, 89, 0.5);
+    }
+
+    .btn-outline-white {
+      background: rgba(255, 255, 255, 0.12);
+      color: #FFFFFF;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      backdrop-filter: blur(6px);
+    }
+    .btn-outline-white:hover {
+      background: rgba(255, 255, 255, 0.22);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: #FFFFFF;
+      color: var(--primary-olive);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+    }
+    .btn-secondary:hover {
+      background: #F3EFE6;
+      border-color: var(--gold-accent);
+    }
+
+    .btn-sm {
+      padding: 6px 14px;
+      font-size: 12.5px;
+      border-radius: 20px;
+    }
+
+    /* Tabs Bar */
+    .admin-nav-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      background: #FFFFFF;
+      padding: 8px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 24px;
+      border: 1px solid var(--border-color);
+    }
+
+    .nav-tab-btn {
+      padding: 10px 18px;
+      border-radius: 10px;
+      border: none;
+      background: transparent;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .nav-tab-btn:hover {
+      color: var(--primary-olive);
+      background: #F7F5F0;
+    }
+
+    .nav-tab-btn.active {
+      background: var(--primary-olive);
+      color: #FFFFFF;
+      box-shadow: 0 4px 12px rgba(45, 59, 30, 0.2);
+    }
+
+    .tab-badge-glow {
+      background: #E5C37A;
+      color: #1A2411;
+      font-size: 10.5px;
+      padding: 2px 7px;
+      border-radius: 10px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    /* Tab Panes */
+    .tab-pane {
+      display: none;
+      animation: fadeInPane 0.3s ease;
+    }
+    .tab-pane.active {
+      display: block;
+    }
+
+    @keyframes fadeInPane {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Card Panels */
+    .admin-card {
+      background: #FFFFFF;
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-md);
+      margin-bottom: 24px;
+    }
+
+    .admin-card-header {
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 16px;
+      margin-bottom: 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .admin-card-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      color: var(--primary-olive);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .admin-card-header p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* Form Grids */
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+    }
+
+    .form-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--primary-olive);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .form-group .field-hint {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      font-weight: normal;
+      text-transform: none;
+    }
+
+    .form-control {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14.5px;
+      padding: 11px 15px;
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      background: #FAFAFA;
+      color: var(--text-dark);
+      transition: all 0.2s ease;
+      width: 100%;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--gold-accent);
+      background: #FFFFFF;
+      box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.18);
+    }
+
+    textarea.form-control {
+      resize: vertical;
+      min-height: 80px;
+      line-height: 1.45;
+    }
+
+    /* Side Choice Radio Cards */
+    .side-choice-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      margin-top: 6px;
+    }
+
+    .side-choice-card {
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #FAFAFA;
+      transition: all 0.2s ease;
+    }
+
+    .side-choice-card:hover {
+      border-color: var(--primary-olive);
+      background: #F3EFE6;
+    }
+
+    .side-choice-card input[type="radio"] {
+      accent-color: var(--primary-olive);
+      width: 16px;
+      height: 16px;
+    }
+
+    .side-choice-card.selected {
+      border-color: var(--primary-olive);
+      background: #EBF0E6;
+      font-weight: 600;
+    }
+
+    /* Generator Result Box */
+    .link-preview-box {
+      background: #F3EFE6;
+      border: 1.5px solid var(--border-gold);
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+      margin-top: 20px;
+    }
+
+    .link-output-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-top: 8px;
+    }
+
+    .link-output-input {
+      font-family: 'SFMono-Regular', Consolas, monospace;
+      font-size: 13.5px;
+      background: #FFFFFF;
+      border: 1px solid var(--border-gold);
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      color: var(--primary-olive);
+      flex: 1;
+      font-weight: 600;
+    }
+
+    .vietnamese-clean-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #E8F0E2;
+      color: var(--primary-olive);
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-weight: 600;
+      margin-top: 6px;
+    }
+
+    /* Message Template Box */
+    .msg-template-box {
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      margin-top: 14px;
+      font-size: 13.5px;
+      white-space: pre-wrap;
+      line-height: 1.55;
+      color: #333333;
+      position: relative;
+    }
+
+    /* Bulk Table */
+    .bulk-table-container {
+      overflow-x: auto;
+      margin-top: 18px;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+    }
+
+    .bulk-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      text-align: left;
+    }
+
+    .bulk-table th {
+      background: #EFECE4;
+      color: var(--primary-olive);
+      font-weight: 700;
+      padding: 12px 14px;
+      border-bottom: 1.5px solid var(--border-color);
+    }
+
+    .bulk-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(63, 80, 43, 0.08);
+      vertical-align: middle;
+    }
+
+    .bulk-table tr:hover {
+      background: #FAF8F4;
+    }
+
+    .bulk-actions-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 14px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    /* Toast Notification */
+    #admin-toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--primary-olive);
+      color: #FFFFFF;
+      padding: 12px 22px;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: 600;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 9999;
+      opacity: 0;
+      transform: translateY(20px);
+      pointer-events: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      border: 1px solid var(--gold-accent);
+    }
+
+    #admin-toast.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    /* QR Code Live Preview Card */
+    .qr-preview-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 18px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-gold);
+      background: #FAF8F4;
+    }
+
+    .qr-preview-img {
+      width: 170px;
+      height: 170px;
+      object-fit: contain;
+      background: #FFFFFF;
+      padding: 8px;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 10px;
+    }
+
+    /* Floating bottom save bar */
+    .floating-save-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid var(--border-gold);
+      padding: 14px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .floating-save-bar .status-text {
+      font-size: 13px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #38A169;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      body {
+        padding: 14px 10px 100px;
+      }
+      .admin-header {
+        padding: 20px 16px;
+      }
+      .admin-card {
+        padding: 20px 14px;
+      }
+      .side-choice-group {
+        grid-template-columns: 1fr;
+      }
+      .link-output-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+
+    /* Romantic Effects Management */
+    .fx-toggle-card {
+      background: #FAFAFA;
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 18px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      transition: all 0.25s ease;
+      margin-bottom: 14px;
+    }
+    .fx-toggle-card:hover {
+      border-color: var(--gold-accent);
+      background: #FFFFFF;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+    .fx-info {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .fx-icon-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(84, 107, 56, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+      border: 1px solid rgba(84, 107, 56, 0.15);
+    }
+    .fx-details h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--primary-olive);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .fx-details p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.45;
+      margin: 0;
+    }
+    .fx-badge-luxury {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 10px;
+      background: #F3EFE6;
+      color: #8C6D23;
+      border: 1px solid rgba(197, 160, 89, 0.3);
+    }
+    /* Switch toggle */
+    .switch-control {
+      position: relative;
+      display: inline-block;
+      width: 52px;
+      height: 30px;
+      flex-shrink: 0;
+    }
+    .switch-control input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .switch-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #CBD5E0;
+      transition: .3s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 34px;
+    }
+    .switch-slider:before {
+      position: absolute;
+      content: "";
+      height: 22px;
+      width: 22px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .3s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 50%;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+    }
+    .switch-control input:checked + .switch-slider {
+      background-color: var(--primary-olive);
+    }
+    .switch-control input:focus + .switch-slider {
+      box-shadow: 0 0 0 3px rgba(84, 107, 56, 0.25);
+    }
+    .switch-control input:checked + .switch-slider:before {
+      transform: translateX(22px);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="admin-container">
+    
+    <!-- Top Header -->
+    <header class="admin-header">
+      <div class="admin-header-titles">
+        <h1>
+          <span>🌿</span> Green Love Management Suite
+        </h1>
+        <p>Hôn Lễ: Lê Tấn Lộc & Dương Hồng Tú · 25.10.2026 (16.09 Bính Ngọ)</p>
+      </div>
+      <div class="header-quick-actions">
+        <a href="index.html" target="_blank" class="btn btn-outline-white">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+          Xem Thiệp Trực Tiếp
+        </a>
+        <button id="btn-save-top" class="btn btn-gold">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+          Lưu Tất Cả Thay Đổi
+        </button>
+      </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="admin-nav-tabs">
+      <button class="nav-tab-btn active" data-tab="tab-guest-links">
+        🔗 Tạo Link Khách Mời <span class="tab-badge-glow">Tự động chuẩn hoá</span>
+      </button>
+      <button class="nav-tab-btn" data-tab="tab-couple">
+        💑 Thông Tin Cặp Đôi
+      </button>
+      <button class="nav-tab-btn" data-tab="tab-family">
+        👨‍👩‍👦 Nhà Trai & Nhà Gái
+      </button>
+      <button class="nav-tab-btn" data-tab="tab-schedule">
+        📅 Lịch Trình & Bản Đồ
+      </button>
+      <button class="nav-tab-btn" data-tab="tab-bank">
+        💳 Mừng Cưới / VietQR
+      </button>
+      <button class="nav-tab-btn" data-tab="tab-quotes">
+        💬 Lời Ngỏ & Cảm Ơn
+      </button>
+      <button class="nav-tab-btn" data-tab="tab-effects">
+        ✨ Hiệu Ứng Lãng Mạn <span class="tab-badge-glow">Mới</span>
+      </button>
+      <button class="nav-tab-btn" data-tab="tab-backup">
+        ⚙️ Sao Lưu & Khôi Phục
+      </button>
+    </nav>
+
+    <!-- TAB 1: SMART GUEST LINK GENERATOR -->
+    <div id="tab-guest-links" class="tab-pane active">
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <div>
+            <h2>🔗 Tạo Link Mời Khách Thông Minh</h2>
+            <p>Nhập tên tiếng Việt có dấu, hệ thống tự động chuẩn hoá không dấu cho URL query an toàn khi gửi qua Zalo / Facebook / SMS.</p>
+          </div>
+        </div>
+
+        <!-- Single Generator -->
+        <div class="form-grid-2">
+          <div>
+            <div class="form-group">
+              <label for="input-guest-name">
+                Nhập tên khách mời (có dấu tiếng Việt)
+              </label>
+              <input 
+                type="text" 
+                id="input-guest-name" 
+                class="form-control" 
+                placeholder="Ví dụ: Anh Nguyễn Văn A, Gia đình Bác Ba, Bạn Thân Tuấn Anh..."
+                value="Anh Nguyễn Văn A"
+              />
+              <span class="field-hint">Tự động loại bỏ dấu mũ, sắc, huyền, hỏi, ngã, nặng, đ/Đ để tạo slug sạch đẹp.</span>
+            </div>
+
+            <div class="form-group">
+              <label>Phía đại diện mời</label>
+              <div class="side-choice-group">
+                <label class="side-choice-card selected" id="card-side-trai">
+                  <input type="radio" name="guest_side" value="trai" checked />
+                  <span>Nhà Trai</span>
+                </label>
+                <label class="side-choice-card" id="card-side-gai">
+                  <input type="radio" name="guest_side" value="gai" />
+                  <span>Nhà Gái</span>
+                </label>
+                <label class="side-choice-card" id="card-side-both">
+                  <input type="radio" name="guest_side" value="" />
+                  <span>Hai Bên</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Định dạng URL</label>
+              <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 4px;">
+                <label style="display: flex; align-items: center; gap: 8px; font-weight: normal; font-size: 13.5px; text-transform: none; cursor: pointer;">
+                  <input type="radio" name="url_format" value="unaccented" checked style="accent-color: var(--primary-olive);" />
+                  <span><strong>Chuẩn hoá không dấu (Khuyên dùng):</strong> <code>?to=Anh+Nguyen+Van+A</code></span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 8px; font-weight: normal; font-size: 13.5px; text-transform: none; cursor: pointer;">
+                  <input type="radio" name="url_format" value="accented" style="accent-color: var(--primary-olive);" />
+                  <span><strong>Giữ nguyên có dấu (URL encode):</strong> <code>?to=Anh+Nguyễn+Văn+A</code></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <!-- Live Converted Result -->
+            <div class="link-preview-box">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <label style="font-size: 12px; font-weight: 700; color: var(--primary-olive); text-transform: uppercase;">
+                  Link Thiệp Cưới Đã Tạo
+                </label>
+                <span class="vietnamese-clean-tag" id="slug-preview-tag">
+                  ✓ Chuẩn hoá: Anh Nguyen Van A
+                </span>
+              </div>
+
+              <div class="link-output-row">
+                <input type="text" id="output-guest-url" class="link-output-input" readonly />
+                <button type="button" id="btn-copy-url" class="btn btn-gold btn-sm">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                  Sao Chép Link
+                </button>
+                <a id="btn-open-preview" href="#" target="_blank" class="btn btn-secondary btn-sm">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                  Mở Xem
+                </a>
+              </div>
+
+              <!-- Message Template -->
+              <div style="margin-top: 14px;">
+                <label style="font-size: 12px; font-weight: 700; color: var(--primary-olive); text-transform: uppercase;">
+                  Tin Nhắn Mời Khách Gửi Qua Zalo / SMS
+                </label>
+                <div id="output-guest-message" class="msg-template-box"></div>
+                <div style="margin-top: 8px; text-align: right;">
+                  <button type="button" id="btn-copy-msg" class="btn btn-secondary btn-sm">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    Sao Chép Tin Nhắn Mời
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bulk Generator Section -->
+        <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border-color);">
+          <div class="admin-card-header" style="border: none; padding-bottom: 0;">
+            <div>
+              <h2>⚡ Tạo Hàng Loạt Từ Danh Sách Khách</h2>
+              <p>Dán danh sách nhiều khách (mỗi dòng một tên có dấu), hệ thống sẽ tạo link cho toàn bộ danh sách chỉ trong 1 giây!</p>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top: 14px;">
+            <textarea id="bulk-names-input" class="form-control" rows="5" placeholder="Dán danh sách khách mời vào đây, mỗi người một dòng:
+Anh Nguyễn Văn A
+Chị Lê Thị B
+Gia đình Bác Ba
+Bạn Thân Minh Đức
+Em Hồng Hạnh
+Cô Chú Sáu"></textarea>
+          </div>
+
+          <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+            <button type="button" id="btn-generate-bulk" class="btn btn-gold">
+              ⚡ Bắt Đầu Tạo Danh Sách Link
+            </button>
+            <span class="field-hint">Áp dụng phía mời và định dạng URL đã chọn ở trên.</span>
+          </div>
+
+          <div id="bulk-result-wrap" style="display: none; margin-top: 18px;">
+            <div class="bulk-actions-toolbar">
+              <strong style="color: var(--primary-olive); font-size: 14px;" id="bulk-count-label">
+                Đã tạo 0 link khách mời
+              </strong>
+              <div style="display: flex; gap: 8px;">
+                <button type="button" id="btn-copy-all-bulk" class="btn btn-secondary btn-sm">
+                  Sao Chép Toàn Bộ (Dạng Text)
+                </button>
+                <button type="button" id="btn-export-csv" class="btn btn-secondary btn-sm">
+                  Xuất File Excel / CSV
+                </button>
+              </div>
+            </div>
+
+            <div class="bulk-table-container">
+              <table class="bulk-table">
+                <thead>
+                  <tr>
+                    <th style="width: 50px;">STT</th>
+                    <th>Tên Gốc (Có Dấu)</th>
+                    <th>Tên Chuẩn Hoá (URL)</th>
+                    <th>Phía Mời</th>
+                    <th>Link Thiệp Cưới</th>
+                    <th style="width: 140px; text-align: center;">Hành Động</th>
+                  </tr>
+                </thead>
+                <tbody id="bulk-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- TAB 2: COUPLE INFO -->
+    <div id="tab-couple" class="tab-pane">
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <div>
+            <h2>💑 Thông Tin Cô Dâu & Chú Rể</h2>
+            <p>Họ tên đầy đủ, tên gọi thân mật, vai vế trong gia đình và ngày cử hành hôn lễ.</p>
+          </div>
+        </div>
+
+        <div class="form-grid-2">
+          <!-- Chú rể -->
+          <div style="background: #FAF8F4; padding: 18px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+            <h3 style="font-family: 'Playfair Display', serif; color: var(--primary-olive); margin-bottom: 14px; font-size: 17px;">
+              🤵 Thông Tin Chú Rể
+            </h3>
+            
+            <div class="form-group">
+              <label for="cfg-groom-name">Họ và Tên Chú Rể (Viết hoa)</label>
+              <input type="text" id="cfg-groom-name" class="form-control" value="LÊ TẤN LỘC" />
+            </div>
+
+            <div class="form-group">
+              <label for="cfg-groom-nickname">Tên gọi thân mật / Thư pháp</label>
+              <input type="text" id="cfg-groom-nickname" class="form-control" value="Tấn Lộc" />
+            </div>
+
+            <div class="form-group">
+              <label for="cfg-groom-role">Vai vế trong gia đình</label>
+              <input type="text" id="cfg-groom-role" class="form-control" value="Út Nam" placeholder="Ví dụ: Trưởng Nam, Thứ Nam, Út Nam..." />
+            </div>
+          </div>
+
+          <!-- Cô dâu -->
+          <div style="background: #FAF8F4; padding: 18px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+            <h3 style="font-family: 'Playfair Display', serif; color: var(--primary-olive); margin-bottom: 14px; font-size: 17px;">
+              👰 Thông Tin Cô Dâu
+            </h3>
+
+            <div class="form-group">
+              <label for="cfg-bride-name">Họ và Tên Cô Dâu (Viết hoa)</label>
+              <input type="text" id="cfg-bride-name" class="form-control" value="DƯƠNG HỒNG TÚ" />
+            </div>
+
+            <div class="form-group">
+              <label for="cfg-bride-nickname">Tên gọi thân mật / Thư pháp</label>
+              <input type="text" id="cfg-bride-nickname" class="form-control" value="Hồng Tú" />
+            </div>
+
+            <div class="form-group">
+              <label for="cfg-bride-role">Vai vế trong gia đình</label>
+              <input type="text" id="cfg-bride-role" class="form-control" value="Út Nữ" placeholder="Ví dụ: Trưởng Nữ, Thứ Nữ, Út Nữ..." />
+            </div>
+          </div>
+        </div>
+
+        <!-- Ngày tháng -->
+        <div style="margin-top: 20px; background: #FAF8F4; padding: 18px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+          <h3 style="font-family: 'Playfair Display', serif; color: var(--primary-olive); margin-bottom: 14px; font-size: 17px;">
+            🗓️ Ngày Tháng Cử Hành & Đếm Ngược
+          </h3>
+
+          <div class="form-grid-3">
+            <div class="form-group">
+              <label for="cfg-solar-date">Ngày Dương Lịch (Chuỗi)</label>
+              <input type="text" id="cfg-solar-date" class="form-control" value="25.10.2026" />
+            </div>
+
+            <div class="form-group">
+              <label for="cfg-solar-day-num">Số ngày (Hiển thị to)</label>
+              <input type="text" id="cfg-solar-day-num" class="form-control" value="25" />
+            </div>
+
+            <div class="form-group">
+              <label for="cfg-lunar-date">Ngày Âm Lịch</label>
+              <input type="text" id="cfg-lunar-date" class="form-control" value="16 tháng 09 năm Bính Ngọ" />
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0;">
+            <label for="cfg-countdown-target">Mốc thời gian đếm ngược (ISO Format YYYY-MM-DDTHH:MM:SS)</label>
+            <input type="text" id="cfg-countdown-target" class="form-control" value="2026-10-25T09:00:00" />
+            <span class="field-hint">Đồng hồ đếm ngược trên thiệp sẽ tự động tính chính xác đến giây phút này.</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- TAB 3: FAMILY INFO -->
+    <div id="tab-family" class="tab-pane">
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <div>
+            <h2>👨‍👩‍👦 Thông Tin Hai Bên Gia Đình</h2>
+            <p>Tên phụ mẫu và địa chỉ tư gia của Nhà Trai & Nhà Gái (trích xuất chuẩn theo thiệp giấy).</p>
+          </div>
+        </div>
+
+        <div class="form-grid-2">
+          <!-- Nhà Trai -->
+          <div style="background: #FAF8F4; padding: 18px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+            <h3 style="font-family: 'Playfair Display', serif; color: var(--primary-olive); margin-bottom: 14px; font-size: 17px;">
+              🏡 Nhà Trai
+            </h3>
+
+            <div class="form-group">
+              <label for="cfg-groom-dad">Họ Tên Ba Chú Rể</label>
+              <input type="text" id="cfg-groom-dad" class="form-control" value="LÊ TẤN LÂM" />
+            </div>
+
+            <div class="form-group">
+              <label for="cfg-groom-mom">Họ Tên Mẹ Chú Rể</label>
+              <input type="text" id="cfg-groom-mom" class="form-control" value="HUỲNH THỊ MỸ PHƯƠNG" />
+            </div>
+
+            <div class="form-group">
+              <label for="cfg-groom-address">Địa chỉ tư gia Nhà Trai</label>
+              <textarea id="cfg-groom-address" class="form-control" rows="3">TDP 5 Cũ (Thôn 3 Mới)
+16/4 Điện Biên Phủ · Đắk Lắk</textarea>
+            </div>
+          </div>
+
+          <!-- Nhà Gái -->
+          <div style="background: #FAF8F4; padding: 18px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+            <h3 style="font-family: 'Playfair Display', serif; color: var(--primary-olive); margin-bottom: 14px; font-size: 17px;">
+              🏡 Nhà Gái
+            </h3>
+
+            <div class="form-group">
+              <label for="cfg-bride-dad">Họ Tên Ba Cô Dâu</label>
+              <input type="text" id="cfg-bride-dad" class="form-control" value="DƯƠNG QUỐC VIỆT" />
+            </div>
+
+            <div class="form-group">
+              <label for="cfg-bride-mom">Họ Tên Mẹ Cô Dâu</label>
+              <input type="text" id="cfg-bride-mom" class="form-control" value="NGUYỄN THỊ THUỶ" />
+            </div>
+
+            <div class="form-group">
+              <label for="cfg-bride-address">Địa chỉ tư gia Nhà Gái</label>
+              <textarea id="cfg-bride-address" class="form-control" rows="3">TDP 1 Cũ (Thôn 1 Mới)
+03 Y Ôn · Đắk Lắk</textarea>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- TAB 4: SCHEDULE & MAPS -->
+    <div id="tab-schedule" class="tab-pane">
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <div>
+            <h2>📅 Lịch Trình Sự Kiện & Bản Đồ Google Maps</h2>
+            <p>Thời gian, địa điểm và link chỉ đường Google Maps cho từng buổi lễ.</p>
+          </div>
+        </div>
+
+        <div class="form-grid-2">
+          <!-- Event 1 -->
+          <div style="background: #FAF8F4; padding: 18px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+            <h3 style="font-family: 'Playfair Display', serif; color: var(--primary-olive); margin-bottom: 14px; font-size: 17px;">
+              💍 Sự Kiện 1: Lễ Tân Hôn (Sáng)
+            </h3>
+
+            <div class="form-group">
+              <label for="cfg-ev1-title">Tên sự kiện</label>
+              <input type="text" id="cfg-ev1-title" class="form-control" value="LỄ TÂN HÔN" />
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label for="cfg-ev1-time">Giờ cử hành</label>
+                <input type="text" id="cfg-ev1-time" class="form-control" value="09:00" />
+              </div>
+              <div class="form-group">
+                <label for="cfg-ev1-day">Thứ trong tuần</label>
+                <input type="text" id="cfg-ev1-day" class="form-control" value="CHỦ NHẬT" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="cfg-ev1-venue">Địa điểm</label>
+              <input type="text" id="cfg-ev1-venue" class="form-control" value="Tại tư gia nhà trai" />
+            </div>
+
+            <div class="form-group">
+              <label for="cfg-ev1-address">Địa chỉ chi tiết</label>
+              <input type="text" id="cfg-ev1-address" class="form-control" value="16/4 Điện Biên Phủ · TDP 5 Cũ (Thôn 3 Mới) · Đắk Lắk" />
+            </div>
+
+            <div class="form-group">
+              <label for="cfg-ev1-map">Link Google Maps (Chỉ đường)</label>
+              <input type="text" id="cfg-ev1-map" class="form-control" value="https://www.google.com/maps/search/?api=1&query=16%2F4+%C4%90i%E1%BB%87n+Bi%C3%AAn+Ph%E1%BB%A7%2C+Kr%C3%B4ng+Kmar%2C+Kr%C3%B4ng+B%C3%B4ng%2C+%C4%90%E1%BA%AFk+L%E1%BA%AFk" />
+            </div>
+          </div>
+
+          <!-- Event 2 -->
+          <div style="background: #FAF8F4; padding: 18px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+            <h3 style="font-family: 'Playfair Display', serif; color: var(--primary-olive); margin-bottom: 14px; font-size: 17px;">
+              🍷 Sự Kiện 2: Tiệc Cưới Chung Vui (Trưa)
+            </h3>
+
+            <div class="form-group">
+              <label for="cfg-ev2-title">Tên sự kiện</label>
+              <input type="text" id="cfg-ev2-title" class="form-control" value="TIỆC CƯỚI CHUNG VUI" />
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label for="cfg-ev2-time">Giờ cử hành</label>
+                <input type="text" id="cfg-ev2-time" class="form-control" value="11:00" />
+              </div>
+              <div class="form-group">
+                <label for="cfg-ev2-day">Thứ trong tuần</label>
+                <input type="text" id="cfg-ev2-day" class="form-control" value="CHỦ NHẬT" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="cfg-ev2-venue">Địa điểm</label>
+              <input type="text" id="cfg-ev2-venue" class="form-control" value="Nhà Cộng Đồng" />
+            </div>
+
+            <div class="form-group">
+              <label for="cfg-ev2-address">Địa chỉ chi tiết</label>
+              <input type="text" id="cfg-ev2-address" class="form-control" value="Thôn 5 · TT. Krông Kmar Cũ (Thôn 3 Mới) · Đắk Lắk" />
+            </div>
+
+            <div class="form-group">
+              <label for="cfg-ev2-map">Link Google Maps (Chỉ đường)</label>
+              <input type="text" id="cfg-ev2-map" class="form-control" value="https://www.google.com/maps/search/?api=1&query=Nh%C3%A0+C%E1%BB%99ng+%C4%90%E1%BB%93ng%2C+Kr%C3%B4ng+Kmar%2C+Kr%C3%B4ng+B%C3%B4ng%2C+%C4%90%E1%BA%AFk+L%E1%BA%AFk" />
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- TAB 5: BANK & VIETQR -->
+    <div id="tab-bank" class="tab-pane">
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <div>
+            <h2>💳 Thông Tin Mừng Cưới & Mã VietQR</h2>
+            <p>Cập nhật số tài khoản ngân hàng và xem trước mã VietQR tự động sinh cho khách ở xa.</p>
+          </div>
+        </div>
+
+        <div class="form-grid-2">
+          <!-- Chú Rể QR -->
+          <div style="background: #FAF8F4; padding: 18px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+            <h3 style="font-family: 'Playfair Display', serif; color: var(--primary-olive); margin-bottom: 14px; font-size: 17px;">
+              🤵 Tài Khoản Chú Rể (Tấn Lộc)
+            </h3>
+
+            <div class="form-group">
+              <label for="cfg-groom-bank">Ngân hàng</label>
+              <input type="text" id="cfg-groom-bank" class="form-control" value="MB Bank" />
+            </div>
+
+            <div class="form-group">
+              <label for="cfg-groom-acc">Số tài khoản</label>
+              <input type="text" id="cfg-groom-acc" class="form-control" value="999988882510" />
+            </div>
+
+            <div class="form-group">
+              <label for="cfg-groom-holder">Chủ tài khoản (Không dấu)</label>
+              <input type="text" id="cfg-groom-holder" class="form-control" value="LE TAN LOC" />
+            </div>
+
+            <div class="qr-preview-card" style="margin-top: 14px;">
+              <img id="qr-preview-groom" src="https://img.vietqr.io/image/MB-999988882510-compact2.png?amount=0&addInfo=Mung%20cuoi%20Tan%20Loc&accountName=LE%20TAN%20LOC" alt="QR Chú Rể" class="qr-preview-img" />
+              <div style="font-size: 12px; font-weight: 600; color: var(--primary-olive);">Xem trước mã VietQR Chú Rể</div>
+            </div>
+          </div>
+
+          <!-- Cô Dâu QR -->
+          <div style="background: #FAF8F4; padding: 18px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+            <h3 style="font-family: 'Playfair Display', serif; color: var(--primary-olive); margin-bottom: 14px; font-size: 17px;">
+              👰 Tài Khoản Cô Dâu (Hồng Tú)
+            </h3>
+
+            <div class="form-group">
+              <label for="cfg-bride-bank">Ngân hàng</label>
+              <input type="text" id="cfg-bride-bank" class="form-control" value="Vietcombank" />
+            </div>
+
+            <div class="form-group">
+              <label for="cfg-bride-acc">Số tài khoản</label>
+              <input type="text" id="cfg-bride-acc" class="form-control" value="101225102026" />
+            </div>
+
+            <div class="form-group">
+              <label for="cfg-bride-holder">Chủ tài khoản (Không dấu)</label>
+              <input type="text" id="cfg-bride-holder" class="form-control" value="DUONG HONG TU" />
+            </div>
+
+            <div class="qr-preview-card" style="margin-top: 14px;">
+              <img id="qr-preview-bride" src="https://img.vietqr.io/image/VCB-101225102026-compact2.png?amount=0&addInfo=Mung%20cuoi%20Hong%20Tu&accountName=DUONG%20HONG%20TU" alt="QR Cô Dâu" class="qr-preview-img" />
+              <div style="font-size: 12px; font-weight: 600; color: var(--primary-olive);">Xem trước mã VietQR Cô Dâu</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- TAB 6: QUOTES & GREETINGS -->
+    <div id="tab-quotes" class="tab-pane">
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <div>
+            <h2>💬 Lời Ngỏ, Trích Dẫn & Lời Cảm Ơn</h2>
+            <p>Nội dung câu nói yêu thương và thông điệp tri ân khách mời ở chân trang.</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="cfg-quote">Câu Trích Dẫn Đầu Trang (Quote)</label>
+          <textarea id="cfg-quote" class="form-control" rows="3">“Tình yêu không phải là tìm một ai đó hoàn hảo, mà là cùng nhau hoàn thiện qua từng năm tháng.”</textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="cfg-thank-you">Lời Cảm Ơn Cuối Trang (Thank You Message)</label>
+          <textarea id="cfg-thank-you" class="form-control" rows="4">“Cảm ơn Quý Khách đã dành tình cảm cho gia đình chúng tôi! Sự hiện diện của Quý Khách chính là món quà ý nghĩa nhất, gia đình chúng tôi vô cùng trân quý khi được cùng Quý Khách chia sẻ niềm hạnh phúc trong ngày trọng đại này.”</textarea>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- TAB 7: BACKUP & RESTORE -->
+    <div id="tab-backup" class="tab-pane">
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <div>
+            <h2>⚙️ Quản Lý Cấu Hình & Sao Lưu</h2>
+            <p>Xuất file JSON để lưu về máy tính hoặc nạp lại cấu hình dự phòng khi cần thiết.</p>
+          </div>
+        </div>
+
+        <div class="form-grid-3">
+          <div style="background: #FAF8F4; padding: 18px; border-radius: var(--radius-md); border: 1px solid var(--border-color); text-align: center;">
+            <div style="font-size: 28px; margin-bottom: 8px;">📥</div>
+            <h4 style="font-size: 15px; color: var(--primary-olive); margin-bottom: 6px;">Xuất File JSON</h4>
+            <p style="font-size: 12.5px; color: var(--text-muted); margin-bottom: 14px;">Tải toàn bộ cấu hình hiện tại thành file `wedding-config.json` để cất giữ.</p>
+            <button type="button" id="btn-export-json" class="btn btn-secondary btn-sm" style="width: 100%;">
+              Tải File JSON
+            </button>
+          </div>
+
+          <div style="background: #FAF8F4; padding: 18px; border-radius: var(--radius-md); border: 1px solid var(--border-color); text-align: center;">
+            <div style="font-size: 28px; margin-bottom: 8px;">📤</div>
+            <h4 style="font-size: 15px; color: var(--primary-olive); margin-bottom: 6px;">Nạp File JSON</h4>
+            <p style="font-size: 12.5px; color: var(--text-muted); margin-bottom: 14px;">Khôi phục lại dữ liệu thiệp từ file JSON đã lưu trước đó.</p>
+            <input type="file" id="input-import-json" accept=".json" style="display: none;" />
+            <button type="button" id="btn-trigger-import" class="btn btn-secondary btn-sm" style="width: 100%;">
+              Chọn File Nạp
+            </button>
+          </div>
+
+          <div style="background: #FAF8F4; padding: 18px; border-radius: var(--radius-md); border: 1px solid var(--border-color); text-align: center;">
+            <div style="font-size: 28px; margin-bottom: 8px;">↺</div>
+            <h4 style="font-size: 15px; color: var(--primary-olive); margin-bottom: 6px;">Khôi Phục Chuẩn</h4>
+            <p style="font-size: 12.5px; color: var(--text-muted); margin-bottom: 14px;">Trở về thông tin gốc từ thiệp giấy của Tấn Lộc & Hồng Tú.</p>
+            <button type="button" id="btn-reset-default" class="btn btn-secondary btn-sm" style="width: 100%; color: #C53030;">
+              Đặt Lại Mặc Định
+            </button>
+          </div>
+        </div>
+
+        <!-- Tool Dọn Dẹp Sổ Lưu Bút -->
+        <div style="margin-top: 24px; padding-top: 20px; border-top: 1.5px dashed var(--border-color); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+          <div>
+            <h3 style="font-size: 15.5px; font-weight: 700; color: var(--primary-olive); display: flex; align-items: center; gap: 8px;">
+              <span>💌</span> Dọn Dẹp Sổ Lưu Bút Khách Mời
+            </h3>
+            <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">
+              Xóa sạch các lời chúc thử nghiệm ban đầu để sổ lưu bút sẵn sàng nhận lời chúc từ khách mời thực tế.
+            </p>
+          </div>
+          <button type="button" id="btn-clear-wishes-admin" class="btn btn-secondary btn-sm" style="color: #C53030; border-color: rgba(197, 48, 48, 0.4); font-weight: 700;">
+            🗑️ Xóa Toàn Bộ Lời Chúc Thử Nghiệm
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- TAB: ROMANTIC VISUAL EFFECTS -->
+    <div id="tab-effects" class="tab-pane">
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <div>
+            <h2>✨ Quản Lý Hiệu Ứng Lãng Mạn (Visual Atmosphere)</h2>
+            <p>Tuỳ chỉnh các hiệu ứng chuyển động cao cấp, tinh tế được may đo riêng cho thiệp cưới của Tấn Lộc & Hồng Tú.</p>
+          </div>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <a href="index.html?test_doves=1" target="_blank" id="btn-test-doves-admin" class="btn btn-gold btn-sm" style="text-decoration:none;">
+              🕊️ Bay Thử Đôi Bồ Câu
+            </a>
+            <button type="button" id="btn-test-confetti-admin" class="btn btn-gold btn-sm">
+              🎉 Bắn Thử Confetti
+            </button>
+          </div>
+        </div>
+
+        <div style="background: #F4F6F0; border-left: 4px solid var(--primary-olive); padding: 14px 18px; border-radius: var(--radius-sm); margin-bottom: 24px;">
+          <p style="font-size: 13px; color: var(--primary-olive); line-height: 1.5; margin: 0;">
+            <strong>🌿 Tiêu chuẩn mỹ thuật UI/UX:</strong> Các hiệu ứng chuyển động chậm, nhẹ và êm ái, tôn vinh ảnh cưới và thông điệp mà không gây rối mắt hay làm mất cảm giác trang trọng. Tự động tạm dừng khi chuyển tab để bảo vệ pin thiết bị di động.
+          </p>
+        </div>
+
+        <!-- Effect 0: Doves Opening Animation -->
+        <div class="fx-toggle-card">
+          <div class="fx-info">
+            <div class="fx-icon-box">🕊️</div>
+            <div class="fx-details">
+              <h3>
+                Đôi Chim Bồ Câu Trắng Tình Yêu
+                <span class="fx-badge-luxury">Hero Opening Animation</span>
+              </h3>
+              <p>Đôi chim bồ câu trắng ngọc trai bay ra từ sau khung ảnh cưới, lượn qua tên cô dâu chú rể, tạo hình trái tim trên không trung cùng ánh sáng champagne vàng lấp lánh (chạy 1 lần ~5.5s).</p>
+            </div>
+          </div>
+          <label class="switch-control">
+            <input type="checkbox" id="cfg-fx-doves" checked>
+            <span class="switch-slider"></span>
+          </label>
+        </div>
+
+        <!-- Effect 1: Petals -->
+        <div class="fx-toggle-card">
+          <div class="fx-info">
+            <div class="fx-icon-box">🌸</div>
+            <div class="fx-details">
+              <h3>
+                Cánh Hoa Hồng Trắng Rơi Nhẹ
+                <span class="fx-badge-luxury">Ambient Canvas</span>
+              </h3>
+              <p>Các cánh hoa hồng trắng kem và ngà rơi chậm rãi từ trên xuống, xoay lật 3D bồng bềnh lãng mạn như một làn gió cưới nhẹ nhàng.</p>
+            </div>
+          </div>
+          <label class="switch-control">
+            <input type="checkbox" id="cfg-fx-petals" checked>
+            <span class="switch-slider"></span>
+          </label>
+        </div>
+
+        <!-- Effect 2: Bokeh Orbs -->
+        <div class="fx-toggle-card">
+          <div class="fx-info">
+            <div class="fx-icon-box">💡</div>
+            <div class="fx-details">
+              <h3>
+                Bokeh Ánh Sáng Đom Đóm / Warm Glow
+                <span class="fx-badge-luxury">Ambient Glow</span>
+              </h3>
+              <p>Các đốm sáng champagne vàng ấm áp trôi lơ lửng ngẫu nhiên quanh các bức ảnh cưới và phần câu chuyện tình yêu, mang lại chiều sâu điện ảnh.</p>
+            </div>
+          </div>
+          <label class="switch-control">
+            <input type="checkbox" id="cfg-fx-bokeh" checked>
+            <span class="switch-slider"></span>
+          </label>
+        </div>
+
+        <!-- Effect 3: Sparkles -->
+        <div class="fx-toggle-card">
+          <div class="fx-info">
+            <div class="fx-icon-box">✦</div>
+            <div class="fx-details">
+              <h3>
+                Lấp Lánh Ánh Vàng Vi Mô (Micro Star Sparkles)
+                <span class="fx-badge-luxury">Pure CSS</span>
+              </h3>
+              <p>Những ánh sao 4 cánh vàng kim nhấp nháy tinh tế quanh chữ "Wedding", tên cô dâu chú rể và các điểm nhấn biểu tượng quan trọng.</p>
+            </div>
+          </div>
+          <label class="switch-control">
+            <input type="checkbox" id="cfg-fx-sparkles" checked>
+            <span class="switch-slider"></span>
+          </label>
+        </div>
+
+        <!-- Effect 4: Confetti -->
+        <div class="fx-toggle-card">
+          <div class="fx-info">
+            <div class="fx-icon-box">🎉</div>
+            <div class="fx-details">
+              <h3>
+                Pháo Hoa Giấy & Trái Tim Confetti Chúc Mừng
+                <span class="fx-badge-luxury">Interactive Cannon</span>
+              </h3>
+              <p>Pháo hoa giấy sắc màu sang trọng (vàng kim, xanh olive, trắng kem và trái tim hồng pastel) bùng nổ khi khách gửi lời chúc hoặc mở hộp mừng cưới.</p>
+            </div>
+          </div>
+          <label class="switch-control">
+            <input type="checkbox" id="cfg-fx-confetti" checked>
+            <span class="switch-slider"></span>
+          </label>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom Floating Save Bar -->
+  <div class="floating-save-bar">
+    <div class="status-text">
+      <span class="status-dot"></span>
+      <span>Hệ thống sẵn sàng · Các thay đổi lưu vào trình duyệt của bạn</span>
+    </div>
+    <div style="display: flex; gap: 10px;">
+      <a href="index.html" target="_blank" class="btn btn-secondary btn-sm">
+        Xem Thiệp Live
+      </a>
+      <button id="btn-save-bottom" class="btn btn-gold btn-sm">
+        ✓ Lưu Tất Cả Thay Đổi
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="admin-toast">
+    <span id="admin-toast-text">✓ Đã lưu thành công!</span>
+  </div>
+
+  <!-- Admin Controller Logic -->
+  <script>
+    // Default wedding configuration (matching 100% of real card)
+    const DEFAULT_CONFIG = {
+      groomName: 'LÊ TẤN LỘC',
+      groomNickname: 'Tấn Lộc',
+      groomRole: 'Út Nam',
+      groomDad: 'LÊ TẤN LÂM',
+      groomMom: 'HUỲNH THỊ MỸ PHƯƠNG',
+      groomAddress: 'TDP 5 Cũ (Thôn 3 Mới)\n16/4 Điện Biên Phủ · Đắk Lắk',
+
+      brideName: 'DƯƠNG HỒNG TÚ',
+      brideNickname: 'Hồng Tú',
+      brideRole: 'Út Nữ',
+      brideDad: 'DƯƠNG QUỐC VIỆT',
+      brideMom: 'NGUYỄN THỊ THUỶ',
+      brideAddress: 'TDP 1 Cũ (Thôn 1 Mới)\n03 Y Ôn · Đắk Lắk',
+
+      solarDate: '25.10.2026',
+      solarDayNumber: '25',
+      lunarDate: '16 tháng 09 năm Bính Ngọ',
+      countdownTarget: '2026-10-25T09:00:00',
+
+      event1Title: 'LỄ TÂN HÔN',
+      event1Time: '09:00',
+      event1DayVal: 'CHỦ NHẬT',
+      event1Venue: 'Tại tư gia nhà trai',
+      event1Address: '16/4 Điện Biên Phủ · TDP 5 Cũ (Thôn 3 Mới) · Đắk Lắk',
+      event1MapLink: 'https://www.google.com/maps/search/?api=1&query=16%2F4+%C4%90i%E1%BB%87n+Bi%C3%AAn+Ph%E1%BB%A7%2C+Kr%C3%B4ng+Kmar%2C+Kr%C3%B4ng+B%C3%B4ng%2C+%C4%90%E1%BA%AFk+L%E1%BA%AFk',
+
+      event2Title: 'TIỆC CƯỚI CHUNG VUI',
+      event2Time: '11:00',
+      event2DayVal: 'CHỦ NHẬT',
+      event2Venue: 'Nhà Cộng Đồng',
+      event2Address: 'Thôn 5 · TT. Krông Kmar Cũ (Thôn 3 Mới) · Đắk Lắk',
+      event2MapLink: 'https://www.google.com/maps/search/?api=1&query=Nh%C3%A0+C%E1%BB%99ng+%C4%90%E1%BB%93ng%2C+Kr%C3%B4ng+Kmar%2C+Kr%C3%B4ng+B%C3%B4ng%2C+%C4%90%E1%BA%AFk+L%E1%BA%AFk',
+
+      groomBank: 'MB Bank',
+      groomAccount: '999988882510',
+      groomAccountHolder: 'LE TAN LOC',
+
+      brideBank: 'Vietcombank',
+      brideAccount: '101225102026',
+      brideAccountHolder: 'DUONG HONG TU',
+
+      quote: '“Tình yêu không phải là tìm một ai đó hoàn hảo, mà là cùng nhau hoàn thiện qua từng năm tháng.”',
+      thankYouMessage: '“Cảm ơn Quý Khách đã dành tình cảm cho gia đình chúng tôi! Sự hiện diện của Quý Khách chính là món quà ý nghĩa nhất, gia đình chúng tôi vô cùng trân quý khi được cùng Quý Khách chia sẻ niềm hạnh phúc trong ngày trọng đại này.”',
+      fx: {
+        doves: true,
+        petals: true,
+        bokeh: true,
+        sparkles: true,
+        confetti: true
+      }
+    };
+
+    /**
+     * Vietnamese diacritics removal function
+     * Converts "Anh Nguyễn Văn A" -> "Anh Nguyen Van A"
+     */
+    function removeVietnameseTones(str) {
+      if (!str) return '';
+      str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, 'a');
+      str = str.replace(/À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ/g, 'A');
+      str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, 'e');
+      str = str.replace(/È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ/g, 'E');
+      str = str.replace(/ì|í|ị|ỉ|ĩ/g, 'i');
+      str = str.replace(/Ì|Í|Ị|Ỉ|Ĩ/g, 'I');
+      str = str.replace(/ò|ó|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, 'o');
+      str = str.replace(/Ò|Ó|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ/g, 'O');
+      str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, 'u');
+      str = str.replace(/Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ/g, 'U');
+      str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, 'y');
+      str = str.replace(/Ỳ|Ý|Ỵ|Ỷ|Ỹ/g, 'Y');
+      str = str.replace(/đ/g, 'd');
+      str = str.replace(/Đ/g, 'D');
+      // Combining diacritical marks
+      str = str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      return str.trim();
+    }
+
+    // Toast helper
+    function showToast(msg) {
+      const toast = document.getElementById('admin-toast');
+      const text = document.getElementById('admin-toast-text');
+      if (!toast || !text) return;
+      text.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2500);
+    }
+
+    // Load active config
+    function getConfig() {
+      try {
+        const raw = localStorage.getItem('wedding_site_config');
+        if (!raw) return { ...DEFAULT_CONFIG };
+        return { ...DEFAULT_CONFIG, ...JSON.parse(raw) };
+      } catch (e) {
+        return { ...DEFAULT_CONFIG };
+      }
+    }
+
+    // Populate form fields from config
+    function populateForm(cfg) {
+      document.getElementById('cfg-groom-name').value = cfg.groomName || '';
+      document.getElementById('cfg-groom-nickname').value = cfg.groomNickname || '';
+      document.getElementById('cfg-groom-role').value = cfg.groomRole || '';
+      document.getElementById('cfg-groom-dad').value = cfg.groomDad || '';
+      document.getElementById('cfg-groom-mom').value = cfg.groomMom || '';
+      document.getElementById('cfg-groom-address').value = cfg.groomAddress || '';
+
+      document.getElementById('cfg-bride-name').value = cfg.brideName || '';
+      document.getElementById('cfg-bride-nickname').value = cfg.brideNickname || '';
+      document.getElementById('cfg-bride-role').value = cfg.brideRole || '';
+      document.getElementById('cfg-bride-dad').value = cfg.brideDad || '';
+      document.getElementById('cfg-bride-mom').value = cfg.brideMom || '';
+      document.getElementById('cfg-bride-address').value = cfg.brideAddress || '';
+
+      document.getElementById('cfg-solar-date').value = cfg.solarDate || '';
+      document.getElementById('cfg-solar-day-num').value = cfg.solarDayNumber || '';
+      document.getElementById('cfg-lunar-date').value = cfg.lunarDate || '';
+      document.getElementById('cfg-countdown-target').value = cfg.countdownTarget || '';
+
+      document.getElementById('cfg-ev1-title').value = cfg.event1Title || '';
+      document.getElementById('cfg-ev1-time').value = cfg.event1Time || '';
+      document.getElementById('cfg-ev1-day').value = cfg.event1DayVal || '';
+      document.getElementById('cfg-ev1-venue').value = cfg.event1Venue || '';
+      document.getElementById('cfg-ev1-address').value = cfg.event1Address || '';
+      document.getElementById('cfg-ev1-map').value = cfg.event1MapLink || '';
+
+      document.getElementById('cfg-ev2-title').value = cfg.event2Title || '';
+      document.getElementById('cfg-ev2-time').value = cfg.event2Time || '';
+      document.getElementById('cfg-ev2-day').value = cfg.event2DayVal || '';
+      document.getElementById('cfg-ev2-venue').value = cfg.event2Venue || '';
+      document.getElementById('cfg-ev2-address').value = cfg.event2Address || '';
+      document.getElementById('cfg-ev2-map').value = cfg.event2MapLink || '';
+
+      document.getElementById('cfg-groom-bank').value = cfg.groomBank || '';
+      document.getElementById('cfg-groom-acc').value = cfg.groomAccount || '';
+      document.getElementById('cfg-groom-holder').value = cfg.groomAccountHolder || '';
+
+      document.getElementById('cfg-bride-bank').value = cfg.brideBank || '';
+      document.getElementById('cfg-bride-acc').value = cfg.brideAccount || '';
+      document.getElementById('cfg-bride-holder').value = cfg.brideAccountHolder || '';
+
+      document.getElementById('cfg-quote').value = cfg.quote || '';
+      document.getElementById('cfg-thank-you').value = cfg.thankYouMessage || '';
+
+      // Romantic effects toggles
+      const fx = cfg.fx || {};
+      const elDoves = document.getElementById('cfg-fx-doves');
+      const elPetals = document.getElementById('cfg-fx-petals');
+      const elBokeh = document.getElementById('cfg-fx-bokeh');
+      const elSparkles = document.getElementById('cfg-fx-sparkles');
+      const elConfetti = document.getElementById('cfg-fx-confetti');
+      if (elDoves) elDoves.checked = fx.doves !== false;
+      if (elPetals) elPetals.checked = fx.petals !== false;
+      if (elBokeh) elBokeh.checked = fx.bokeh !== false;
+      if (elSparkles) elSparkles.checked = fx.sparkles !== false;
+      if (elConfetti) elConfetti.checked = fx.confetti !== false;
+
+      updateQrPreviews();
+    }
+
+    // Collect values from form
+    function collectForm() {
+      const elDoves = document.getElementById('cfg-fx-doves');
+      const elPetals = document.getElementById('cfg-fx-petals');
+      const elBokeh = document.getElementById('cfg-fx-bokeh');
+      const elSparkles = document.getElementById('cfg-fx-sparkles');
+      const elConfetti = document.getElementById('cfg-fx-confetti');
+
+      return {
+        groomName: document.getElementById('cfg-groom-name').value.trim(),
+        groomNickname: document.getElementById('cfg-groom-nickname').value.trim(),
+        groomRole: document.getElementById('cfg-groom-role').value.trim(),
+        groomDad: document.getElementById('cfg-groom-dad').value.trim(),
+        groomMom: document.getElementById('cfg-groom-mom').value.trim(),
+        groomAddress: document.getElementById('cfg-groom-address').value.trim(),
+
+        brideName: document.getElementById('cfg-bride-name').value.trim(),
+        brideNickname: document.getElementById('cfg-bride-nickname').value.trim(),
+        brideRole: document.getElementById('cfg-bride-role').value.trim(),
+        brideDad: document.getElementById('cfg-bride-dad').value.trim(),
+        brideMom: document.getElementById('cfg-bride-mom').value.trim(),
+        brideAddress: document.getElementById('cfg-bride-address').value.trim(),
+
+        solarDate: document.getElementById('cfg-solar-date').value.trim(),
+        solarDayNumber: document.getElementById('cfg-solar-day-num').value.trim(),
+        lunarDate: document.getElementById('cfg-lunar-date').value.trim(),
+        countdownTarget: document.getElementById('cfg-countdown-target').value.trim(),
+
+        event1Title: document.getElementById('cfg-ev1-title').value.trim(),
+        event1Time: document.getElementById('cfg-ev1-time').value.trim(),
+        event1DayVal: document.getElementById('cfg-ev1-day').value.trim(),
+        event1Venue: document.getElementById('cfg-ev1-venue').value.trim(),
+        event1Address: document.getElementById('cfg-ev1-address').value.trim(),
+        event1MapLink: document.getElementById('cfg-ev1-map').value.trim(),
+
+        event2Title: document.getElementById('cfg-ev2-title').value.trim(),
+        event2Time: document.getElementById('cfg-ev2-time').value.trim(),
+        event2DayVal: document.getElementById('cfg-ev2-day').value.trim(),
+        event2Venue: document.getElementById('cfg-ev2-venue').value.trim(),
+        event2Address: document.getElementById('cfg-ev2-address').value.trim(),
+        event2MapLink: document.getElementById('cfg-ev2-map').value.trim(),
+
+        groomBank: document.getElementById('cfg-groom-bank').value.trim(),
+        groomAccount: document.getElementById('cfg-groom-acc').value.trim(),
+        groomAccountHolder: document.getElementById('cfg-groom-holder').value.trim(),
+
+        brideBank: document.getElementById('cfg-bride-bank').value.trim(),
+        brideAccount: document.getElementById('cfg-bride-acc').value.trim(),
+        brideAccountHolder: document.getElementById('cfg-bride-holder').value.trim(),
+
+        quote: document.getElementById('cfg-quote').value.trim(),
+        thankYouMessage: document.getElementById('cfg-thank-you').value.trim(),
+
+        fx: {
+          doves: elDoves ? elDoves.checked : true,
+          petals: elPetals ? elPetals.checked : true,
+          bokeh: elBokeh ? elBokeh.checked : true,
+          sparkles: elSparkles ? elSparkles.checked : true,
+          confetti: elConfetti ? elConfetti.checked : true
+        }
+      };
+    }
+
+    // Save to localStorage
+    function saveConfig() {
+      const data = collectForm();
+      localStorage.setItem('wedding_site_config', JSON.stringify(data));
+      showToast('✓ Đã lưu thành công! Thiệp cưới đã được cập nhật.');
+      updateQrPreviews();
+    }
+
+    // Update VietQR image previews
+    function updateQrPreviews() {
+      const gBank = document.getElementById('cfg-groom-bank').value.trim() || 'MB';
+      const gAcc = document.getElementById('cfg-groom-acc').value.trim() || '';
+      const gHolder = encodeURIComponent(document.getElementById('cfg-groom-holder').value.trim() || 'LE TAN LOC');
+      const gImg = document.getElementById('qr-preview-groom');
+      if (gImg && gAcc) {
+        gImg.src = `https://img.vietqr.io/image/${gBank}-${gAcc}-compact2.png?amount=0&addInfo=Mung%20cuoi%20Tan%20Loc&accountName=${gHolder}`;
+      }
+
+      const bBank = document.getElementById('cfg-bride-bank').value.trim() || 'VCB';
+      const bAcc = document.getElementById('cfg-bride-acc').value.trim() || '';
+      const bHolder = encodeURIComponent(document.getElementById('cfg-bride-holder').value.trim() || 'DUONG HONG TU');
+      const bImg = document.getElementById('qr-preview-bride');
+      if (bImg && bAcc) {
+        bImg.src = `https://img.vietqr.io/image/${bBank}-${bAcc}-compact2.png?amount=0&addInfo=Mung%20cuoi%20Hong%20Tu&accountName=${bHolder}`;
+      }
+    }
+
+    /**
+     * Build Base URL for the invitation
+     */
+    function getInvitationBaseUrl() {
+      const loc = window.location;
+      let path = loc.pathname;
+      if (path.endsWith('admin.html')) {
+        path = path.replace(/admin\.html$/, 'index.html');
+      } else {
+        path = path.substring(0, path.lastIndexOf('/') + 1) + 'index.html';
+      }
+      return `${loc.origin}${path}`;
+    }
+
+    /**
+     * Generate Link for a single guest name
+     * Clean slug in URL (e.g. /banhien_nhatrai) while preserving accented name (Bạn Hiển) on the card!
+     */
+    function generateGuestLink(rawName, side) {
+      const baseUrl = getInvitationBaseUrl();
+      const trimmedName = rawName.trim();
+      if (!trimmedName) return { url: baseUrl, slug: '', rawName: '', normalizedName: '' };
+
+      // Slug creation: remove accents, lowercase, remove special characters
+      // e.g. "Bạn Hiển" -> "banhien"
+      let cleanSlug = removeVietnameseTones(trimmedName)
+        .toLowerCase()
+        .replace(/[^a-z0-9]/g, '');
+
+      // Add side suffix for clarity: banhien_nhatrai / banhien_nhagai
+      if (side === 'trai') {
+        cleanSlug += '_nhatrai';
+      } else if (side === 'gai') {
+        cleanSlug += '_nhagai';
+      }
+
+      // Save to guest map dictionary in localStorage so that slug can be resolved locally
+      try {
+        const guestMap = JSON.parse(localStorage.getItem('wedding_guest_map') || '{}');
+        guestMap[cleanSlug] = { name: trimmedName, side: side };
+        localStorage.setItem('wedding_guest_map', JSON.stringify(guestMap));
+      } catch (e) {}
+
+      // Build safe URL: contains normalized slug in ?to= and proper accented name in &name=
+      const params = new URLSearchParams();
+      params.set('to', cleanSlug);
+      params.set('name', trimmedName);
+      if (side) {
+        params.set('side', side);
+      }
+
+      const url = `${baseUrl}?${params.toString().replace(/%20/g, '+')}`;
+      return {
+        url,
+        slug: cleanSlug,
+        normalizedName: cleanSlug,
+        rawName: trimmedName
+      };
+    }
+
+    /**
+     * Update Single Link Generator Output
+     */
+    function updateSingleGenerator() {
+      const inputName = document.getElementById('input-guest-name').value;
+      const sideRadio = document.querySelector('input[name="guest_side"]:checked');
+      const side = sideRadio ? sideRadio.value : 'trai';
+
+      const res = generateGuestLink(inputName, side);
+
+      const urlInput = document.getElementById('output-guest-url');
+      const slugTag = document.getElementById('slug-preview-tag');
+      const openBtn = document.getElementById('btn-open-preview');
+      const msgBox = document.getElementById('output-guest-message');
+
+      if (urlInput) urlInput.value = res.url;
+      if (openBtn) openBtn.href = res.url;
+      if (slugTag) {
+        slugTag.textContent = res.slug ? `✓ Link: /${res.slug} · Thiệp: ${res.rawName}` : 'Chưa nhập tên';
+      }
+
+      // Guest greeting name
+      const displayGuestName = res.rawName || 'Quý Khách';
+
+      if (msgBox) {
+        msgBox.textContent = 
+`💌 THƯ MỜI CƯỚI TRÂN TRỌNG
+Kính gửi: ${displayGuestName}
+
+Hôn lễ của Tấn Lộc & Hồng Tú sẽ được tổ chức vào Chủ Nhật, ngày 25.10.2026.
+Sự hiện diện của ${displayGuestName} là niềm vinh hạnh to lớn cho gia đình chúng tôi!
+
+Trân trọng kính mời ${displayGuestName} xem thiệp cưới online và thông tin chi tiết tại link:
+${res.url}
+
+Rất mong được đón tiếp ${displayGuestName}!`;
+      }
+    }
+
+    /**
+     * Bulk Guest List Generator
+     */
+    function generateBulkList() {
+      const rawText = document.getElementById('bulk-names-input').value;
+      const lines = rawText.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+
+      const sideRadio = document.querySelector('input[name="guest_side"]:checked');
+      const side = sideRadio ? sideRadio.value : 'trai';
+
+      const wrap = document.getElementById('bulk-result-wrap');
+      const tbody = document.getElementById('bulk-table-body');
+      const countLabel = document.getElementById('bulk-count-label');
+
+      if (lines.length === 0) {
+        alert('Vui lòng nhập ít nhất một tên khách mời vào ô danh sách!');
+        return;
+      }
+
+      tbody.innerHTML = '';
+      window._currentBulkItems = [];
+
+      lines.forEach((name, idx) => {
+        const item = generateGuestLink(name, side);
+        window._currentBulkItems.push(item);
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td style="font-weight: 600; color: var(--text-muted);">${idx + 1}</td>
+          <td style="font-weight: 600; color: var(--primary-olive);">${item.rawName}</td>
+          <td><code style="background: #EFECE4; padding: 2px 6px; border-radius: 4px;">/${item.slug}</code></td>
+          <td>${side === 'trai' ? 'Nhà Trai' : side === 'gai' ? 'Nhà Gái' : 'Hai Bên'}</td>
+          <td>
+            <a href="${item.url}" target="_blank" style="color: var(--primary-olive); text-decoration: underline; word-break: break-all;">
+              ${item.url}
+            </a>
+          </td>
+          <td style="text-align: center;">
+            <button type="button" class="btn btn-secondary btn-sm" onclick="copyText('${item.url}', 'Đã sao chép link của ${item.rawName}!')">
+              Copy Link
+            </button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      countLabel.textContent = `Đã tạo thành công ${lines.length} link khách mời`;
+      wrap.style.display = 'block';
+      showToast(`⚡ Đã tạo xong ${lines.length} link mời!`);
+    }
+
+    // Copy helper
+    window.copyText = function(text, successMsg) {
+      navigator.clipboard.writeText(text).then(() => {
+        showToast(successMsg || '✓ Đã sao chép vào bộ nhớ tạm!');
+      }).catch(() => {
+        prompt('Nhấn Ctrl+C để sao chép link:', text);
+      });
+    };
+
+    // Export Bulk to CSV
+    function exportBulkCsv() {
+      if (!window._currentBulkItems || window._currentBulkItems.length === 0) return;
+      let csvContent = '\uFEFFSTT,Ten_Goc,Ten_Khong_Dau,Link_Thiep\n';
+      window._currentBulkItems.forEach((it, idx) => {
+        csvContent += `${idx + 1},"${it.rawName}","${it.normalizedName}","${it.url}"\n`;
+      });
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.setAttribute('href', url);
+      link.setAttribute('download', `danh-sach-khach-moi-${Date.now()}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      showToast('✓ Đã xuất file CSV thành công!');
+    }
+
+    // Copy all bulk as text list
+    function copyAllBulk() {
+      if (!window._currentBulkItems || window._currentBulkItems.length === 0) return;
+      let text = '';
+      window._currentBulkItems.forEach((it, idx) => {
+        text += `${idx + 1}. ${it.rawName} -> ${it.url}\n`;
+      });
+      copyText(text, '✓ Đã sao chép toàn bộ danh sách link!');
+    }
+
+    // Export JSON file
+    function exportJsonFile() {
+      const data = collectForm();
+      const str = JSON.stringify(data, null, 2);
+      const blob = new Blob([str], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `wedding-config-${Date.now()}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      showToast('✓ Đã tải file JSON cấu hình!');
+    }
+
+    // Import JSON file
+    function importJsonFile(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        try {
+          const imported = JSON.parse(event.target.result);
+          localStorage.setItem('wedding_site_config', JSON.stringify(imported));
+          populateForm(imported);
+          showToast('✓ Đã nạp cấu hình JSON thành công!');
+        } catch (err) {
+          alert('Lỗi: File JSON không hợp lệ!');
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    // Reset default
+    function resetDefault() {
+      if (confirm('Bạn có chắc chắn muốn đặt lại toàn bộ thông tin về mặc định của đám cưới Tấn Lộc & Hồng Tú?')) {
+        localStorage.removeItem('wedding_site_config');
+        populateForm(DEFAULT_CONFIG);
+        showToast('✓ Đã khôi phục thông tin gốc thành công!');
+      }
+    }
+
+    // Tab switcher
+    document.querySelectorAll('.nav-tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.nav-tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+
+        btn.classList.add('active');
+        const tabId = btn.getAttribute('data-tab');
+        const pane = document.getElementById(tabId);
+        if (pane) pane.classList.add('active');
+      });
+    });
+
+    // Side cards selector
+    document.querySelectorAll('.side-choice-card').forEach(card => {
+      card.addEventListener('click', () => {
+        document.querySelectorAll('.side-choice-card').forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        const radio = card.querySelector('input[type="radio"]');
+        if (radio) {
+          radio.checked = true;
+          updateSingleGenerator();
+        }
+      });
+    });
+
+    // Event listeners
+    document.getElementById('input-guest-name').addEventListener('input', updateSingleGenerator);
+    document.querySelectorAll('input[name="url_format"]').forEach(r => r.addEventListener('change', updateSingleGenerator));
+
+    document.getElementById('btn-copy-url').addEventListener('click', () => {
+      const url = document.getElementById('output-guest-url').value;
+      copyText(url, '✓ Đã sao chép link mời!');
+    });
+
+    document.getElementById('btn-copy-msg').addEventListener('click', () => {
+      const msg = document.getElementById('output-guest-message').textContent;
+      copyText(msg, '✓ Đã sao chép tin nhắn Zalo!');
+    });
+
+    document.getElementById('btn-generate-bulk').addEventListener('click', generateBulkList);
+    document.getElementById('btn-copy-all-bulk').addEventListener('click', copyAllBulk);
+    document.getElementById('btn-export-csv').addEventListener('click', exportBulkCsv);
+
+    document.getElementById('btn-save-top').addEventListener('click', saveConfig);
+    document.getElementById('btn-save-bottom').addEventListener('click', saveConfig);
+
+    document.getElementById('btn-export-json').addEventListener('click', exportJsonFile);
+    document.getElementById('btn-trigger-import').addEventListener('click', () => {
+      document.getElementById('input-import-json').click();
+    });
+    document.getElementById('input-import-json').addEventListener('change', importJsonFile);
+    document.getElementById('btn-reset-default').addEventListener('click', resetDefault);
+
+    // Test Confetti in Admin
+    function launchConfettiAdmin() {
+      let canvas = document.getElementById('admin-confetti-canvas');
+      if (!canvas) {
+        canvas = document.createElement('canvas');
+        canvas.id = 'admin-confetti-canvas';
+        canvas.style.position = 'fixed';
+        canvas.style.top = '0';
+        canvas.style.left = '0';
+        canvas.style.width = '100vw';
+        canvas.style.height = '100vh';
+        canvas.style.pointerEvents = 'none';
+        canvas.style.zIndex = '99999';
+        document.body.appendChild(canvas);
+      }
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const pieces = [];
+      const colors = ['#D4AF37', '#C5A059', '#3F502B', '#546B38', '#FFFDF8', '#F5E6CC', '#E89292'];
+      for (let i = 0; i < 75; i++) {
+        const isHeart = Math.random() > 0.8;
+        pieces.push({
+          x: canvas.width * 0.5 + (Math.random() - 0.5) * 180,
+          y: canvas.height * 0.65,
+          vx: (Math.random() - 0.5) * 14,
+          vy: -(Math.random() * 11 + 6),
+          size: isHeart ? (Math.random() * 5 + 6) : (Math.random() * 7 + 4),
+          color: colors[Math.floor(Math.random() * colors.length)],
+          rotation: Math.random() * 360,
+          vrot: (Math.random() - 0.5) * 8,
+          isHeart: isHeart
+        });
+      }
+
+      function drawMiniHeart(c, x, y, size, color) {
+        c.save();
+        c.translate(x, y);
+        c.fillStyle = color;
+        c.beginPath();
+        const topCurve = size * 0.3;
+        c.moveTo(0, topCurve);
+        c.bezierCurveTo(0, 0, -size / 2, 0, -size / 2, topCurve);
+        c.bezierCurveTo(-size / 2, (size + topCurve) / 2, 0, size, 0, size * 1.3);
+        c.bezierCurveTo(0, size, size / 2, (size + topCurve) / 2, size / 2, topCurve);
+        c.bezierCurveTo(size / 2, 0, 0, 0, 0, topCurve);
+        c.closePath();
+        c.fill();
+        c.restore();
+      }
+
+      let animId;
+      function loop() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        let active = false;
+        pieces.forEach(p => {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += 0.32;
+          p.vx *= 0.99;
+          p.rotation += p.vrot;
+          if (p.y < canvas.height + 25) {
+            active = true;
+            ctx.save();
+            ctx.translate(p.x, p.y);
+            ctx.rotate((p.rotation * Math.PI) / 180);
+            if (p.isHeart) {
+              drawMiniHeart(ctx, 0, 0, p.size, p.color);
+            } else {
+              ctx.fillStyle = p.color;
+              ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 1.3);
+            }
+            ctx.restore();
+          }
+        });
+        if (active) {
+          animId = requestAnimationFrame(loop);
+        } else {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+      }
+      cancelAnimationFrame(animId);
+      loop();
+      showToast('🎉 Đã bắn thử pháo hoa Confetti thành công!');
+    }
+
+    const btnTestConfetti = document.getElementById('btn-test-confetti-admin');
+    if (btnTestConfetti) {
+      btnTestConfetti.addEventListener('click', launchConfettiAdmin);
+    }
+
+    // Clear wishes button listener
+    const btnClearWishes = document.getElementById('btn-clear-wishes-admin');
+    if (btnClearWishes) {
+      btnClearWishes.addEventListener('click', () => {
+        if (confirm('Bạn có chắc chắn muốn xóa toàn bộ lời chúc thử nghiệm không? Sau khi xóa, sổ lưu bút sẽ hoàn toàn sạch sẽ.')) {
+          localStorage.setItem('wedding_wishes_list', JSON.stringify([]));
+          showToast('✓ Đã xóa sạch toàn bộ lời chúc thử nghiệm!');
+        }
+      });
+    }
+
+    // Initial load
+    window.addEventListener('DOMContentLoaded', () => {
+      const currentCfg = getConfig();
+      populateForm(currentCfg);
+      updateSingleGenerator();
+    });
+  </script>
+
+</body>
+</html>

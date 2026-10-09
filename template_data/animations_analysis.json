@@ -1,0 +1,1146 @@
+[
+  {
+    "id": "N72T7P-Q9Z",
+    "type": "PhotoBox",
+    "top": 0,
+    "content": "Image: templates/294becca-b2a5-4",
+    "transition": {
+      "effectType": "fade-in",
+      "effectEnabled": false,
+      "effectDuration": 1,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "jjPTgwqDkR",
+    "type": "GeometricBox",
+    "top": 400.0032,
+    "content": "",
+    "transition": {
+      "effectType": "fade-in",
+      "effectEnabled": false,
+      "effectDuration": 1,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "XKo4S1zWXk",
+    "type": "TextBox",
+    "top": 400.0032,
+    "content": "Wedding",
+    "transition": {
+      "effectType": "slide-up",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0
+    }
+  },
+  {
+    "id": "2Wqyj--dm3",
+    "type": "TextBox",
+    "top": 509.99719999999996,
+    "content": "Anh đức<div>Lan Ngọc</div>",
+    "transition": {
+      "effectType": "slide-up",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0
+    }
+  },
+  {
+    "id": "cTZr0FCekv",
+    "type": "TextBox",
+    "top": 594.9996,
+    "content": "26.12.2026",
+    "transition": {
+      "effectType": "slide-up",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0
+    }
+  },
+  {
+    "id": "WvkzS-tP3n",
+    "type": "TextBox",
+    "top": 680.0020000000001,
+    "content": "<p>\"Hôn nhân là chuyện cả đời,",
+    "transition": {
+      "effectType": "slide-up",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "ove1IOvn15",
+    "type": "TextBox",
+    "top": 776.2532,
+    "content": "nhà gái",
+    "transition": {
+      "effectType": "slide-left",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "yDv59z6I91",
+    "type": "TextBox",
+    "top": 776.2532,
+    "content": "nhà trai",
+    "transition": {
+      "effectType": "slide-right",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "zSrXvwLfsI",
+    "type": "TextBox",
+    "top": 800.2472,
+    "content": "Ông. Nguyễn Văn tài<div>Bà. lê",
+    "transition": {
+      "effectType": "slide-left",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "a-ZGGWc1EV",
+    "type": "TextBox",
+    "top": 801.2534,
+    "content": "Ông. NGô Văn Đại<div>Bà. Lê Th",
+    "transition": {
+      "effectType": "slide-right",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "1wtzBAeBuc",
+    "type": "TextBox",
+    "top": 845.0015999999999,
+    "content": "<div>TP. Hồ Chí Minh</div>",
+    "transition": {
+      "effectType": "slide-left",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "CRo16xVNJT",
+    "type": "TextBox",
+    "top": 845.0015999999999,
+    "content": "TP. Hồ Chí Minh",
+    "transition": {
+      "effectType": "slide-right",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "bo5CXDB2w_",
+    "type": "PhotoBox",
+    "top": 870.0018,
+    "content": "Image: templates/294becca-b2a5-4",
+    "transition": {
+      "effectType": "fade-in",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "pulse",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "MdczOuUB4r",
+    "type": "TextBox",
+    "top": 962.5034,
+    "content": "cô dâu",
+    "transition": {
+      "effectType": "slide-left",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "dkGpmFb-qh",
+    "type": "TextBox",
+    "top": 962.5034,
+    "content": "Chú rể",
+    "transition": {
+      "effectType": "slide-right",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "EkRkDmSyrJ",
+    "type": "TextBox",
+    "top": 985.8008,
+    "content": "<p>Lan Ngọc</p>",
+    "transition": {
+      "effectType": "slide-up",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "qQjBDSkVI3",
+    "type": "TextBox",
+    "top": 985.9986,
+    "content": "<p>Anh Đức</p>",
+    "transition": {
+      "effectType": "slide-up",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "ol1c8xAbpl",
+    "type": "GeometricBox",
+    "top": 1064.9982,
+    "content": "",
+    "transition": {
+      "effectType": "fade-in",
+      "effectEnabled": false,
+      "effectDuration": 1,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "tn34n6-Tnz",
+    "type": "PhotoBox",
+    "top": 1077.5026,
+    "content": "Image: templates/294becca-b2a5-4",
+    "transition": {
+      "effectType": "slide-right",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "ZdnbvUbhRp",
+    "type": "PhotoBox",
+    "top": 1077.5026,
+    "content": "Image: templates/294becca-b2a5-4",
+    "transition": {
+      "effectType": "slide-left",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "6xI8h9OmPc",
+    "type": "TextBox",
+    "top": 1411.002,
+    "content": "<p>TRÂN TRỌNG KÍNH MỜI QUÝ KHÁ",
+    "transition": {
+      "effectType": "slide-up",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "ntCHdV5Te_",
+    "type": "PhotoBox",
+    "top": 1498.9972,
+    "content": "Image: templates/294becca-b2a5-4",
+    "transition": {
+      "effectType": "zoom-in",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "cQw3TmuBAw",
+    "type": "PhotoBox",
+    "top": 1529.0026,
+    "content": "Image: templates/294becca-b2a5-4",
+    "transition": {
+      "effectType": "slide-left",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "cYcOFzDfJH",
+    "type": "PhotoBox",
+    "top": 1529.0026,
+    "content": "Image: templates/294becca-b2a5-4",
+    "transition": {
+      "effectType": "slide-right",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "xBjYJCPOzn",
+    "type": "TextBox",
+    "top": 1769.0028,
+    "content": "bữa tiệc chung vui",
+    "transition": {
+      "effectType": "slide-up",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "uO0dFb3Duk",
+    "type": "TextBox",
+    "top": 1803.9962,
+    "content": "<div>được tổ chức vào lúc 16:3",
+    "transition": {
+      "effectType": "slide-up",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "kYUom7xTyV",
+    "type": "TextBox",
+    "top": 1838.9981999999998,
+    "content": "29",
+    "transition": {
+      "effectType": "zoom-in",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "Lz_0Y1rWmw",
+    "type": "TextBox",
+    "top": 1862.1064,
+    "content": "tháng 12",
+    "transition": {
+      "effectType": "slide-right",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "hAhVqG_Sa_",
+    "type": "TextBox",
+    "top": 1862.1064,
+    "content": "năm 2026",
+    "transition": {
+      "effectType": "slide-left",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "-Xf8MAS_ZD",
+    "type": "TextBox",
+    "top": 1924.0006,
+    "content": "<div>(Tức ngày 20 tháng 11 năm",
+    "transition": {
+      "effectType": "slide-up",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "PjZZnGJ3t_",
+    "type": "TextBox",
+    "top": 1962.0040000000001,
+    "content": "tại tư gia nhà trai",
+    "transition": {
+      "effectType": "slide-up",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "Fz3cjKZizV",
+    "type": "TextBox",
+    "top": 1999.0012,
+    "content": "<div>45 Lê Duẩn - Phường Bến N",
+    "transition": {
+      "effectType": "slide-up",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "C-KgfYrRba",
+    "type": "TextBox",
+    "top": 2038.9997999999998,
+    "content": "xem chỉ đường",
+    "transition": {
+      "effectType": "fade-in",
+      "effectEnabled": true,
+      "effectDuration": 1,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "pulse",
+      "duration": 1,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "gz7vgmtcaD",
+    "type": "PhotoBox",
+    "top": 2107.8084,
+    "content": "Image: templates/294becca-b2a5-4",
+    "transition": {
+      "effectType": "fade-in",
+      "effectEnabled": false,
+      "effectDuration": 1,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "yaGHLHeW-b",
+    "type": "TextBox",
+    "top": 2186.808,
+    "content": "lễ thành hôn",
+    "transition": {
+      "effectType": "slide-up",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "VYlUx1b3SM",
+    "type": "TextBox",
+    "top": 2221.81,
+    "content": "được tổ chức vào lúc 09:30, TH",
+    "transition": {
+      "effectType": "slide-up",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "60tcgNRdYA",
+    "type": "TextBox",
+    "top": 2256.812,
+    "content": "<div>29</div>",
+    "transition": {
+      "effectType": "zoom-in",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "ExibzKz02O",
+    "type": "TextBox",
+    "top": 2280.1094,
+    "content": "tháng 12",
+    "transition": {
+      "effectType": "slide-right",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "EM0KxKG7Ii",
+    "type": "TextBox",
+    "top": 2280.1094,
+    "content": "năm 2026",
+    "transition": {
+      "effectType": "slide-left",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "ZAMsbFuxA8",
+    "type": "TextBox",
+    "top": 2343.0098,
+    "content": "(Tức ngày 20 tháng 11 năm Bính",
+    "transition": {
+      "effectType": "slide-up",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "dEQlaaITUT",
+    "type": "TextBox",
+    "top": 2379.8091999999997,
+    "content": "tại tư gia nhà trai",
+    "transition": {
+      "effectType": "slide-up",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "kPmGNL57uN",
+    "type": "TextBox",
+    "top": 2416.8064,
+    "content": "<div>45 Lê Duẩn - Phường Bến N",
+    "transition": {
+      "effectType": "slide-up",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "U28QkJYhHU",
+    "type": "TextBox",
+    "top": 2456.8136,
+    "content": "xem chỉ đường",
+    "transition": {
+      "effectType": "fade-in",
+      "effectEnabled": true,
+      "effectDuration": 1,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "pulse",
+      "duration": 1,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "y2FS9p8HgW",
+    "type": "GeometricBox",
+    "top": 2544.0004,
+    "content": "",
+    "transition": {
+      "effectType": "fade-in",
+      "effectEnabled": false,
+      "effectDuration": 1,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "RAB4Zym-qa",
+    "type": "TextBox",
+    "top": 2568.003,
+    "content": "of",
+    "transition": {
+      "effectType": "slide-up",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "sQ2O1s7R59",
+    "type": "TextBox",
+    "top": 2583.9990000000003,
+    "content": "golden hour",
+    "transition": {
+      "effectType": "slide-up",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "EQIPYvx-G1",
+    "type": "TextBox",
+    "top": 2583.9990000000003,
+    "content": "love",
+    "transition": {
+      "effectType": "slide-up",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "NUIQSfzD34",
+    "type": "TextBox",
+    "top": 2638.4284,
+    "content": "<p>Our wedding story unfolds t",
+    "transition": {
+      "effectType": "slide-up",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "ch9MAMO6Ke",
+    "type": "PhotoBox",
+    "top": 2734,
+    "content": "Image: templates/294becca-b2a5-4",
+    "transition": {
+      "effectType": "flip-in",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "xSV0yCTNVs",
+    "type": "PhotoBox",
+    "top": 3003.9972,
+    "content": "Image: templates/294becca-b2a5-4",
+    "transition": {
+      "effectType": "slide-up",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "ZNFE0g2CTe",
+    "type": "PhotoBox",
+    "top": 3003.9972,
+    "content": "Image: templates/294becca-b2a5-4",
+    "transition": {
+      "effectType": "slide-left",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "Fj234vQxba",
+    "type": "PhotoBox",
+    "top": 3209.65,
+    "content": "Image: templates/294becca-b2a5-4",
+    "transition": {
+      "effectType": "slide-down",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "9gxEGErxbw",
+    "type": "PhotoBox",
+    "top": 3404.0004,
+    "content": "Image: templates/294becca-b2a5-4",
+    "transition": {
+      "effectType": "slide-right",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "CPiE1koQYa",
+    "type": "PhotoBox",
+    "top": 3404.0004,
+    "content": "Image: templates/294becca-b2a5-4",
+    "transition": {
+      "effectType": "slide-left",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "0NUdOfXDWM",
+    "type": "PhotoBox",
+    "top": 3698.9975999999997,
+    "content": "Image: templates/294becca-b2a5-4",
+    "transition": {
+      "effectType": "slide-left",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "nRinCqcWij",
+    "type": "PhotoBox",
+    "top": 3698.9975999999997,
+    "content": "Image: templates/294becca-b2a5-4",
+    "transition": {
+      "effectType": "slide-right",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "7YJHIyhj0c",
+    "type": "TextBox",
+    "top": 4061.4962,
+    "content": "<p>Hãy xác nhận sự có mặt của ",
+    "transition": {
+      "effectType": "slide-up",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "HVShPRnNFi",
+    "type": "PluginRsvp",
+    "top": 4156.7412,
+    "content": "",
+    "transition": {
+      "effectType": "fade-in",
+      "effectEnabled": false,
+      "effectDuration": 1.5,
+      "effectDelay": 0,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {}
+  },
+  {
+    "id": "Rkp9oekbGM",
+    "type": "TextBox",
+    "top": 4529.0008,
+    "content": "<p>Cowntdown</p>",
+    "transition": {
+      "effectType": "zoom-in",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "OVf-eSZ3wp",
+    "type": "PluginCountDown",
+    "top": 4608.9636,
+    "content": "",
+    "transition": {
+      "effectType": "fade-in",
+      "effectEnabled": false,
+      "effectDuration": 1.5,
+      "effectDelay": 0,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {}
+  },
+  {
+    "id": "M4fns-FXfj",
+    "type": "PhotoBox",
+    "top": 4721.66,
+    "content": "Image: templates/294becca-b2a5-4",
+    "transition": {
+      "effectType": "fade-in",
+      "effectEnabled": false,
+      "effectDuration": 1,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "uqJtsnHl2X",
+    "type": "GeometricBox",
+    "top": 4819.999,
+    "content": "",
+    "transition": {
+      "effectType": "fade-in",
+      "effectEnabled": false,
+      "effectDuration": 1,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "39f8GRiJ1Z",
+    "type": "TextBox",
+    "top": 4835.4962,
+    "content": "<p>Thank you</p>",
+    "transition": {
+      "effectType": "slide-up",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  },
+  {
+    "id": "BjDAhx4WPr",
+    "type": "TextBox",
+    "top": 4894.475,
+    "content": "<p>Cảm ơn Quý Khách đã dành tì",
+    "transition": {
+      "effectType": "slide-up",
+      "effectEnabled": true,
+      "effectDuration": 1.5,
+      "effectDelay": 0.5,
+      "effectEasing": "ease"
+    },
+    "continuousAnimation": {
+      "type": "none",
+      "duration": 1.5,
+      "delay": 0.5
+    }
+  }
+]

@@ -1,0 +1,64 @@
+Top 0.0     | PhotoBox        | Hiệu ứng: None (Tĩnh)                         | Ảnh: 471dc383-36ec-4393-8591-5
+Top 400.0   | GeometricBox    | Hiệu ứng: None (Tĩnh)                         | Khối nền linear-gradient(180deg, r
+Top 400.0   | TextBox         | Hiệu ứng: slide-up (1.5s, delay 0s)           | "Wedding"
+Top 510.0   | TextBox         | Hiệu ứng: slide-up (1.5s, delay 0s)           | "Anh đức Lan Ngọc"
+Top 595.0   | TextBox         | Hiệu ứng: slide-up (1.5s, delay 0s)           | "26.12.2026"
+Top 680.0   | TextBox         | Hiệu ứng: slide-up (1.5s, delay 0.5s)         | ""Hôn nhân là chuyện cả đời,  Yêu ng"
+Top 776.3   | TextBox         | Hiệu ứng: slide-left (1.5s, delay 0.5s)       | "nhà gái"
+Top 776.3   | TextBox         | Hiệu ứng: slide-right (1.5s, delay 0.5s)      | "nhà trai"
+Top 800.2   | TextBox         | Hiệu ứng: slide-left (1.5s, delay 0.5s)       | "Ông. Nguyễn Văn tài Bà. lê thu hà"
+Top 801.3   | TextBox         | Hiệu ứng: slide-right (1.5s, delay 0.5s)      | "Ông. NGô Văn Đại Bà. Lê Thị Ân"
+Top 845.0   | TextBox         | Hiệu ứng: slide-left (1.5s, delay 0.5s)       | "TP. Hồ Chí Minh"
+Top 845.0   | TextBox         | Hiệu ứng: slide-right (1.5s, delay 0.5s)      | "TP. Hồ Chí Minh"
+Top 870.0   | PhotoBox        | Hiệu ứng: fade-in (1.5s, delay 0.5s)          | Ảnh: 7124252b-2a10-4d05-9e9f-9 | [LẶP: pulse]
+Top 962.5   | TextBox         | Hiệu ứng: slide-left (1.5s, delay 0.5s)       | "cô dâu"
+Top 962.5   | TextBox         | Hiệu ứng: slide-right (1.5s, delay 0.5s)      | "Chú rể"
+Top 985.8   | TextBox         | Hiệu ứng: slide-up (1.5s, delay 0.5s)         | "Lan Ngọc"
+Top 986.0   | TextBox         | Hiệu ứng: slide-up (1.5s, delay 0.5s)         | "Anh Đức"
+Top 1065.0  | GeometricBox    | Hiệu ứng: None (Tĩnh)                         | Khối nền rgba(93, 115, 63, 1.00)
+Top 1077.5  | PhotoBox        | Hiệu ứng: slide-right (1.5s, delay 0.5s)      | Ảnh: afacacd9-ea49-41d9-ba93-7
+Top 1077.5  | PhotoBox        | Hiệu ứng: slide-left (1.5s, delay 0.5s)       | Ảnh: e9e162f4-596a-4c8a-a437-5
+Top 1411.0  | TextBox         | Hiệu ứng: slide-up (1.5s, delay 0.5s)         | "TRÂN TRỌNG KÍNH MỜI QUÝ KHÁCH đến C"
+Top 1499.0  | PhotoBox        | Hiệu ứng: zoom-in (1.5s, delay 0.5s)          | Ảnh: 471dc383-36ec-4393-8591-5
+Top 1529.0  | PhotoBox        | Hiệu ứng: slide-left (1.5s, delay 0.5s)       | Ảnh: 3900e153-c843-4b66-9cee-8
+Top 1529.0  | PhotoBox        | Hiệu ứng: slide-right (1.5s, delay 0.5s)      | Ảnh: 090cc8ce-413d-475a-9151-6
+Top 1769.0  | TextBox         | Hiệu ứng: slide-up (1.5s, delay 0.5s)         | "bữa tiệc chung vui"
+Top 1804.0  | TextBox         | Hiệu ứng: slide-up (1.5s, delay 0.5s)         | "được tổ chức vào lúc 16:30, THỨ BẢY"
+Top 1839.0  | TextBox         | Hiệu ứng: zoom-in (1.5s, delay 0.5s)          | "29"
+Top 1862.1  | TextBox         | Hiệu ứng: slide-right (1.5s, delay 0.5s)      | "tháng 12"
+Top 1862.1  | TextBox         | Hiệu ứng: slide-left (1.5s, delay 0.5s)       | "năm 2026"
+Top 1924.0  | TextBox         | Hiệu ứng: slide-up (1.5s, delay 0.5s)         | "(Tức ngày 20 tháng 11 năm Bính Ngọ)"
+Top 1962.0  | TextBox         | Hiệu ứng: slide-up (1.5s, delay 0.5s)         | "tại tư gia nhà trai"
+Top 1999.0  | TextBox         | Hiệu ứng: slide-up (1.5s, delay 0.5s)         | "45 Lê Duẩn - Phường Bến Nghé - TP H"
+Top 2039.0  | TextBox         | Hiệu ứng: fade-in (1s, delay 0.5s)            | "xem chỉ đường" | [LẶP: pulse]
+Top 2107.8  | PhotoBox        | Hiệu ứng: None (Tĩnh)                         | Ảnh: 85d07a2a-319a-44a7-a85e-9
+Top 2186.8  | TextBox         | Hiệu ứng: slide-up (1.5s, delay 0.5s)         | "lễ thành hôn"
+Top 2221.8  | TextBox         | Hiệu ứng: slide-up (1.5s, delay 0.5s)         | "được tổ chức vào lúc 09:30, THỨ BẢY"
+Top 2256.8  | TextBox         | Hiệu ứng: zoom-in (1.5s, delay 0.5s)          | "29"
+Top 2280.1  | TextBox         | Hiệu ứng: slide-right (1.5s, delay 0.5s)      | "tháng 12"
+Top 2280.1  | TextBox         | Hiệu ứng: slide-left (1.5s, delay 0.5s)       | "năm 2026"
+Top 2343.0  | TextBox         | Hiệu ứng: slide-up (1.5s, delay 0.5s)         | "(Tức ngày 20 tháng 11 năm Bính Ngọ)"
+Top 2379.8  | TextBox         | Hiệu ứng: slide-up (1.5s, delay 0.5s)         | "tại tư gia nhà trai"
+Top 2416.8  | TextBox         | Hiệu ứng: slide-up (1.5s, delay 0.5s)         | "45 Lê Duẩn - Phường Bến Nghé - TP H"
+Top 2456.8  | TextBox         | Hiệu ứng: fade-in (1s, delay 0.5s)            | "xem chỉ đường" | [LẶP: pulse]
+Top 2544.0  | GeometricBox    | Hiệu ứng: None (Tĩnh)                         | Khối nền rgba(93, 115, 63, 1.00)
+Top 2568.0  | TextBox         | Hiệu ứng: slide-up (1.5s, delay 0.5s)         | "of"
+Top 2584.0  | TextBox         | Hiệu ứng: slide-up (1.5s, delay 0.5s)         | "golden hour"
+Top 2584.0  | TextBox         | Hiệu ứng: slide-up (1.5s, delay 0.5s)         | "love"
+Top 2638.4  | TextBox         | Hiệu ứng: slide-up (1.5s, delay 0.5s)         | "Our wedding story unfolds through s"
+Top 2734.0  | PhotoBox        | Hiệu ứng: flip-in (1.5s, delay 0.5s)          | Ảnh: d952b333-4915-44ad-aa5d-4
+Top 3004.0  | PhotoBox        | Hiệu ứng: slide-up (1.5s, delay 0.5s)         | Ảnh: f024c207-d3f4-4161-95ec-3
+Top 3004.0  | PhotoBox        | Hiệu ứng: slide-left (1.5s, delay 0.5s)       | Ảnh: de292fd7-9f51-4c1f-9e56-8
+Top 3209.7  | PhotoBox        | Hiệu ứng: slide-down (1.5s, delay 0.5s)       | Ảnh: f024c207-d3f4-4161-95ec-3
+Top 3404.0  | PhotoBox        | Hiệu ứng: slide-right (1.5s, delay 0.5s)      | Ảnh: 67631d4e-6c27-46dc-a907-6
+Top 3404.0  | PhotoBox        | Hiệu ứng: slide-left (1.5s, delay 0.5s)       | Ảnh: 7615ba6e-8eb1-4915-a20d-8
+Top 3699.0  | PhotoBox        | Hiệu ứng: slide-left (1.5s, delay 0.5s)       | Ảnh: 876a6229-9793-43a6-8754-5
+Top 3699.0  | PhotoBox        | Hiệu ứng: slide-right (1.5s, delay 0.5s)      | Ảnh: 7e1be3f0-f36d-4be7-9413-b
+Top 4061.5  | TextBox         | Hiệu ứng: slide-up (1.5s, delay 0.5s)         | "Hãy xác nhận sự có mặt của Quý Khác"
+Top 4156.7  | PluginRsvp      | Hiệu ứng: None (Tĩnh)                         | Form xác nhận tham dự (RSVP)
+Top 4529.0  | TextBox         | Hiệu ứng: zoom-in (1.5s, delay 0.5s)          | "Cowntdown"
+Top 4609.0  | PluginCountDown | Hiệu ứng: None (Tĩnh)                         | Đồng hồ đếm ngược (Countdown)
+Top 4721.7  | PhotoBox        | Hiệu ứng: None (Tĩnh)                         | Ảnh: d952b333-4915-44ad-aa5d-4
+Top 4820.0  | GeometricBox    | Hiệu ứng: None (Tĩnh)                         | Khối nền linear-gradient(180deg, r
+Top 4835.5  | TextBox         | Hiệu ứng: slide-up (1.5s, delay 0.5s)         | "Thank you"
+Top 4894.5  | TextBox         | Hiệu ứng: slide-up (1.5s, delay 0.5s)         | "Cảm ơn Quý Khách đã dành tình cảm c"

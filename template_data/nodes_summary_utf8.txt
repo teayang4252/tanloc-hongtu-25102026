@@ -1,0 +1,67 @@
+Total nodes: 65
+ROOT props: {"width": 430, "height": 5035.3, "backgroundColor": "bg_theme_custom", "backgroundCustomColor": "#ffffff", "backgroundImageUrl": "", "backgroundImageStyle": {"baseColor": "#FAFAFA", "overlayColor": "", "overlayOpacity": 0, "imageRepeat": "repeat", "imageSize": "contain"}, "backgroundPattern": "single", "backgroundEffect": "1"}
+
+[0NUdOfXDWM] Type: PhotoBox, top: 3698.9975999999997, left: 14.9984, w: 195.22, h: 284.65999999999997 | imgKey: templates/294becca-b2a5-4082-941d-87c7d82d9dea/876a6229-9793-43a6-8754-5dd760d226ce-edited-f0e34e131b3d.png
+[xSV0yCTNVs] Type: PhotoBox, top: 3003.9972, left: 275.00219999999996, w: 147.85020804438278, h: 200 | imgKey: templates/294becca-b2a5-4082-941d-87c7d82d9dea/f024c207-d3f4-4161-95ec-3ab5200938e1-edited-78efa604aca3.png?resize=1000x&crop=0,0,533,721&format=webp
+[M4fns-FXfj] Type: PhotoBox, top: 4721.66, left: 0, w: 430, h: 312.891 | imgKey: templates/294becca-b2a5-4082-941d-87c7d82d9dea/d952b333-4915-44ad-aa5d-41196bb51a93-edited-f51c5ac0f912.png?resize=1000x&crop=0,728,1085,721&format=webp
+[cQw3TmuBAw] Type: PhotoBox, top: 1529.0026, left: 300.00239999999997, w: 120.39999999999999, h: 174.57999999999998 | imgKey: templates/294becca-b2a5-4082-941d-87c7d82d9dea/3900e153-c843-4b66-9cee-8fca60d37169-edited-389ef3ea0ed1.png
+[N72T7P-Q9Z] Type: PhotoBox, top: 0, left: 0, w: 430, h: 645 | imgKey: templates/294becca-b2a5-4082-941d-87c7d82d9dea/471dc383-36ec-4393-8591-5e8534eba030-edited-9da795ff4ee9.png
+[Fj234vQxba] Type: PhotoBox, top: 3209.65, left: 274.733, w: 150.757, h: 183.07 | imgKey: templates/294becca-b2a5-4082-941d-87c7d82d9dea/f024c207-d3f4-4161-95ec-3ab5200938e1-edited-78efa604aca3.png?resize=1000x&crop=0,730,543,719&format=webp
+[9gxEGErxbw] Type: PhotoBox, top: 3404.0004, left: 219.9966, w: 195.22, h: 284.65999999999997 | imgKey: templates/294becca-b2a5-4082-941d-87c7d82d9dea/67631d4e-6c27-46dc-a907-64c80d0a5815-edited-a7727d909ec0.png
+[nRinCqcWij] Type: PhotoBox, top: 3698.9975999999997, left: 219.9966, w: 195.22, h: 284.65999999999997 | imgKey: templates/294becca-b2a5-4082-941d-87c7d82d9dea/7e1be3f0-f36d-4be7-9413-b334366afadf-edited-4be367dbc24d.png
+[ZNFE0g2CTe] Type: PhotoBox, top: 3003.9972, left: 14.9984, w: 250.26, h: 389.58 | imgKey: templates/294becca-b2a5-4082-941d-87c7d82d9dea/de292fd7-9f51-4c1f-9e56-869cf8876309-edited-f9134aff7404.png
+[ch9MAMO6Ke] Type: PhotoBox, top: 2734, left: 14.9984, w: 400.2, h: 265.202 | imgKey: templates/294becca-b2a5-4082-941d-87c7d82d9dea/d952b333-4915-44ad-aa5d-41196bb51a93-edited-f51c5ac0f912.png?resize=1000x&crop=0,0,1085,719&format=webp
+[gz7vgmtcaD] Type: PhotoBox, top: 2107.8084, left: 188.5034, w: 53.32, h: 47.3 | imgKey: templates/294becca-b2a5-4082-941d-87c7d82d9dea/85d07a2a-319a-44a7-a85e-95610f76e865.png
+[tn34n6-Tnz] Type: PhotoBox, top: 1077.5026, left: 12.4958, w: 195.22, h: 284.65999999999997 | imgKey: templates/294becca-b2a5-4082-941d-87c7d82d9dea/afacacd9-ea49-41d9-ba93-78acaf022c1e-edited-3617d2593bfe.png
+[ZdnbvUbhRp] Type: PhotoBox, top: 1077.5026, left: 222.49920000000003, w: 195.22, h: 284.65999999999997 | imgKey: templates/294becca-b2a5-4082-941d-87c7d82d9dea/e9e162f4-596a-4c8a-a437-511a6882a524-edited-580362beb893.png
+[cYcOFzDfJH] Type: PhotoBox, top: 1529.0026, left: 10.001800000000001, w: 120.39999999999999, h: 174.57999999999998 | imgKey: templates/294becca-b2a5-4082-941d-87c7d82d9dea/090cc8ce-413d-475a-9151-62afc55ab374-edited-8de20cee86c1.png
+[bo5CXDB2w_] Type: PhotoBox, top: 870.0018, left: 179.00039999999998, w: 72.24, h: 79.98 | imgKey: templates/294becca-b2a5-4082-941d-87c7d82d9dea/7124252b-2a10-4d05-9e9f-908f8114a636.png
+[CPiE1koQYa] Type: PhotoBox, top: 3404.0004, left: 14.9984, w: 195.22, h: 284.65999999999997 | imgKey: templates/294becca-b2a5-4082-941d-87c7d82d9dea/7615ba6e-8eb1-4915-a20d-8fb82c998189-edited-840393895993.png
+[ntCHdV5Te_] Type: PhotoBox, top: 1498.9972, left: 139.99939999999998, w: 149.64, h: 229.62 | imgKey: templates/294becca-b2a5-4082-941d-87c7d82d9dea/471dc383-36ec-4393-8591-5e8534eba030-edited-9da795ff4ee9.png
+[ol1c8xAbpl] Type: GeometricBox, top: 1064.9982, left: 0, w: 430, h: 309.6 | 
+[y2FS9p8HgW] Type: GeometricBox, top: 2544.0004, left: 0, w: 430, h: 1485.22 | 
+[uqJtsnHl2X] Type: GeometricBox, top: 4819.999, left: 0, w: 430, h: 215 | 
+[jjPTgwqDkR] Type: GeometricBox, top: 400.0032, left: 0, w: 430, h: 245.1 | 
+[6xI8h9OmPc] Type: TextBox, top: 1411.002, left: 0, w: 430, h: 54.18 | text: <p>TRÂN TRỌNG KÍNH MỜI QUÝ KHÁCH đến<br>CHUNG VUI CÙNG GIA ĐÌNH CHÚNG TÔI</p> | font: "Lora Regular" (18.06px, rgb(93, 115, 63))
+[kYUom7xTyV] Type: TextBox, top: 1838.9981999999998, left: 167.50220000000002, w: 94.6, h: 79.98 | text: 29 | font: "Alisheia" (79.98px, rgb(93, 115, 63))
+[yaGHLHeW-b] Type: TextBox, top: 2186.808, left: 0, w: 430, h: 30.099999999999998 | text: lễ thành hôn | font: "Lora Regular" (19.78px, rgb(93, 115, 63))
+[kPmGNL57uN] Type: TextBox, top: 2416.8064, left: 0, w: 430, h: 24.08 | text: <div>45 Lê Duẩn - Phường Bến Nghé - TP Hồ Chí Minh</div> | font: "Lora Regular" (16.34px, rgb(93, 115, 63))
+[MdczOuUB4r] Type: TextBox, top: 962.5034, left: 215, w: 215, h: 23.22 | text: cô dâu | font: "Lora Regular" (14.62px, rgb(48, 69, 28))
+[XKo4S1zWXk] Type: TextBox, top: 400.0032, left: 0, w: 430, h: 137.6 | text: Wedding | font: "Arcittya Begatri" (105.78px, rgba(255, 255, 255, 0.6))
+[1wtzBAeBuc] Type: TextBox, top: 845.0015999999999, left: 215, w: 215, h: 20.64 | text: <div>TP. Hồ Chí Minh</div> | font: "Lora Regular" (13.76px, rgb(48, 69, 28))
+[Fz3cjKZizV] Type: TextBox, top: 1999.0012, left: 0, w: 430, h: 24.08 | text: <div>45 Lê Duẩn - Phường Bến Nghé - TP Hồ Chí Minh</div> | font: "Lora Regular" (16.34px, rgb(93, 115, 63))
+[39f8GRiJ1Z] Type: TextBox, top: 4835.4962, left: 0, w: 430, h: 54.18 | text: <p>Thank you</p> | font: "Monsieur La Doulaise" (36.12px, rgb(255, 255, 255))
+[-Xf8MAS_ZD] Type: TextBox, top: 1924.0006, left: 0, w: 430, h: 24.08 | text: <div>(Tức ngày 20 tháng 11 năm Bính Ngọ)</div> | font: "Lora Regular" (16.34px, rgb(93, 115, 63))
+[Rkp9oekbGM] Type: TextBox, top: 4529.0008, left: 0, w: 430, h: 72.24 | text: <p>Cowntdown</p> | font: "Monsieur La Doulaise" (48.16px, rgb(93, 115, 63))
+[EkRkDmSyrJ] Type: TextBox, top: 985.8008, left: 215, w: 215, h: 37.839999999999996 | text: <p>Lan Ngọc</p> | font: "HoaTay1" (31.82px, rgb(48, 69, 28))
+[zSrXvwLfsI] Type: TextBox, top: 800.2472, left: 215, w: 215, h: 42.14 | text: Ông. Nguyễn Văn tài<div>Bà. lê thu hà</div> | font: "Lora Regular" (13.76px, rgb(48, 69, 28))
+[7YJHIyhj0c] Type: TextBox, top: 4061.4962, left: 0, w: 430, h: 72.24 | text: <p>Hãy xác nhận sự có mặt của Quý Khách để gia đình</p><p>chúng tôi chuẩn bị đón tiếp một cách chu đáo nhất.</p><p>Trân trọng!</p> | font: "Lora Regular" (16.34px, rgb(93, 115, 63))
+[cTZr0FCekv] Type: TextBox, top: 594.9996, left: 0, w: 430, h: 24.08 | text: 26.12.2026 | font: "Hastegi" (19.78px, rgb(255, 255, 255))
+[sQ2O1s7R59] Type: TextBox, top: 2583.9990000000003, left: 14.9984, w: 245.1, h: 48.16 | text: golden hour | font: "Lora Regular" (31.82px, rgb(255, 255, 255))
+[ove1IOvn15] Type: TextBox, top: 776.2532, left: 215, w: 215, h: 23.22 | text: nhà gái | font: "Lora Regular" (14.62px, rgb(48, 69, 28))
+[ExibzKz02O] Type: TextBox, top: 2280.1094, left: 29.9968, w: 120.39999999999999, h: 31.82 | text: tháng 12 | font: "Lora Regular" (19.78px, rgb(93, 115, 63))
+[dEQlaaITUT] Type: TextBox, top: 2379.8091999999997, left: 0, w: 430, h: 26.66 | text: tại tư gia nhà trai | font: "Lora Regular" (18.06px, rgb(93, 115, 63))
+[60tcgNRdYA] Type: TextBox, top: 2256.812, left: 167.50220000000002, w: 94.6, h: 79.98 | text: <div>29</div> | font: "Alisheia" (79.98px, rgb(93, 115, 63))
+[EQIPYvx-G1] Type: TextBox, top: 2583.9990000000003, left: 304.99899999999997, w: 124.7, h: 48.16 | text: love | font: "Lora Regular" (31.82px, rgb(255, 255, 255))
+[EM0KxKG7Ii] Type: TextBox, top: 2280.1094, left: 279.99879999999996, w: 120.39999999999999, h: 31.82 | text: năm 2026 | font: "Lora Regular" (19.78px, rgb(93, 115, 63))
+[BjDAhx4WPr] Type: TextBox, top: 4894.475, left: 12.4958, w: 405.06, h: 84.28 | text: <p>Cảm ơn Quý Khách đã dành tình cảm cho gia đình chúng tôi! Sự hiện diện của Quý Khách chính là món quà ý nghĩa nhất, gia đình chúng tôi vô cùng trân quý khi được cùng Quý Khách chia sẻ niềm hạnh phúc trong ngày trọng đại này.</p> | font: "Lora Regular" (13.76px, rgb(255, 255, 255))
+[NUIQSfzD34] Type: TextBox, top: 2638.4284, left: 14.9984, w: 399.9, h: 75.67999999999999 | text: <p>Our wedding story unfolds through soft moments of love — filled with warm smiles, quiet tenderness, and timeless memories that will stay in our hearts forever.</p> | font: "Lora Regular" (13.76px, rgb(255, 255, 255))
+[RAB4Zym-qa] Type: TextBox, top: 2568.003, left: 225.0018, w: 103.2, h: 62.78 | text: of | font: "UVN" (42.14px, rgb(255, 255, 255))
+[2Wqyj--dm3] Type: TextBox, top: 509.99719999999996, left: 0, w: 430, h: 86 | text: Anh đức<div>Lan Ngọc</div> | font: "Hastegi" (36.12px, rgb(255, 255, 255))
+[U28QkJYhHU] Type: TextBox, top: 2456.8136, left: 117.50179999999999, w: 195.22, h: 29.24 | text: xem chỉ đường | font: "Lora Regular" (16.34px, rgb(255, 255, 255))
+[dkGpmFb-qh] Type: TextBox, top: 962.5034, left: 0, w: 215, h: 23.22 | text: Chú rể | font: "Lora Regular" (14.62px, rgb(48, 69, 28))
+[CRo16xVNJT] Type: TextBox, top: 845.0015999999999, left: 0, w: 215, h: 20.64 | text: TP. Hồ Chí Minh | font: "Lora Regular" (13.76px, rgb(48, 69, 28))
+[Lz_0Y1rWmw] Type: TextBox, top: 1862.1064, left: 29.9968, w: 120.39999999999999, h: 31.82 | text: tháng 12 | font: "Lora Regular" (19.78px, rgb(93, 115, 63))
+[ZAMsbFuxA8] Type: TextBox, top: 2343.0098, left: 0, w: 430, h: 24.08 | text: (Tức ngày 20 tháng 11 năm Bính Ngọ) | font: "Lora Regular" (16.34px, rgb(93, 115, 63))
+[uO0dFb3Duk] Type: TextBox, top: 1803.9962, left: 0, w: 430, h: 26.66 | text: <div>được tổ chức vào lúc 16:30, THỨ BẢY</div> | font: "Lora Regular" (18.06px, rgb(93, 115, 63))
+[WvkzS-tP3n] Type: TextBox, top: 680.0020000000001, left: 0, w: 430, h: 66.22 | text: <p>"Hôn nhân là chuyện cả đời,</p><p>Yêu người vừa ý, cưới người mình thương..."</p> | font: "Pinyon" (22.36px, rgb(93, 115, 63))
+[xBjYJCPOzn] Type: TextBox, top: 1769.0028, left: 0, w: 430, h: 30.099999999999998 | text: bữa tiệc chung vui | font: "Lora Regular" (19.78px, rgb(93, 115, 63))
+[C-KgfYrRba] Type: TextBox, top: 2038.9997999999998, left: 117.50179999999999, w: 195.22, h: 29.24 | text: xem chỉ đường | font: "Lora Regular" (16.34px, rgb(255, 255, 255))
+[qQjBDSkVI3] Type: TextBox, top: 985.9986, left: 0, w: 215, h: 37.839999999999996 | text: <p>Anh Đức</p> | font: "HoaTay1" (31.82px, rgb(48, 69, 28))
+[yDv59z6I91] Type: TextBox, top: 776.2532, left: 0, w: 215, h: 23.22 | text: nhà trai | font: "Lora Regular" (14.62px, rgb(48, 69, 28))
+[hAhVqG_Sa_] Type: TextBox, top: 1862.1064, left: 279.99879999999996, w: 120.39999999999999, h: 31.82 | text: năm 2026 | font: "Lora Regular" (19.78px, rgb(93, 115, 63))
+[VYlUx1b3SM] Type: TextBox, top: 2221.81, left: 0, w: 430, h: 26.66 | text: được tổ chức vào lúc 09:30, THỨ BẢY | font: "Lora Regular" (18.06px, rgb(93, 115, 63))
+[PjZZnGJ3t_] Type: TextBox, top: 1962.0040000000001, left: 0, w: 430, h: 26.66 | text: tại tư gia nhà trai | font: "Lora Regular" (18.06px, rgb(93, 115, 63))
+[a-ZGGWc1EV] Type: TextBox, top: 801.2534, left: 0, w: 215, h: 42.14 | text: Ông. NGô Văn Đại<div>Bà. Lê Thị Ân</div> | font: "Lora Regular" (13.76px, rgb(48, 69, 28))
+[OVf-eSZ3wp] Type: PluginCountDown, top: 4608.9636, left: 39.56, w: 350.5274, h: 79.4554 | font: "Lora Regular" (14.62px, rgb(255, 255, 255))
+[HVShPRnNFi] Type: PluginRsvp, top: 4156.7412, left: 23.8478, w: 382.6828, h: 337.9628 | 
