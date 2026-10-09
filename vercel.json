@@ -3,7 +3,6 @@
   "rewrites": [
     { "source": "/admin", "destination": "/admin.html" },
     { "source": "/admin.html", "destination": "/admin.html" },
-    { "source": "/assets/:match*", "destination": "/assets/:match*" },
-    { "source": "/:slug", "destination": "/index.html" }
+    { "source": "/((?!assets|admin|style\\.css|script\\.js|favicon).*)", "destination": "/index.html" }
   ]
 }
