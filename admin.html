@@ -2029,7 +2029,13 @@ Rất mong được đón tiếp ${displayGuestName}!`;
     }
 
     function setSavedGuests(guests) {
-      localStorage.setItem(SAVED_GUESTS_KEY, JSON.stringify(guests));
+      try {
+        localStorage.setItem(SAVED_GUESTS_KEY, JSON.stringify(guests));
+        return true;
+      } catch (error) {
+        console.error('Không thể lưu danh sách khách trên trình duyệt:', error);
+        return false;
+      }
     }
 
     async function registerGuestLink(item) {
@@ -2055,8 +2061,8 @@ Rất mong được đón tiếp ${displayGuestName}!`;
       }
     }
 
-    function saveGuestItem(item, silent = false) {
-      if (!item || !item.rawName) return;
+    async function saveGuestItem(item, silent = false) {
+      if (!item || !item.rawName) return { saved: false, synced: false };
       const guests = getSavedGuests();
       const key = item.normalizedName.toLowerCase();
       const lookupKey = editingGuestKey || key;
@@ -2065,10 +2071,15 @@ Rất mong được đón tiếp ${displayGuestName}!`;
       if (existingIndex >= 0) guests[existingIndex] = savedItem;
       else guests.unshift(savedItem);
       editingGuestKey = '';
-      setSavedGuests(guests);
-      registerGuestLink(item);
+      const saved = setSavedGuests(guests);
+      if (!saved) {
+        showToast('Không thể lưu danh sách khách. Hãy kiểm tra quyền lưu dữ liệu của trình duyệt.');
+        return { saved: false, synced: false };
+      }
       renderSavedGuests();
       if (!silent) showToast(`✓ Đã lưu khách mời ${item.rawName}`);
+      const synced = await registerGuestLink(item);
+      return { saved: true, synced };
     }
 
     function renderSavedGuests() {
@@ -2180,7 +2191,7 @@ Rất mong được đón tiếp ${displayGuestName}!`;
       if (urlInput) urlInput.value = res.url;
       if (openBtn) openBtn.href = res.url;
       if (slugTag) {
-        slugTag.textContent = res.slug ? `✓ Link: /${res.slug} · Thiệp: ${res.rawName}` : 'Chưa nhập tên';
+        slugTag.textContent = res.slug ? `Đang lưu: /${res.slug} · Thiệp: ${res.rawName}` : 'Chưa nhập tên';
       }
 
       if (msgBox) {
@@ -2189,8 +2200,13 @@ Rất mong được đón tiếp ${displayGuestName}!`;
 
       if (resultBox) resultBox.style.display = 'block';
       if (generateBtn) generateBtn.textContent = '↻ Tạo Lại Link';
-      await registerGuestLink(res);
-      showToast(`✓ Đã tạo link ${side === 'gai' ? 'Nhà Gái' : 'Nhà Trai'} cho ${res.rawName}`);
+      const saveResult = await saveGuestItem(res, true);
+      if (saveResult.saved) {
+        if (slugTag) slugTag.textContent = `✓ Đã tạo và lưu: /${res.slug} · Thiệp: ${res.rawName}`;
+        showToast(`✓ Đã tạo và lưu link ${side === 'gai' ? 'Nhà Gái' : 'Nhà Trai'} cho ${res.rawName}`);
+      } else if (slugTag) {
+        slugTag.textContent = `⚠ Link đã tạo nhưng chưa lưu: /${res.slug}`;
+      }
     }
 
     /**
