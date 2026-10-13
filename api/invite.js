@@ -34,7 +34,10 @@ module.exports = function handler(req, res) {
   const forwardedProto = String(req.headers['x-forwarded-proto'] || 'https').split(',')[0].trim();
   const protocol = forwardedProto === 'http' ? 'http' : 'https';
   const encodedSlug = encodeURIComponent(rawSlug).replace(/%2D/gi, '-');
-  const invitationUrl = `${protocol}://${host}/${side}/${encodedSlug}`;
+  const rawFacebookVersion = String((req.query && req.query.fb) || '').trim();
+  const facebookVersion = /^[a-z0-9_-]{1,40}$/i.test(rawFacebookVersion) ? rawFacebookVersion : '';
+  const facebookQuery = facebookVersion ? `?fb=${encodeURIComponent(facebookVersion)}` : '';
+  const invitationUrl = `${protocol}://${host}/${side}/${encodedSlug}${facebookQuery}`;
   const safeUrl = escapeAttribute(invitationUrl);
   const description = side === '1'
     ? 'Trân trọng kính mời Quý khách đến chung vui cùng gia đình Nhà Gái vào ngày 24.10.2026 tại Nhà hàng Quang Long.'
