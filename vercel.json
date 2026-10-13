@@ -1,7 +1,14 @@
 {
   "trailingSlash": false,
+  "functions": {
+    "api/invite.js": {
+      "includeFiles": "index.html"
+    }
+  },
   "rewrites": [
     { "source": "/admin", "destination": "/admin.html" },
+    { "source": "/1/:slug", "destination": "/api/invite?inviteSide=1&inviteSlug=:slug" },
+    { "source": "/2/:slug", "destination": "/api/invite?inviteSide=2&inviteSlug=:slug" },
     { "source": "/:slug*", "destination": "/" }
   ]
 }
