@@ -358,10 +358,13 @@ function initAudioPlayer() {
     if (!document.hidden && audio.paused) playMusic();
   });
 
-  // 2. First real in-page gesture unlocks audio on mobile browsers.
+  // 2. First real in-page gesture or scroll intent unlocks audio.
+  // Some mobile browsers reject the initial touchstart of a swipe, so retry on
+  // touchmove/scroll as well instead of requiring a separate tap.
   const gestureEvents = [
-    'pointerdown', 'touchstart', 'touchend', 'click', 'keydown'
+    'pointerdown', 'pointerup', 'touchstart', 'touchend', 'mousedown', 'click', 'keydown'
   ];
+  const scrollIntentEvents = ['touchmove', 'wheel', 'scroll'];
 
   function handleFirstGesture(event) {
     // These controls call playMusic themselves. Skipping them here prevents
@@ -378,10 +381,16 @@ function initAudioPlayer() {
     gestureEvents.forEach(evt => {
       document.removeEventListener(evt, handleFirstGesture, true);
     });
+    scrollIntentEvents.forEach(evt => {
+      window.removeEventListener(evt, handleFirstGesture, true);
+    });
   }
 
   gestureEvents.forEach(evt => {
     document.addEventListener(evt, handleFirstGesture, { capture: true, passive: true });
+  });
+  scrollIntentEvents.forEach(evt => {
+    window.addEventListener(evt, handleFirstGesture, { capture: true, passive: true });
   });
 
   audio.addEventListener('playing', () => syncPlaybackUi(true));
