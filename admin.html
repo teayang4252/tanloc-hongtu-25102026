@@ -2102,11 +2102,23 @@ Rất mong được đón tiếp ${displayGuestName}!`;
           <td>${sideLabel}</td>
           <td><a href="${escapeAdminHtml(fresh.url)}" target="_blank" rel="noopener" style="color:var(--primary-olive);word-break:break-all;">${escapeAdminHtml(fresh.url)}</a></td>
           <td style="text-align:center;white-space:nowrap;">
+            <button type="button" class="btn btn-gold btn-sm saved-guest-copy" data-index="${index}" aria-label="Sao chép link của ${escapeAdminHtml(guest.rawName)}">
+              Copy Link
+            </button>
             <button type="button" class="btn btn-secondary btn-sm saved-guest-edit" data-index="${index}">Sửa</button>
             <button type="button" class="btn btn-secondary btn-sm saved-guest-delete" data-index="${index}">Xoá</button>
           </td>
         </tr>`;
       }).join('');
+
+      tbody.querySelectorAll('.saved-guest-copy').forEach(button => {
+        button.addEventListener('click', () => {
+          const guest = guests[Number(button.dataset.index)];
+          if (!guest) return;
+          const fresh = generateGuestLink(guest.rawName, guest.side);
+          copyText(fresh.url, `✓ Đã sao chép link của ${guest.rawName}!`);
+        });
+      });
 
       tbody.querySelectorAll('.saved-guest-edit').forEach(button => {
         button.addEventListener('click', () => {
