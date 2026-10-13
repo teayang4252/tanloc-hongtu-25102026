@@ -768,7 +768,10 @@
                 placeholder="Ví dụ: Em Tú Tôn, Chú Sáu, Anh Nguyễn Văn A..."
                 value="Em Tú Tôn"
               />
-              <span class="field-hint">Hệ thống sẽ tự động tạo link thiệp cá nhân hoá trang trọng cho khách mời.</span>
+              <span class="field-hint">Nhập đúng tên, chọn phía mời rồi bấm nút bên dưới để xác nhận tạo link.</span>
+              <button type="button" id="btn-generate-single" class="btn btn-gold" style="width: 100%; margin-top: 12px; justify-content: center;">
+                ✓ Xác Nhận Tạo Link
+              </button>
             </div>
 
             <div class="form-group">
@@ -796,8 +799,8 @@
                   <input type="radio" name="url_format" value="clean_slug" checked style="accent-color: var(--primary-olive); margin-top: 3px;" />
                   <div>
                     <strong>Link Cá Nhân Hoá An Toàn (Khuyên Dùng):</strong><br>
-                    <code style="background: #EFECE4; padding: 1px 6px; border-radius: 4px;">/Em-Tu-Ton?name=Em+Tú+Tôn</code>
-                    <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 2px;">Đường dẫn chính vẫn ngắn, đồng thời giữ đúng tên có dấu trên mọi điện thoại.</div>
+                    <code style="background: #EFECE4; padding: 1px 6px; border-radius: 4px;">/1/Em-Tu-Ton (Nhà Gái) · /2/Em-Tu-Ton (Nhà Trai)</code>
+                    <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 2px;">Số 1 luôn mở thiệp Nhà Gái; số 2 luôn mở thiệp Nhà Trai.</div>
                   </div>
                 </label>
                 <label style="display: flex; align-items: flex-start; gap: 8px; font-weight: normal; font-size: 13px; cursor: pointer;">
@@ -822,7 +825,7 @@
 
           <div>
             <!-- Live Converted Result -->
-            <div class="link-preview-box">
+            <div class="link-preview-box" id="single-link-result" style="display: none;">
               <div style="display: flex; justify-content: space-between; align-items: center;">
                 <label style="font-size: 12px; font-weight: 700; color: var(--primary-olive); text-transform: uppercase;">
                   Link Thiệp Cưới Đã Tạo
@@ -1144,7 +1147,7 @@ Cô Chú Sáu"></textarea>
 
             <div class="form-group">
               <label for="cfg-ev1-map">Link Google Maps (Chỉ đường)</label>
-              <input type="text" id="cfg-ev1-map" class="form-control" value="https://www.google.com/maps/search/?api=1&query=16%2F4+%C4%90i%E1%BB%87n+Bi%C3%AAn+Ph%E1%BB%A7%2C+Kr%C3%B4ng+Kmar%2C+Kr%C3%B4ng+B%C3%B4ng%2C+%C4%90%E1%BA%AFk+L%E1%BA%AFk" />
+              <input type="url" id="cfg-ev1-map" class="form-control" inputmode="url" value="https://www.google.com/maps/search/?api=1&query=16%2F4+%C4%90i%E1%BB%87n+Bi%C3%AAn+Ph%E1%BB%A7%2C+Kr%C3%B4ng+Kmar%2C+Kr%C3%B4ng+B%C3%B4ng%2C+%C4%90%E1%BA%AFk+L%E1%BA%AFk" />
             </div>
           </div>
 
@@ -1182,7 +1185,66 @@ Cô Chú Sáu"></textarea>
 
             <div class="form-group">
               <label for="cfg-ev2-map">Link Google Maps (Chỉ đường)</label>
-              <input type="text" id="cfg-ev2-map" class="form-control" value="https://www.google.com/maps/search/?api=1&query=Nh%C3%A0+C%E1%BB%99ng+%C4%90%E1%BB%93ng%2C+Kr%C3%B4ng+Kmar%2C+Kr%C3%B4ng+B%C3%B4ng%2C+%C4%90%E1%BA%AFk+L%E1%BA%AFk" />
+              <input type="url" id="cfg-ev2-map" class="form-control" inputmode="url" value="https://www.google.com/maps/search/?api=1&query=Nh%C3%A0+C%E1%BB%99ng+%C4%90%E1%BB%93ng%2C+Kr%C3%B4ng+Kmar%2C+Kr%C3%B4ng+B%C3%B4ng%2C+%C4%90%E1%BA%AFk+L%E1%BA%AFk" />
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 24px; background: #F4F6F0; padding: 18px; border-radius: var(--radius-md); border: 1px solid var(--border-gold);">
+          <h3 style="font-family: 'Playfair Display', serif; color: var(--primary-olive); margin-bottom: 6px; font-size: 18px;">Phiên Bản Nhà Gái</h3>
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 18px; line-height: 1.5;">
+            Tự động áp dụng cho link khách mời Nhà Gái (<strong>side=gai</strong>). Lịch Nhà Trai phía trên vẫn được giữ nguyên.
+          </p>
+
+          <div class="form-grid-2">
+            <div>
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label for="cfg-bride-solar-date">Ngày dương lịch</label>
+                  <input type="text" id="cfg-bride-solar-date" class="form-control" value="24.10.2026" />
+                </div>
+                <div class="form-group">
+                  <label for="cfg-bride-solar-day-num">Ngày hiển thị lớn</label>
+                  <input type="text" id="cfg-bride-solar-day-num" class="form-control" value="24" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="cfg-bride-lunar-date">Ngày âm lịch</label>
+                <input type="text" id="cfg-bride-lunar-date" class="form-control" value="15 tháng 09 năm Bính Ngọ" />
+              </div>
+              <div class="form-group">
+                <label for="cfg-bride-countdown-target">Mốc đếm ngược</label>
+                <input type="datetime-local" id="cfg-bride-countdown-target" class="form-control" value="2026-10-24T11:00" />
+              </div>
+              <div class="form-group">
+                <label for="cfg-bride-event-title">Tên sự kiện</label>
+                <input type="text" id="cfg-bride-event-title" class="form-control" value="TIỆC CƯỚI NHÀ GÁI" />
+              </div>
+            </div>
+
+            <div>
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label for="cfg-bride-event-time">Giờ tổ chức</label>
+                  <input type="text" id="cfg-bride-event-time" class="form-control" value="11:00" />
+                </div>
+                <div class="form-group">
+                  <label for="cfg-bride-event-day">Thứ trong tuần</label>
+                  <input type="text" id="cfg-bride-event-day" class="form-control" value="THỨ BẢY" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="cfg-bride-event-venue">Địa điểm</label>
+                <input type="text" id="cfg-bride-event-venue" class="form-control" value="Nhà hàng Quang Long" />
+              </div>
+              <div class="form-group">
+                <label for="cfg-bride-event-address">Địa chỉ chi tiết</label>
+                <input type="text" id="cfg-bride-event-address" class="form-control" value="29 Nguyễn Huệ · Krông Bông · Đắk Lắk" />
+              </div>
+              <div class="form-group">
+                <label for="cfg-bride-event-map">Link Google Maps Nhà Gái</label>
+                <input type="url" id="cfg-bride-event-map" class="form-control" inputmode="url" value="https://maps.app.goo.gl/aJm6BMmdJeqJbcic8?g_st=ic" />
+              </div>
             </div>
           </div>
         </div>
@@ -1214,7 +1276,7 @@ Cô Chú Sáu"></textarea>
 
             <div class="form-group">
               <label for="cfg-groom-acc">Số tài khoản</label>
-              <input type="text" id="cfg-groom-acc" class="form-control" value="999988882510" />
+              <input type="text" id="cfg-groom-acc" class="form-control" inputmode="numeric" autocomplete="off" value="999988882510" />
             </div>
 
             <div class="form-group">
@@ -1241,7 +1303,7 @@ Cô Chú Sáu"></textarea>
 
             <div class="form-group">
               <label for="cfg-bride-acc">Số tài khoản</label>
-              <input type="text" id="cfg-bride-acc" class="form-control" value="101225102026" />
+              <input type="text" id="cfg-bride-acc" class="form-control" inputmode="numeric" autocomplete="off" value="101225102026" />
             </div>
 
             <div class="form-group">
@@ -1517,6 +1579,17 @@ Cô Chú Sáu"></textarea>
       event2Address: 'Thôn 5 · TT. Krông Kmar Cũ (Thôn 3 Mới) · Đắk Lắk',
       event2MapLink: 'https://www.google.com/maps/search/?api=1&query=Nh%C3%A0+C%E1%BB%99ng+%C4%90%E1%BB%93ng%2C+Kr%C3%B4ng+Kmar%2C+Kr%C3%B4ng+B%C3%B4ng%2C+%C4%90%E1%BA%AFk+L%E1%BA%AFk',
 
+      brideSolarDate: '24.10.2026',
+      brideSolarDayNumber: '24',
+      brideLunarDate: '15 tháng 09 năm Bính Ngọ',
+      brideCountdownTarget: '2026-10-24T11:00',
+      brideEventTitle: 'TIỆC CƯỚI NHÀ GÁI',
+      brideEventTime: '11:00',
+      brideEventDayVal: 'THỨ BẢY',
+      brideEventVenue: 'Nhà hàng Quang Long',
+      brideEventAddress: '29 Nguyễn Huệ · Krông Bông · Đắk Lắk',
+      brideEventMapLink: 'https://maps.app.goo.gl/aJm6BMmdJeqJbcic8?g_st=ic',
+
       groomBank: 'MB Bank',
       groomAccount: '999988882510',
       groomAccountHolder: 'LE TAN LOC',
@@ -1619,6 +1692,17 @@ Cô Chú Sáu"></textarea>
       document.getElementById('cfg-ev2-address').value = cfg.event2Address || '';
       document.getElementById('cfg-ev2-map').value = cfg.event2MapLink || '';
 
+      document.getElementById('cfg-bride-solar-date').value = cfg.brideSolarDate || '';
+      document.getElementById('cfg-bride-solar-day-num').value = cfg.brideSolarDayNumber || '';
+      document.getElementById('cfg-bride-lunar-date').value = cfg.brideLunarDate || '';
+      document.getElementById('cfg-bride-countdown-target').value = cfg.brideCountdownTarget || '';
+      document.getElementById('cfg-bride-event-title').value = cfg.brideEventTitle || '';
+      document.getElementById('cfg-bride-event-time').value = cfg.brideEventTime || '';
+      document.getElementById('cfg-bride-event-day').value = cfg.brideEventDayVal || '';
+      document.getElementById('cfg-bride-event-venue').value = cfg.brideEventVenue || '';
+      document.getElementById('cfg-bride-event-address').value = cfg.brideEventAddress || '';
+      document.getElementById('cfg-bride-event-map').value = cfg.brideEventMapLink || '';
+
       document.getElementById('cfg-groom-bank').value = cfg.groomBank || '';
       document.getElementById('cfg-groom-acc').value = cfg.groomAccount || '';
       document.getElementById('cfg-groom-holder').value = cfg.groomAccountHolder || '';
@@ -1688,6 +1772,17 @@ Cô Chú Sáu"></textarea>
         event2Address: document.getElementById('cfg-ev2-address').value.trim(),
         event2MapLink: document.getElementById('cfg-ev2-map').value.trim(),
 
+        brideSolarDate: document.getElementById('cfg-bride-solar-date').value.trim(),
+        brideSolarDayNumber: document.getElementById('cfg-bride-solar-day-num').value.trim(),
+        brideLunarDate: document.getElementById('cfg-bride-lunar-date').value.trim(),
+        brideCountdownTarget: document.getElementById('cfg-bride-countdown-target').value.trim(),
+        brideEventTitle: document.getElementById('cfg-bride-event-title').value.trim(),
+        brideEventTime: document.getElementById('cfg-bride-event-time').value.trim(),
+        brideEventDayVal: document.getElementById('cfg-bride-event-day').value.trim(),
+        brideEventVenue: document.getElementById('cfg-bride-event-venue').value.trim(),
+        brideEventAddress: document.getElementById('cfg-bride-event-address').value.trim(),
+        brideEventMapLink: document.getElementById('cfg-bride-event-map').value.trim(),
+
         groomBank: document.getElementById('cfg-groom-bank').value.trim(),
         groomAccount: document.getElementById('cfg-groom-acc').value.trim(),
         groomAccountHolder: document.getElementById('cfg-groom-holder').value.trim(),
@@ -1709,30 +1804,89 @@ Cô Chú Sáu"></textarea>
       };
     }
 
+    function isValidHttpUrl(value) {
+      try {
+        const url = new URL(value);
+        return url.protocol === 'http:' || url.protocol === 'https:';
+      } catch (_) {
+        return false;
+      }
+    }
+
     // Save to localStorage
     function saveConfig() {
       const data = collectForm();
-      localStorage.setItem('wedding_site_config', JSON.stringify(data));
-      showToast('✓ Đã lưu thành công! Thiệp cưới đã được cập nhật.');
-      updateQrPreviews();
+      const mapFields = [
+        { element: document.getElementById('cfg-ev1-map'), value: data.event1MapLink },
+        { element: document.getElementById('cfg-ev2-map'), value: data.event2MapLink },
+        { element: document.getElementById('cfg-bride-event-map'), value: data.brideEventMapLink }
+      ];
+      const invalidMap = mapFields.find(item => item.value && !isValidHttpUrl(item.value));
+
+      if (invalidMap) {
+        invalidMap.element.focus();
+        showToast('Link Google Maps chưa hợp lệ. Vui lòng nhập link bắt đầu bằng http:// hoặc https://.');
+        return;
+      }
+
+      try {
+        localStorage.setItem('wedding_site_config', JSON.stringify(data));
+        showToast('✓ Đã lưu thành công! Thiệp cưới đã được cập nhật.');
+        updateQrPreviews();
+      } catch (error) {
+        console.error('Không thể lưu cấu hình thiệp:', error);
+        showToast('Không thể lưu thay đổi trong trình duyệt này. Vui lòng kiểm tra quyền lưu trữ.');
+      }
+    }
+
+    function getVietQrBankId(bankName) {
+      const normalized = String(bankName || '')
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/đ/g, 'd')
+        .replace(/[^a-z0-9]/g, '');
+      const aliases = {
+        mb: 'MB', mbbank: 'MB', nganhangquandoi: 'MB',
+        vcb: 'VCB', vietcombank: 'VCB',
+        tcb: 'TCB', techcombank: 'TCB',
+        acb: 'ACB', vpbank: 'VPB', vpb: 'VPB',
+        bidv: 'BIDV', vietinbank: 'ICB', icb: 'ICB',
+        agribank: 'VBA', vba: 'VBA',
+        sacombank: 'STB', stb: 'STB',
+        tpbank: 'TPB', tpb: 'TPB',
+        vib: 'VIB', shb: 'SHB', hdbank: 'HDB', hdb: 'HDB',
+        ocb: 'OCB', msb: 'MSB', seabank: 'SEAB',
+        eximbank: 'EIB', eib: 'EIB', lpbank: 'LPB', lpb: 'LPB'
+      };
+      return aliases[normalized] || String(bankName || '').trim().replace(/\s+/g, '');
+    }
+
+    function buildVietQrUrl(bank, account, holder, message) {
+      const bankId = getVietQrBankId(bank);
+      if (!bankId || !account) return '';
+      const cleanAccount = String(account).replace(/\s+/g, '');
+      const path = `${encodeURIComponent(bankId)}-${encodeURIComponent(cleanAccount)}-compact2.png`;
+      const params = new URLSearchParams({ amount: '0', addInfo: message, accountName: holder });
+      return `https://img.vietqr.io/image/${path}?${params.toString()}`;
     }
 
     // Update VietQR image previews
     function updateQrPreviews() {
       const gBank = document.getElementById('cfg-groom-bank').value.trim() || 'MB';
       const gAcc = document.getElementById('cfg-groom-acc').value.trim() || '';
-      const gHolder = encodeURIComponent(document.getElementById('cfg-groom-holder').value.trim() || 'LE TAN LOC');
+      const gHolder = document.getElementById('cfg-groom-holder').value.trim() || 'LE TAN LOC';
       const gImg = document.getElementById('qr-preview-groom');
       if (gImg && gAcc) {
-        gImg.src = `https://img.vietqr.io/image/${gBank}-${gAcc}-compact2.png?amount=0&addInfo=Mung%20cuoi%20Tan%20Loc&accountName=${gHolder}`;
+        gImg.src = buildVietQrUrl(gBank, gAcc, gHolder, 'Mung cuoi Tan Loc');
       }
 
       const bBank = document.getElementById('cfg-bride-bank').value.trim() || 'VCB';
       const bAcc = document.getElementById('cfg-bride-acc').value.trim() || '';
-      const bHolder = encodeURIComponent(document.getElementById('cfg-bride-holder').value.trim() || 'DUONG HONG TU');
+      const bHolder = document.getElementById('cfg-bride-holder').value.trim() || 'DUONG HONG TU';
       const bImg = document.getElementById('qr-preview-bride');
       if (bImg && bAcc) {
-        bImg.src = `https://img.vietqr.io/image/${bBank}-${bAcc}-compact2.png?amount=0&addInfo=Mung%20cuoi%20Hong%20Tu&accountName=${bHolder}`;
+        bImg.src = buildVietQrUrl(bBank, bAcc, bHolder, 'Mung cuoi Hong Tu');
       }
     }
 
@@ -1744,7 +1898,7 @@ Cô Chú Sáu"></textarea>
       if (input) {
         input.value = domain;
         localStorage.setItem('wedding_base_domain', domain);
-        updateSingleGenerator();
+        invalidateSingleGenerator();
         showToast(`✓ Đã chọn tên miền: ${domain}`);
       }
     };
@@ -1799,20 +1953,20 @@ Cô Chú Sáu"></textarea>
 
       let url = '';
       let displaySlug = cleanSlug;
+      const routeCode = side === 'gai' ? '1' : '2';
+      let lookupSlug = `${routeCode}-${cleanSlug}`;
 
       if (format === 'unicode_slug') {
-        displaySlug = unicodeSlug;
-        const sideQuery = side ? `&side=${encodeURIComponent(side)}` : '';
-        url = `${baseUrl}${encodeURI(unicodeSlug)}?name=${encodeURIComponent(trimmedName)}${sideQuery}`;
+        displaySlug = `${routeCode}/${unicodeSlug}`;
+        lookupSlug = `${routeCode}-${unicodeSlug}`;
+        url = `${baseUrl}${routeCode}/${encodeURI(unicodeSlug)}?name=${encodeURIComponent(trimmedName)}`;
       } else if (format === 'compat') {
-        const sideQuery = side ? `&side=${encodeURIComponent(side)}` : '';
-        displaySlug = `${cleanSlug}?name=${encodeURIComponent(trimmedName)}`;
-        url = `${baseUrl}?to=${cleanSlug}&name=${encodeURIComponent(trimmedName)}${sideQuery}`;
+        displaySlug = `${routeCode}/${cleanSlug}?name=${encodeURIComponent(trimmedName)}`;
+        url = `${baseUrl}${routeCode}/${cleanSlug}?name=${encodeURIComponent(trimmedName)}`;
       } else {
         // clean_slug (Default recommended)
-        displaySlug = cleanSlug;
-        const sideQuery = side ? `&side=${encodeURIComponent(side)}` : '';
-        url = `${baseUrl}${cleanSlug}?name=${encodeURIComponent(trimmedName)}${sideQuery}`;
+        displaySlug = `${routeCode}/${cleanSlug}`;
+        url = `${baseUrl}${routeCode}/${cleanSlug}`;
       }
 
       // Save to guest map dictionary in localStorage for local lookups
@@ -1821,17 +1975,22 @@ Cô Chú Sáu"></textarea>
         guestMap[cleanSlug] = { name: trimmedName, side: side };
         guestMap[cleanSlug.toLowerCase()] = { name: trimmedName, side: side };
         guestMap[unicodeSlug] = { name: trimmedName, side: side };
+        guestMap[`${routeCode}/${cleanSlug}`] = { name: trimmedName, side: side };
+        guestMap[`${routeCode}/${cleanSlug}`.toLowerCase()] = { name: trimmedName, side: side };
         localStorage.setItem('wedding_guest_map', JSON.stringify(guestMap));
       } catch (e) {}
 
       // Personalized invitation message
       const displayGuestName = trimmedName || 'Quý Khách';
       const sideText = side === 'trai' ? 'gia đình Nhà Trai' : side === 'gai' ? 'gia đình Nhà Gái' : 'gia đình chúng tôi';
+      const weddingDateText = side === 'gai'
+        ? 'Thứ Bảy, ngày 24.10.2026'
+        : 'Chủ Nhật, ngày 25.10.2026';
       const message = 
 `💌 THƯ MỜI CƯỚI TRÂN TRỌNG
 Kính gửi: ${displayGuestName}
 
-Hôn lễ của Tấn Lộc & Hồng Tú sẽ được tổ chức vào Chủ Nhật, ngày 25.10.2026.
+Hôn lễ của Tấn Lộc & Hồng Tú sẽ được tổ chức vào ${weddingDateText}.
 Sự hiện diện của ${displayGuestName} là niềm vinh hạnh to lớn cho ${sideText}!
 
 Trân trọng kính mời ${displayGuestName} xem thiệp cưới online và thông tin chi tiết tại link:
@@ -1842,6 +2001,7 @@ Rất mong được đón tiếp ${displayGuestName}!`;
       return {
         url,
         slug: displaySlug,
+        lookupSlug,
         normalizedName: cleanSlug,
         rawName: trimmedName,
         side,
@@ -1851,6 +2011,7 @@ Rất mong được đón tiếp ${displayGuestName}!`;
 
     const SAVED_GUESTS_KEY = 'wedding_saved_guests';
     let editingGuestKey = '';
+    let currentGeneratedItem = null;
 
     function escapeAdminHtml(value) {
       const div = document.createElement('div');
@@ -1871,6 +2032,29 @@ Rất mong được đón tiếp ${displayGuestName}!`;
       localStorage.setItem(SAVED_GUESTS_KEY, JSON.stringify(guests));
     }
 
+    async function registerGuestLink(item) {
+      if (!item || !item.rawName || !item.lookupSlug || typeof window.fetch !== 'function') return false;
+      try {
+        const response = await fetch('/api/guests', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            slug: item.lookupSlug,
+            name: item.rawName,
+            side: item.side || ''
+          })
+        });
+        if (!response.ok) return false;
+        const contentType = response.headers.get('content-type') || '';
+        if (!contentType.includes('application/json')) return false;
+        const payload = await response.json();
+        return Boolean(payload && payload.ok);
+      } catch (error) {
+        console.info('Chưa thể đồng bộ khách mời dùng chung:', error.message);
+        return false;
+      }
+    }
+
     function saveGuestItem(item, silent = false) {
       if (!item || !item.rawName) return;
       const guests = getSavedGuests();
@@ -1882,6 +2066,7 @@ Rất mong được đón tiếp ${displayGuestName}!`;
       else guests.unshift(savedItem);
       editingGuestKey = '';
       setSavedGuests(guests);
+      registerGuestLink(item);
       renderSavedGuests();
       if (!silent) showToast(`✓ Đã lưu khách mời ${item.rawName}`);
     }
@@ -1924,7 +2109,7 @@ Rất mong được đón tiếp ${displayGuestName}!`;
             document.querySelectorAll('.side-choice-card').forEach(card => card.classList.remove('selected'));
             sideRadio.closest('.side-choice-card')?.classList.add('selected');
           }
-          updateSingleGenerator();
+          invalidateSingleGenerator();
           document.getElementById('input-guest-name').focus();
           window.scrollTo({ top: 0, behavior: 'smooth' });
         });
@@ -1946,25 +2131,51 @@ Rất mong được đón tiếp ${displayGuestName}!`;
     /**
      * Copy Personalized Guest Invitation Message
      */
-    window.copyGuestMsg = function(name, url, side) {
+    window.copyGuestMsg = async function(name, url, side) {
       const item = generateGuestLink(name, side);
-      copyText(item.message, `✓ Đã sao chép tin nhắn mời cho ${name}!`);
+      const synced = await registerGuestLink(item);
+      copyText(
+        item.message,
+        synced
+          ? `✓ Đã sao chép tin nhắn mời cho ${name}!`
+          : `Đã sao chép; cần cấu hình Redis để giữ tên có dấu trên link ngắn.`
+      );
     };
 
     /**
-     * Update Single Link Generator Output
+     * Clear the confirmed result whenever an input that affects the URL changes.
      */
-    function updateSingleGenerator() {
+    function invalidateSingleGenerator() {
+      currentGeneratedItem = null;
+      const resultBox = document.getElementById('single-link-result');
+      const generateBtn = document.getElementById('btn-generate-single');
+      if (resultBox) resultBox.style.display = 'none';
+      if (generateBtn) generateBtn.textContent = '✓ Xác Nhận Tạo Link';
+    }
+
+    /**
+     * Generate the single guest link only after explicit confirmation.
+     */
+    async function generateSingleLink() {
       const inputName = document.getElementById('input-guest-name').value;
       const sideRadio = document.querySelector('input[name="guest_side"]:checked');
       const side = sideRadio ? sideRadio.value : 'trai';
 
+      if (!inputName.trim()) {
+        showToast('Vui lòng nhập tên khách mời trước khi tạo link.');
+        document.getElementById('input-guest-name').focus();
+        return;
+      }
+
       const res = generateGuestLink(inputName, side);
+      currentGeneratedItem = res;
 
       const urlInput = document.getElementById('output-guest-url');
       const slugTag = document.getElementById('slug-preview-tag');
       const openBtn = document.getElementById('btn-open-preview');
       const msgBox = document.getElementById('output-guest-message');
+      const resultBox = document.getElementById('single-link-result');
+      const generateBtn = document.getElementById('btn-generate-single');
 
       if (urlInput) urlInput.value = res.url;
       if (openBtn) openBtn.href = res.url;
@@ -1975,6 +2186,11 @@ Rất mong được đón tiếp ${displayGuestName}!`;
       if (msgBox) {
         msgBox.textContent = res.message;
       }
+
+      if (resultBox) resultBox.style.display = 'block';
+      if (generateBtn) generateBtn.textContent = '↻ Tạo Lại Link';
+      await registerGuestLink(res);
+      showToast(`✓ Đã tạo link ${side === 'gai' ? 'Nhà Gái' : 'Nhà Trai'} cho ${res.rawName}`);
     }
 
     /**
@@ -2137,32 +2353,70 @@ Rất mong được đón tiếp ${displayGuestName}!`;
         const radio = card.querySelector('input[type="radio"]');
         if (radio) {
           radio.checked = true;
-          updateSingleGenerator();
+          invalidateSingleGenerator();
         }
       });
     });
 
     // Event listeners
-    document.getElementById('input-guest-name').addEventListener('input', updateSingleGenerator);
-    document.querySelectorAll('input[name="url_format"]').forEach(r => r.addEventListener('change', updateSingleGenerator));
+    document.getElementById('input-guest-name').addEventListener('input', invalidateSingleGenerator);
+    document.querySelectorAll('input[name="url_format"]').forEach(r => r.addEventListener('change', invalidateSingleGenerator));
+    document.getElementById('btn-generate-single').addEventListener('click', generateSingleLink);
 
-    document.getElementById('btn-copy-url').addEventListener('click', () => {
-      const url = document.getElementById('output-guest-url').value;
-      copyText(url, '✓ Đã sao chép link mời!');
+    document.getElementById('btn-open-preview').addEventListener('click', async (event) => {
+      event.preventDefault();
+      const item = currentGeneratedItem;
+      if (!item) {
+        showToast('Hãy bấm “Xác Nhận Tạo Link” trước.');
+        return;
+      }
+
+      // Open the tab immediately so browsers do not block it, then navigate only
+      // after the shared guest record has had a chance to finish saving.
+      const previewWindow = window.open('', '_blank');
+      await registerGuestLink(item);
+      if (previewWindow) {
+        previewWindow.opener = null;
+        previewWindow.location.replace(item.url);
+      } else {
+        window.location.href = item.url;
+      }
     });
 
-    document.getElementById('btn-copy-msg').addEventListener('click', () => {
-      const msg = document.getElementById('output-guest-message').textContent;
-      copyText(msg, '✓ Đã sao chép tin nhắn Zalo!');
+    document.getElementById('btn-copy-url').addEventListener('click', async () => {
+      const item = currentGeneratedItem;
+      if (!item) {
+        showToast('Hãy bấm “Xác Nhận Tạo Link” trước.');
+        return;
+      }
+      const synced = await registerGuestLink(item);
+      copyText(
+        item.url,
+        synced
+          ? '✓ Đã sao chép link mời và lưu đúng tên khách!'
+          : 'Đã sao chép link; cần cấu hình Redis để giữ tên có dấu.'
+      );
+    });
+
+    document.getElementById('btn-copy-msg').addEventListener('click', async () => {
+      const item = currentGeneratedItem;
+      if (!item) {
+        showToast('Hãy bấm “Xác Nhận Tạo Link” trước.');
+        return;
+      }
+      const synced = await registerGuestLink(item);
+      copyText(
+        item.message,
+        synced
+          ? '✓ Đã sao chép tin nhắn Zalo và lưu đúng tên khách!'
+          : 'Đã sao chép tin nhắn; cần cấu hình Redis để giữ tên có dấu.'
+      );
     });
 
     document.getElementById('btn-save-guest').addEventListener('click', () => {
-      const inputName = document.getElementById('input-guest-name').value;
-      const sideRadio = document.querySelector('input[name="guest_side"]:checked');
-      const item = generateGuestLink(inputName, sideRadio ? sideRadio.value : '');
-      if (!item.rawName) {
-        showToast('Vui lòng nhập tên khách mời trước khi lưu.');
-        document.getElementById('input-guest-name').focus();
+      const item = currentGeneratedItem;
+      if (!item) {
+        showToast('Hãy bấm “Xác Nhận Tạo Link” trước khi lưu.');
         return;
       }
       saveGuestItem(item);
@@ -2291,7 +2545,7 @@ Rất mong được đón tiếp ${displayGuestName}!`;
     if (domainInput) {
       domainInput.addEventListener('input', () => {
         localStorage.setItem('wedding_base_domain', domainInput.value.trim());
-        updateSingleGenerator();
+        invalidateSingleGenerator();
       });
     }
 
@@ -2319,7 +2573,7 @@ Rất mong được đón tiếp ${displayGuestName}!`;
 
       const currentCfg = getConfig();
       populateForm(currentCfg);
-      updateSingleGenerator();
+      invalidateSingleGenerator();
       renderSavedGuests();
     });
   </script>

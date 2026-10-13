@@ -199,6 +199,7 @@ body {
   width: 2px;
   background: var(--primary-olive);
   border-radius: 1px;
+  transform-origin: center bottom;
   animation: soundBar 1s ease-in-out infinite;
 }
 
@@ -209,6 +210,11 @@ body {
 .floating-audio-control.paused .audio-sound-waves span {
   animation: none;
   height: 2px;
+}
+
+@keyframes soundBar {
+  0%, 100% { transform: scaleY(0.35); opacity: 0.55; }
+  50% { transform: scaleY(1); opacity: 1; }
 }
 
 .audio-toast-pill {
@@ -1854,7 +1860,7 @@ body {
     max-width: none;
     transform: none;
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 3px;
     padding: 6px;
     border-radius: 26px;
@@ -1890,6 +1896,22 @@ body {
 /* ==========================================================================
    Modals (Gift QR & Guestbook Wishes)
    ========================================================================== */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 .modal-backdrop {
   position: fixed;
   inset: 0;
@@ -2081,6 +2103,34 @@ body {
   border-radius: 14px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
   object-fit: contain;
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+  backface-visibility: hidden;
+  transition:
+    opacity 0.22s ease,
+    transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.lightbox-main-img.is-leaving-next {
+  opacity: 0;
+  transform: translate3d(-18px, 0, 0) scale(0.985);
+}
+
+.lightbox-main-img.is-leaving-prev {
+  opacity: 0;
+  transform: translate3d(18px, 0, 0) scale(0.985);
+}
+
+.lightbox-main-img.is-entering-next {
+  opacity: 0;
+  transform: translate3d(18px, 0, 0) scale(0.985);
+  transition: none;
+}
+
+.lightbox-main-img.is-entering-prev {
+  opacity: 0;
+  transform: translate3d(-18px, 0, 0) scale(0.985);
+  transition: none;
 }
 
 .lightbox-btn-close {
@@ -2245,45 +2295,63 @@ body {
 [data-anim] {
   opacity: 0;
   will-change: transform, opacity;
+  backface-visibility: hidden;
   transition-property: opacity, transform;
-  transition-duration: var(--anim-duration, 0.65s);
-  transition-timing-function: var(--anim-easing, cubic-bezier(0.16, 1, 0.3, 1));
+  transition-duration: var(--anim-duration, 0.82s);
+  transition-timing-function: var(--anim-easing, cubic-bezier(0.22, 1, 0.36, 1));
   transition-delay: var(--anim-delay, 0.04s);
 }
 
 /* Initial States (Before Entering Viewport - Clean Amplitude) */
 [data-anim="fade-in"] {
-  transform: translateY(20px) scale(0.97);
+  transform: translate3d(0, 14px, 0) scale(0.985);
 }
 
 [data-anim="slide-up"] {
-  transform: translateY(36px);
+  transform: translate3d(0, 28px, 0);
 }
 
 [data-anim="slide-down"] {
-  transform: translateY(-36px);
+  transform: translate3d(0, -28px, 0);
 }
 
 [data-anim="slide-left"] {
-  transform: translateX(36px);
+  transform: translate3d(28px, 0, 0);
 }
 
 [data-anim="slide-right"] {
-  transform: translateX(-36px);
+  transform: translate3d(-28px, 0, 0);
 }
 
 [data-anim="zoom-in"] {
-  transform: scale(0.88) translateY(24px);
+  transform: translate3d(0, 18px, 0) scale(0.94);
 }
 
 [data-anim="flip-in"] {
-  transform: perspective(600px) rotateX(15deg) translateY(28px);
+  transform: perspective(700px) rotateX(9deg) translate3d(0, 22px, 0);
 }
 
 /* In-View Active State (Full clarity & spring settling) */
 [data-anim].anim-in-view {
   opacity: 1 !important;
-  transform: translateY(0) translateX(0) scale(1) perspective(600px) rotateX(0deg) rotateY(0deg) !important;
+  transform: translate3d(0, 0, 0) scale(1) perspective(700px) rotateX(0deg) rotateY(0deg) !important;
+}
+
+/* Nội dung chữ dùng nhịp chậm hơn một chút để đọc tự nhiên, không bật nảy. */
+.hero-watermark[data-anim],
+.hero-hy-badge[data-anim],
+.hero-guest-invitation[data-anim],
+.hero-couple-stacked[data-anim],
+.hero-photo-date[data-anim],
+.wedding-quote[data-anim],
+.formal-invitation-banner[data-anim],
+.schedule-master-header[data-anim],
+.gallery-header[data-anim],
+.countdown-title[data-anim],
+.section-eyebrow[data-anim],
+.thankyou-content[data-anim] {
+  --anim-duration: 0.9s;
+  --anim-easing: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* ==========================================================================
@@ -2567,5 +2635,19 @@ body {
 
   .hero-doves-overlay {
     display: none !important;
+  }
+
+  .modal-backdrop.active,
+  .modal-card,
+  .fullscreen-lightbox.active,
+  .lightbox-main-img,
+  .audio-toast-pill,
+  .floating-audio-control.playing .disc-wrapper,
+  .audio-sound-waves span {
+    animation: none !important;
+  }
+
+  .lightbox-main-img {
+    transition: none !important;
   }
 }

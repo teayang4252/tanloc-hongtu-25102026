@@ -5,10 +5,10 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   const initializers = [
+    initGuestPersonalization,
     loadSavedConfig,
     initAudioPlayer,
     initCountdown,
-    initGuestPersonalization,
     initWishesSection,
     initGiftModal,
     initPhotoLightbox,
@@ -30,14 +30,137 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+function prefersReducedMotion() {
+  return typeof window.matchMedia === 'function' &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+const DEFAULT_GROOM_SCHEDULE = {
+  solarDate: '25.10.2026',
+  solarDayNumber: '25',
+  lunarDate: '16 tháng 09 năm Bính Ngọ',
+  countdownTarget: '2026-10-25T09:00:00+07:00',
+  event1Title: 'LỄ TÂN HÔN',
+  event1Time: '09:00',
+  event1DayVal: 'CHỦ NHẬT',
+  event1Venue: 'Tại tư gia nhà trai',
+  event1Address: '16/4 Điện Biên Phủ · TDP 5 Cũ (Thôn 3 Mới) · Đắk Lắk',
+  event1MapLink: 'https://www.google.com/maps/search/?api=1&query=16%2F4+%C4%90i%E1%BB%87n+Bi%C3%AAn+Ph%E1%BB%A7%2C+Kr%C3%B4ng+Kmar%2C+Kr%C3%B4ng+B%C3%B4ng%2C+%C4%90%E1%BA%AFk+L%E1%BA%AFk',
+  event2Title: 'TIỆC CƯỚI CHUNG VUI',
+  event2Time: '11:00',
+  event2DayVal: 'CHỦ NHẬT',
+  event2Venue: 'Nhà Cộng Đồng',
+  event2Address: 'Thôn 5 · TT. Krông Kmar Cũ (Thôn 3 Mới) · Đắk Lắk',
+  event2MapLink: 'https://www.google.com/maps/search/?api=1&query=Nh%C3%A0+C%E1%BB%99ng+%C4%90%E1%BB%93ng%2C+Kr%C3%B4ng+Kmar%2C+Kr%C3%B4ng+B%C3%B4ng%2C+%C4%90%E1%BA%AFk+L%E1%BA%AFk'
+};
+
+const DEFAULT_BRIDE_SCHEDULE = {
+  solarDate: '24.10.2026',
+  solarDayNumber: '24',
+  lunarDate: '15 tháng 09 năm Bính Ngọ',
+  countdownTarget: '2026-10-24T11:00:00+07:00',
+  event2Title: 'TIỆC CƯỚI NHÀ GÁI',
+  event2Time: '11:00',
+  event2DayVal: 'THỨ BẢY',
+  event2Venue: 'Nhà hàng Quang Long',
+  event2Address: '29 Nguyễn Huệ · Krông Bông · Đắk Lắk',
+  event2MapLink: 'https://maps.app.goo.gl/aJm6BMmdJeqJbcic8?g_st=ic'
+};
+
+function getInvitationSide() {
+  if (window._guestInvitationSide === 'gai') return 'bride';
+  if (window._guestInvitationSide === 'trai') return 'groom';
+
+  const path = (window.location.pathname || '').toLowerCase();
+  if (/^\/1(?:\/|$)/.test(path)) return 'bride';
+  if (/^\/2(?:\/|$)/.test(path)) return 'groom';
+
+  const search = window.location.search || '';
+  const sideMatch = search.match(/[?&](?:side|nha)=([^&]+)/i);
+  let side = '';
+  if (sideMatch) {
+    try { side = decodeURIComponent(sideMatch[1].replace(/\+/g, ' ')); } catch (_) { side = sideMatch[1]; }
+  }
+
+  if (!side && /(?:_|-)nhagai(?:\/|$)/.test(path)) side = 'gai';
+  if (!side && /(?:_|-)nhatrai(?:\/|$)/.test(path)) side = 'trai';
+
+  side = side.toLowerCase();
+  if (['gai', 'bride', 'nhagai', 'nha-gai'].includes(side)) return 'bride';
+  if (['trai', 'groom', 'nhatrai', 'nha-trai'].includes(side)) return 'groom';
+  return 'groom';
+}
+
+function getEffectiveWeddingConfig(storedConfig) {
+  const stored = storedConfig || {};
+  if (getInvitationSide() !== 'bride') {
+    return { ...DEFAULT_GROOM_SCHEDULE, ...stored };
+  }
+
+  const bride = {
+    solarDate: stored.brideSolarDate || DEFAULT_BRIDE_SCHEDULE.solarDate,
+    solarDayNumber: stored.brideSolarDayNumber || DEFAULT_BRIDE_SCHEDULE.solarDayNumber,
+    lunarDate: stored.brideLunarDate || DEFAULT_BRIDE_SCHEDULE.lunarDate,
+    countdownTarget: stored.brideCountdownTarget || DEFAULT_BRIDE_SCHEDULE.countdownTarget,
+    event2Title: stored.brideEventTitle || DEFAULT_BRIDE_SCHEDULE.event2Title,
+    event2Time: stored.brideEventTime || DEFAULT_BRIDE_SCHEDULE.event2Time,
+    event2DayVal: stored.brideEventDayVal || DEFAULT_BRIDE_SCHEDULE.event2DayVal,
+    event2Venue: stored.brideEventVenue || DEFAULT_BRIDE_SCHEDULE.event2Venue,
+    event2Address: stored.brideEventAddress || DEFAULT_BRIDE_SCHEDULE.event2Address,
+    event2MapLink: stored.brideEventMapLink || DEFAULT_BRIDE_SCHEDULE.event2MapLink
+  };
+
+  return { ...DEFAULT_GROOM_SCHEDULE, ...stored, ...bride };
+}
+
+function parseWeddingDateTime(dateText, timeText) {
+  const match = String(dateText || '').match(/^(\d{1,2})[./-](\d{1,2})[./-](\d{4})$/);
+  if (!match) return null;
+  const day = match[1].padStart(2, '0');
+  const month = match[2].padStart(2, '0');
+  const time = /^\d{2}:\d{2}$/.test(timeText || '') ? timeText : '11:00';
+  const value = new Date(`${match[3]}-${month}-${day}T${time}:00+07:00`).getTime();
+  return Number.isNaN(value) ? null : value;
+}
+
+function parseCountdownTarget(value, fallbackDate, fallbackTime) {
+  let normalized = String(value || '').trim();
+  if (normalized && !/(?:Z|[+-]\d{2}:?\d{2})$/i.test(normalized)) {
+    if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(normalized)) normalized += ':00';
+    normalized += '+07:00';
+  }
+  const parsed = new Date(normalized).getTime();
+  return Number.isNaN(parsed) ? parseWeddingDateTime(fallbackDate, fallbackTime) : parsed;
+}
+
 /* ==========================================================================
    0. Dynamic Config Sync from Admin Panel (localStorage)
    ========================================================================== */
 function loadSavedConfig() {
+  window._weddingFxConfig = {
+    petals: true,
+    bokeh: true,
+    sparkles: true,
+    doves: true,
+    confetti: true
+  };
+
   try {
     const raw = localStorage.getItem('wedding_site_config');
-    if (!raw) return;
-    const cfg = JSON.parse(raw);
+    const storedConfig = raw ? JSON.parse(raw) : {};
+    const cfg = getEffectiveWeddingConfig(storedConfig);
+    const invitationSide = getInvitationSide();
+
+    document.body.dataset.invitationSide = invitationSide;
+    if (invitationSide === 'bride') {
+      document.querySelectorAll('.groom-schedule-only').forEach(el => {
+        el.hidden = true;
+        el.style.display = 'none';
+      });
+      document.querySelectorAll('.schedule-audience-label').forEach(el => el.textContent = 'PHIÊN BẢN NHÀ GÁI');
+    } else {
+      document.querySelectorAll('.schedule-audience-label').forEach(el => el.textContent = 'PHIÊN BẢN NHÀ TRAI');
+    }
 
     // Couple Names
     if (cfg.groomName) {
@@ -86,17 +209,44 @@ function loadSavedConfig() {
 
     // Dates
     if (cfg.solarDate) document.querySelectorAll('.solar-date-text').forEach(el => el.textContent = cfg.solarDate);
-    if (cfg.solarDayNumber) document.querySelectorAll('.date-badge-large').forEach(el => el.textContent = cfg.solarDayNumber);
-    if (cfg.lunarDate) document.querySelectorAll('.schedule-lunar-date, .lunar-date-text').forEach(el => el.textContent = cfg.lunarDate);
+    if (cfg.solarDayNumber) document.querySelectorAll('.date-badge-large, .sched-day-number').forEach(el => el.textContent = cfg.solarDayNumber);
+    if (cfg.solarDate) {
+      const dateParts = cfg.solarDate.split('.');
+      if (dateParts.length === 3) {
+        document.querySelectorAll('.sched-month').forEach(el => el.textContent = `THÁNG ${dateParts[1]}`);
+        document.querySelectorAll('.sched-year').forEach(el => el.textContent = `NĂM ${dateParts[2]}`);
+      }
+    }
+    if (cfg.lunarDate) {
+      document.querySelectorAll('.schedule-lunar-date, .lunar-date-text').forEach(el => el.textContent = cfg.lunarDate);
+      document.querySelectorAll('.sched-lunar-date').forEach(el => el.textContent = `(Nhằm ngày ${cfg.lunarDate})`);
+    }
+
+    window._customCountdownTarget = parseCountdownTarget(
+      cfg.countdownTarget,
+      cfg.solarDate,
+      cfg.event2Time
+    );
+    window._activeWeddingSchedule = {
+      title: invitationSide === 'bride' ? 'Tiệc Cưới Nhà Gái Tấn Lộc & Hồng Tú' : 'Lễ Cưới Tấn Lộc & Hồng Tú',
+      details: 'Trân trọng kính mời bạn đến chung vui cùng gia đình chúng tôi trong ngày cưới Tấn Lộc & Hồng Tú! ❤️',
+      location: `${cfg.event2Venue}, ${cfg.event2Address}`,
+      start: parseWeddingDateTime(cfg.solarDate, cfg.event2Time)
+    };
 
     // Bank Details
     if (cfg.groomBank) document.querySelectorAll('.groom-bank-text').forEach(el => el.textContent = cfg.groomBank);
     if (cfg.groomAccount) document.querySelectorAll('.groom-acc-text').forEach(el => el.textContent = cfg.groomAccount);
     if (cfg.groomAccountHolder) document.querySelectorAll('.groom-holder-text').forEach(el => el.textContent = cfg.groomAccountHolder);
+    if (cfg.groomAccount) document.querySelectorAll('.groom-copy-account').forEach(el => el.dataset.copy = cfg.groomAccount);
 
     if (cfg.brideBank) document.querySelectorAll('.bride-bank-text').forEach(el => el.textContent = cfg.brideBank);
     if (cfg.brideAccount) document.querySelectorAll('.bride-acc-text').forEach(el => el.textContent = cfg.brideAccount);
     if (cfg.brideAccountHolder) document.querySelectorAll('.bride-holder-text').forEach(el => el.textContent = cfg.brideAccountHolder);
+    if (cfg.brideAccount) document.querySelectorAll('.bride-copy-account').forEach(el => el.dataset.copy = cfg.brideAccount);
+
+    updateGiftQrCode('groom-qr-code', cfg.groomBank, cfg.groomAccount, cfg.groomAccountHolder, 'Mung cuoi Tan Loc');
+    updateGiftQrCode('bride-qr-code', cfg.brideBank, cfg.brideAccount, cfg.brideAccountHolder, 'Mung cuoi Hong Tu');
 
     // Quotes
     if (cfg.quote) document.querySelectorAll('.wedding-quote p').forEach(el => el.textContent = cfg.quote);
@@ -138,15 +288,24 @@ function initAudioPlayer() {
   const promptPill = document.getElementById('audio-prompt-pill');
   if (!audio || !musicBtn) return;
 
+  // Luôn ưu tiên phát nhạc. Trình duyệt di động vẫn có thể bắt buộc một lần
+  // chạm đầu tiên; các listener bên dưới sẽ phát ngay khi thao tác đó xảy ra.
+  audio.autoplay = true;
+  audio.loop = true;
+  audio.playsInline = true;
+  let userPaused = false;
+
   function syncPlaybackUi(playing) {
     musicBtn.classList.toggle('playing', playing);
     musicBtn.classList.toggle('paused', !playing);
     musicBtn.setAttribute('aria-pressed', String(playing));
+    musicBtn.setAttribute('aria-label', playing ? 'Tạm dừng nhạc nền' : 'Bật nhạc nền');
     if (promptPill) promptPill.classList.toggle('hidden', playing);
   }
 
-  function playMusic() {
-    audio.volume = 1.0;
+  function playMusic(force = false) {
+    if (userPaused && !force) return null;
+    audio.volume = 0.82;
     audio.muted = false;
     const playPromise = audio.play();
     if (playPromise !== undefined) {
@@ -169,10 +328,12 @@ function initAudioPlayer() {
   musicBtn.addEventListener('click', (e) => {
     e.stopPropagation();
     if (!audio.paused && !audio.ended) {
+      userPaused = true;
       pauseMusic();
       showToast('Đã tạm dừng nhạc ♫');
     } else {
-      playMusic();
+      userPaused = false;
+      playMusic(true);
       showToast('Đang phát: Em Đồng Ý (I Do) ♫');
     }
   });
@@ -180,7 +341,8 @@ function initAudioPlayer() {
   if (promptPill) {
     promptPill.addEventListener('click', (e) => {
       e.stopPropagation();
-      playMusic();
+      userPaused = false;
+      playMusic(true);
       showToast('Đang phát: Em Đồng Ý (I Do) ♫');
     });
   }
@@ -191,13 +353,14 @@ function initAudioPlayer() {
   playMusic();
   window.addEventListener('load', () => { if (audio.paused) playMusic(); }, { once: true });
   window.addEventListener('pageshow', () => { if (audio.paused) playMusic(); });
+  audio.addEventListener('canplay', () => { if (audio.paused) playMusic(); }, { once: true });
   document.addEventListener('visibilitychange', () => {
     if (!document.hidden && audio.paused) playMusic();
   });
 
   // 2. First real in-page gesture unlocks audio on mobile browsers.
   const gestureEvents = [
-    'pointerdown', 'touchend', 'click', 'keydown'
+    'pointerdown', 'touchstart', 'touchend', 'click', 'keydown'
   ];
 
   function handleFirstGesture(event) {
@@ -207,7 +370,7 @@ function initAudioPlayer() {
       return;
     }
     if (audio.paused) {
-      playMusic();
+      playMusic(true);
     }
   }
 
@@ -222,8 +385,55 @@ function initAudioPlayer() {
   });
 
   audio.addEventListener('playing', () => syncPlaybackUi(true));
-  audio.addEventListener('pause', () => syncPlaybackUi(false));
+  audio.addEventListener('pause', () => {
+    syncPlaybackUi(false);
+    // Khôi phục sau gián đoạn hệ thống/tab nếu khách chưa chủ động tắt nhạc.
+    if (!userPaused && !document.hidden) {
+      setTimeout(() => {
+        if (audio.paused && !userPaused) playMusic();
+      }, 350);
+    }
+  });
+  audio.addEventListener('ended', () => playMusic());
   audio.addEventListener('error', () => syncPlaybackUi(false));
+}
+
+function getVietQrBankId(bankName) {
+  const normalized = String(bankName || '')
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/đ/g, 'd')
+    .replace(/[^a-z0-9]/g, '');
+  const aliases = {
+    mb: 'MB', mbbank: 'MB', nganhangquandoi: 'MB',
+    vcb: 'VCB', vietcombank: 'VCB',
+    tcb: 'TCB', techcombank: 'TCB',
+    acb: 'ACB', vpbank: 'VPB', vpb: 'VPB',
+    bidv: 'BIDV', vietinbank: 'ICB', icb: 'ICB',
+    agribank: 'VBA', vba: 'VBA',
+    sacombank: 'STB', stb: 'STB',
+    tpbank: 'TPB', tpb: 'TPB',
+    vib: 'VIB', shb: 'SHB', hdbank: 'HDB', hdb: 'HDB',
+    ocb: 'OCB', msb: 'MSB', seabank: 'SEAB',
+    eximbank: 'EIB', eib: 'EIB', lpbank: 'LPB', lpb: 'LPB'
+  };
+  return aliases[normalized] || String(bankName || '').trim().replace(/\s+/g, '');
+}
+
+function updateGiftQrCode(elementId, bank, account, holder, message) {
+  const image = document.getElementById(elementId);
+  const bankId = getVietQrBankId(bank);
+  if (!image || !bankId || !account) return;
+
+  const cleanAccount = String(account).replace(/\s+/g, '');
+  const path = `${encodeURIComponent(bankId)}-${encodeURIComponent(cleanAccount)}-compact2.png`;
+  const query = [
+    'amount=0',
+    `addInfo=${encodeURIComponent(message)}`,
+    `accountName=${encodeURIComponent(String(holder || '').trim())}`
+  ].join('&');
+  image.src = `https://img.vietqr.io/image/${path}?${query}`;
 }
 
 /* ==========================================================================
@@ -275,58 +485,7 @@ let currentGuest = {
   hasCustomName: false
 };
 
-function initGuestPersonalization() {
-  const urlParams = new URLSearchParams(window.location.search);
-
-  // 0. Clean path-based slug (e.g. /Em-Tu-Ton or /Ban-Hien without ?to=)
-  let pathSlug = window.location.pathname.replace(/^\/+|\/+$/g, '');
-  if (pathSlug && !pathSlug.includes('.') && pathSlug.toLowerCase() !== 'admin' && pathSlug.toLowerCase() !== 'index') {
-    try {
-      pathSlug = decodeURIComponent(pathSlug);
-    } catch (e) {}
-  } else {
-    pathSlug = '';
-  }
-  
-  // 1. Explicit Vietnamese accented name parameter (e.g. ?name=Bạn+Hiển or ?ten=Bạn+Hiển)
-  let guestName = urlParams.get('name') || urlParams.get('ten') || '';
-  let guestSide = urlParams.get('side') || urlParams.get('nha') || '';
-
-  // 2. Slug parameter (e.g. ?to=banhien_nhatrai)
-  const toParam = pathSlug || urlParams.get('to') || urlParams.get('guest') || urlParams.get('khach') || '';
-
-  // 3. Resolve slug from admin guest map dictionary if available
-  if (toParam) {
-    try {
-      const guestMap = JSON.parse(localStorage.getItem('wedding_guest_map') || '{}');
-      const found = guestMap[toParam] || guestMap[toParam.toLowerCase()];
-      if (found) {
-        if (!guestName) guestName = found.name;
-        if (!guestSide) guestSide = found.side;
-      }
-    } catch (e) {}
-
-    // Fallback: If still no guestName, decode toParam and Title-case
-    if (!guestName) {
-      const rawSlug = toParam.replace(/_nhatrai|_nhagai|-nhatrai|-nhagai/gi, '').replace(/[-_]+/g, ' ').trim();
-      guestName = rawSlug.split(/\s+/).map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
-    }
-
-    // Auto-detect side from slug format like banhien_nhatrai / banhien_nhagai
-    if (!guestSide) {
-      if (toParam.includes('_nhatrai') || toParam.includes('-nhatrai')) {
-        guestSide = 'trai';
-      } else if (toParam.includes('_nhagai') || toParam.includes('-nhagai')) {
-        guestSide = 'gai';
-      }
-    }
-  }
-
-  // Graceful cleanup: If guestName still contains slug suffixes (e.g. opened ?to=banhien_nhatrai without &name=)
-  if (guestName && (guestName.includes('_nhatrai') || guestName.includes('_nhagai') || guestName.includes('-nhatrai') || guestName.includes('-nhagai'))) {
-    guestName = guestName.replace(/_nhatrai|_nhagai|-nhatrai|-nhagai/g, '').replace(/_/g, ' ');
-  }
-
+function applyGuestPersonalization(guestName, guestSide) {
   const cleanName = guestName.trim();
   const cleanSide = guestSide.trim().toLowerCase();
 
@@ -373,17 +532,114 @@ function initGuestPersonalization() {
   }
 
   // Handle side of family
-  if (greetingSide) {
-    if (cleanSide === 'trai' || cleanSide === 'groom' || cleanSide === 'nhatrai') {
-      currentGuest.side = 'Nhà trai';
-      greetingSide.textContent = 'Khách quý của Nhà Trai';
-    } else if (cleanSide === 'gai' || cleanSide === 'bride' || cleanSide === 'nhagai') {
-      currentGuest.side = 'Nhà gái';
-      greetingSide.textContent = 'Khách quý của Nhà Gái';
-    } else {
-      currentGuest.side = 'Hai bên';
-      greetingSide.textContent = 'Khách quý của Hai Bên Gia Đình';
+  if (cleanSide === 'trai' || cleanSide === 'groom' || cleanSide === 'nhatrai') {
+    currentGuest.side = 'Nhà trai';
+    if (greetingSide) greetingSide.textContent = 'Khách quý của Nhà Trai';
+  } else if (cleanSide === 'gai' || cleanSide === 'bride' || cleanSide === 'nhagai') {
+    currentGuest.side = 'Nhà gái';
+    if (greetingSide) greetingSide.textContent = 'Khách quý của Nhà Gái';
+  } else {
+    currentGuest.side = 'Hai bên';
+    if (greetingSide) greetingSide.textContent = 'Khách quý của Hai Bên Gia Đình';
+  }
+}
+
+async function loadSharedGuest(slug, fallbackName, fallbackSide, explicitName, explicitSide) {
+  if (!slug || typeof window.fetch !== 'function') return;
+  try {
+    const response = await fetch(`/api/guests?slug=${encodeURIComponent(slug)}`, {
+      headers: { Accept: 'application/json' }
+    });
+    if (!response.ok) return;
+    const payload = await response.json();
+    if (!payload || !payload.ok || !payload.guest) return;
+
+    const resolvedName = explicitName ? fallbackName : (payload.guest.name || fallbackName);
+    const resolvedSide = explicitSide ? fallbackSide : (payload.guest.side || fallbackSide);
+
+    if (!explicitSide && ['trai', 'gai'].includes(resolvedSide)) {
+      const previousSide = getInvitationSide();
+      window._guestInvitationSide = resolvedSide;
+      if (getInvitationSide() !== previousSide) loadSavedConfig();
     }
+
+    applyGuestPersonalization(resolvedName, resolvedSide);
+  } catch (error) {
+    console.info('Thiệp đang dùng tên khách từ đường dẫn:', error.message);
+  }
+}
+
+function initGuestPersonalization() {
+  const urlParams = new URLSearchParams(window.location.search);
+
+  // 0. Clean path-based slug (e.g. /Em-Tu-Ton without query parameters)
+  const pathSegments = window.location.pathname
+    .replace(/^\/+|\/+$/g, '')
+    .split('/')
+    .filter(Boolean);
+  const routeCode = pathSegments.length === 2 && ['1', '2'].includes(pathSegments[0])
+    ? pathSegments[0]
+    : '';
+  const routeSide = routeCode === '1' ? 'gai' : routeCode === '2' ? 'trai' : '';
+  let pathSlug = routeCode ? pathSegments[1] : (pathSegments.length === 1 ? pathSegments[0] : '');
+  if (pathSlug && !pathSlug.includes('.') && !['admin', 'index'].includes(pathSlug.toLowerCase())) {
+    try { pathSlug = decodeURIComponent(pathSlug); } catch (_) {}
+  } else {
+    pathSlug = '';
+  }
+
+  // 1. Explicit parameters remain supported for old links.
+  const explicitName = urlParams.get('name') || urlParams.get('ten') || '';
+  const explicitSide = urlParams.get('side') || urlParams.get('nha') || routeSide;
+  let guestName = explicitName;
+  let guestSide = explicitSide;
+
+  // 2. Slug parameter (e.g. ?to=banhien_nhatrai)
+  const toParam = pathSlug || urlParams.get('to') || urlParams.get('guest') || urlParams.get('khach') || '';
+
+  // 3. Resolve slug from the current browser cache when available.
+  if (toParam) {
+    try {
+      const guestMap = JSON.parse(localStorage.getItem('wedding_guest_map') || '{}');
+      const routeKey = routeCode ? `${routeCode}/${toParam}` : toParam;
+      const found = guestMap[routeKey] || guestMap[routeKey.toLowerCase()] || guestMap[toParam] || guestMap[toParam.toLowerCase()];
+      if (found) {
+        if (!guestName) guestName = found.name;
+        if (!guestSide) guestSide = found.side;
+      }
+    } catch (_) {}
+
+    // Immediate readable fallback while the shared guest record is loading.
+    if (!guestName) {
+      const rawSlug = toParam.replace(/_nhatrai|_nhagai|-nhatrai|-nhagai/gi, '').replace(/[-_]+/g, ' ').trim();
+      guestName = rawSlug.split(/\s+/).map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+    }
+
+    if (!guestSide) {
+      if (/_nhatrai|-nhatrai/i.test(toParam)) guestSide = 'trai';
+      else if (/_nhagai|-nhagai/i.test(toParam)) guestSide = 'gai';
+    }
+  }
+
+  if (guestName && /_nhatrai|_nhagai|-nhatrai|-nhagai/i.test(guestName)) {
+    guestName = guestName.replace(/_nhatrai|_nhagai|-nhatrai|-nhagai/gi, '').replace(/_/g, ' ');
+  }
+
+  // Set the invitation side before loadSavedConfig() applies venue, date and map data.
+  // This is especially important for clean links such as /Em-Tu-Ton, which carry
+  // the side in the locally/shared saved guest record instead of the URL itself.
+  const normalizedGuestSide = String(guestSide || '').trim().toLowerCase();
+  if (normalizedGuestSide === 'trai' || normalizedGuestSide === 'gai') {
+    window._guestInvitationSide = normalizedGuestSide;
+  }
+
+  applyGuestPersonalization(guestName, guestSide);
+
+  // The shared record restores Vietnamese accents and invitation side on the
+  // recipient's device while keeping the public URL as short as /Em-Tu-Ton.
+  if (pathSlug) {
+    const sharedSlug = routeCode ? `${routeCode}-${pathSlug}` : pathSlug;
+    loadSharedGuest(sharedSlug, guestName, guestSide, Boolean(explicitName), Boolean(explicitSide));
   }
 }
 
@@ -722,12 +978,13 @@ function initWishesSection() {
    5. Calendar Integration (Google Calendar & .ics File)
    ========================================================================== */
 function handleAddToCalendar() {
-  const title = encodeURIComponent('Lễ Cưới Tấn Lộc & Hồng Tú');
-  const details = encodeURIComponent('Trân trọng kính mời bạn đến chung vui cùng gia đình chúng tôi tại tiệc cưới Tấn Lộc & Hồng Tú! ❤️');
-  const location = encodeURIComponent('Nhà Cộng Đồng, Thôn 5, TT. Krông Kmar Cũ (Thôn 3 Mới), Đắk Lắk');
-  
-  // Oct 25, 2026, 11:00 to 14:00 (GMT+7 -> 04:00 UTC to 07:00 UTC)
-  const gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=20261025T040000Z/20261025T070000Z&details=${details}&location=${location}`;
+  const schedule = getActiveWeddingSchedule();
+  const title = encodeURIComponent(schedule.title);
+  const details = encodeURIComponent(schedule.details);
+  const location = encodeURIComponent(schedule.location);
+  const start = formatCalendarUtc(schedule.start);
+  const end = formatCalendarUtc(schedule.start + (3 * 60 * 60 * 1000));
+  const gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${start}/${end}&details=${details}&location=${location}`;
 
   const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent);
   if (isIos) {
@@ -738,18 +995,34 @@ function handleAddToCalendar() {
   showToast('Đang thêm lịch cưới vào điện thoại 📅');
 }
 
+function getActiveWeddingSchedule() {
+  return window._activeWeddingSchedule || {
+    title: 'Lễ Cưới Tấn Lộc & Hồng Tú',
+    details: 'Trân trọng kính mời bạn đến chung vui cùng gia đình chúng tôi trong ngày cưới Tấn Lộc & Hồng Tú! ❤️',
+    location: 'Nhà Cộng Đồng, Thôn 5, TT. Krông Kmar Cũ (Thôn 3 Mới), Đắk Lắk',
+    start: new Date('2026-10-25T11:00:00+07:00').getTime()
+  };
+}
+
+function formatCalendarUtc(timestamp) {
+  return new Date(timestamp).toISOString().replace(/[-:]/g, '').replace(/\.\d{3}Z$/, 'Z');
+}
+
 function downloadIcsFile() {
+  const schedule = getActiveWeddingSchedule();
+  const start = formatCalendarUtc(schedule.start);
+  const end = formatCalendarUtc(schedule.start + (3 * 60 * 60 * 1000));
   const icsContent = 
 `BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//Green Love//Wedding Invitation//VI
 CALSCALE:GREGORIAN
 BEGIN:VEVENT
-SUMMARY:Lễ Cưới Tấn Lộc & Hồng Tú
-DESCRIPTION:Trân trọng kính mời bạn đến chung vui cùng gia đình Tấn Lộc & Hồng Tú!
-LOCATION:Nhà Cộng Đồng, Thôn 5, TT. Krông Kmar Cũ (Thôn 3 Mới), Đắk Lắk
-DTSTART:20261025T040000Z
-DTEND:20261025T070000Z
+SUMMARY:${schedule.title}
+DESCRIPTION:${schedule.details}
+LOCATION:${schedule.location}
+DTSTART:${start}
+DTEND:${end}
 STATUS:CONFIRMED
 END:VEVENT
 END:VCALENDAR`;
@@ -757,7 +1030,9 @@ END:VCALENDAR`;
   const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
   const link = document.createElement('a');
   link.href = window.URL.createObjectURL(blob);
-  link.setAttribute('download', 'le-cuoi-tan-loc-hong-tu.ics');
+  link.setAttribute('download', getInvitationSide() === 'bride'
+    ? 'tiec-cuoi-nha-gai-tan-loc-hong-tu.ics'
+    : 'le-cuoi-nha-trai-tan-loc-hong-tu.ics');
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
@@ -794,18 +1069,82 @@ function initPhotoLightbox() {
   });
 
   let currentIndex = 0;
+  let transitionSerial = 0;
+  let transitionTimer = null;
+  const transitionClasses = [
+    'is-leaving-next', 'is-leaving-prev',
+    'is-entering-next', 'is-entering-prev'
+  ];
 
   function closeLightbox() {
     lightbox.classList.remove('active');
     if (window.setWeddingModalActive) window.setWeddingModalActive(false);
   }
 
-  function showPhoto(index) {
+  function clearImageTransition() {
+    if (transitionTimer) {
+      clearTimeout(transitionTimer);
+      transitionTimer = null;
+    }
+    lightboxImg.classList.remove(...transitionClasses);
+  }
+
+  function preloadAdjacentPhotos() {
+    if (photoList.length < 2) return;
+    const previous = (currentIndex - 1 + photoList.length) % photoList.length;
+    const next = (currentIndex + 1) % photoList.length;
+    [photoList[previous], photoList[next]].forEach(src => {
+      const image = new Image();
+      image.src = src;
+    });
+  }
+
+  function showPhoto(index, direction = 0, immediate = false) {
     if (photoList.length === 0) return;
     if (index < 0) index = photoList.length - 1;
     if (index >= photoList.length) index = 0;
     currentIndex = index;
-    lightboxImg.src = photoList[currentIndex];
+    const nextSource = photoList[currentIndex];
+    const serial = ++transitionSerial;
+
+    if (immediate || prefersReducedMotion() || !lightbox.classList.contains('active')) {
+      clearImageTransition();
+      lightboxImg.src = nextSource;
+      preloadAdjacentPhotos();
+      return;
+    }
+
+    const preloader = new Image();
+    let ready = false;
+    const swapImage = () => {
+      if (ready || serial !== transitionSerial) return;
+      ready = true;
+      clearImageTransition();
+
+      const leavingClass = direction < 0 ? 'is-leaving-prev' : 'is-leaving-next';
+      const enteringClass = direction < 0 ? 'is-entering-prev' : 'is-entering-next';
+      lightboxImg.classList.add(leavingClass);
+
+      transitionTimer = setTimeout(() => {
+        if (serial !== transitionSerial) return;
+        lightboxImg.src = nextSource;
+        lightboxImg.classList.remove(leavingClass);
+        lightboxImg.classList.add(enteringClass);
+        void lightboxImg.offsetWidth;
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            if (serial === transitionSerial) lightboxImg.classList.remove(enteringClass);
+          });
+        });
+        preloadAdjacentPhotos();
+        transitionTimer = null;
+      }, 160);
+    };
+
+    preloader.addEventListener('load', swapImage, { once: true });
+    preloader.addEventListener('error', swapImage, { once: true });
+    preloader.src = nextSource;
+    if (preloader.complete) swapImage();
   }
 
   if (closeBtn) {
@@ -815,14 +1154,14 @@ function initPhotoLightbox() {
   if (prevBtn) {
     prevBtn.addEventListener('click', (e) => {
       e.stopPropagation();
-      showPhoto(currentIndex - 1);
+      showPhoto(currentIndex - 1, -1);
     });
   }
 
   if (nextBtn) {
     nextBtn.addEventListener('click', (e) => {
       e.stopPropagation();
-      showPhoto(currentIndex + 1);
+      showPhoto(currentIndex + 1, 1);
     });
   }
 
@@ -833,8 +1172,8 @@ function initPhotoLightbox() {
   document.addEventListener('keydown', (e) => {
     if (!lightbox.classList.contains('active')) return;
     if (e.key === 'Escape') closeLightbox();
-    if (e.key === 'ArrowLeft') showPhoto(currentIndex - 1);
-    if (e.key === 'ArrowRight') showPhoto(currentIndex + 1);
+    if (e.key === 'ArrowLeft') showPhoto(currentIndex - 1, -1);
+    if (e.key === 'ArrowRight') showPhoto(currentIndex + 1, 1);
   });
 }
 
@@ -842,7 +1181,8 @@ function initPhotoLightbox() {
    7. 3D Tilt & Touch Tactile Feedback for Photos
    ========================================================================== */
 function init3DPhotoTilt() {
-  const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const canHover = typeof window.matchMedia === 'function' &&
+    window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   const cards = document.querySelectorAll('.hero-arch-frame, .gallery-photo-card, .gallery-hero-card, .collage-item, .family-photo-wrapper');
   
   cards.forEach(card => {
@@ -918,8 +1258,7 @@ function initScrollAnimations() {
   if (!animatedElements.length) return;
 
   const revealAll = () => animatedElements.forEach(el => el.classList.add('anim-in-view'));
-  const reducedMotion = typeof window.matchMedia === 'function' &&
-    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const reducedMotion = prefersReducedMotion();
 
   // Nội dung luôn phải đọc được trên WebView cũ hoặc khi người dùng tắt chuyển động.
   if (reducedMotion || typeof window.IntersectionObserver !== 'function') {
@@ -966,7 +1305,7 @@ function initAmbientAtmosphere() {
   if (!ctx) return;
 
   // Respect user preference for reduced motion
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (prefersReducedMotion()) return;
 
   const fxConfig = window._weddingFxConfig || {
     petals: true,
@@ -1020,7 +1359,9 @@ function initAmbientAtmosphere() {
   for (let i = 0; i < petalCount; i++) {
     petals.push({
       x: Math.random() * width,
-      y: Math.random() * height - height,
+      // Distribute the first frame across the viewport so the effect is visible
+      // immediately instead of taking many seconds to fall in from above.
+      y: Math.random() * height,
       size: Math.random() * 7 + 9,
       vy: Math.random() * 0.55 + 0.42,
       swayAmp: Math.random() * 1.5 + 0.9,
@@ -1041,6 +1382,8 @@ function initAmbientAtmosphere() {
     ctx.scale(Math.cos(p.flip), 1);
 
     ctx.fillStyle = p.color;
+    ctx.shadowColor = 'rgba(111, 86, 49, 0.22)';
+    ctx.shadowBlur = 3;
     ctx.beginPath();
     ctx.moveTo(0, -p.size);
     ctx.bezierCurveTo(p.size * 0.8, -p.size * 0.4, p.size * 0.7, p.size * 0.6, 0, p.size);
@@ -1272,8 +1615,7 @@ function initHeroDoves() {
   } catch (e) {}
 
   // 1. Accessibility: respects prefers-reduced-motion
-  const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-  if (motionQuery && motionQuery.matches) {
+  if (prefersReducedMotion()) {
     overlay.style.display = 'none';
     return;
   }
@@ -1373,7 +1715,7 @@ let accumulatedScrollY = 0;
 const SCROLL_SPEED_PX_PER_SEC = 72;
 
 function initCinematicAutoScroll() {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (prefersReducedMotion()) return;
 
   // Đảm bảo không bị giật do CSS smooth scroll
   document.documentElement.style.scrollBehavior = 'auto';
