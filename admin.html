@@ -799,8 +799,8 @@
                   <input type="radio" name="url_format" value="clean_slug" checked style="accent-color: var(--primary-olive); margin-top: 3px;" />
                   <div>
                     <strong>Link Cá Nhân Hoá An Toàn (Khuyên Dùng):</strong><br>
-                    <code style="background: #EFECE4; padding: 1px 6px; border-radius: 4px;">/1/Ban-Hien?name=Bạn+Hiền · /2/Ban-Hien?name=Bạn+Hiền</code>
-                    <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 2px;">Số 1 là Nhà Gái, số 2 là Nhà Trai; tên có dấu đi kèm để điện thoại và máy tính hiển thị giống nhau.</div>
+                    <code style="background: #EFECE4; padding: 1px 6px; border-radius: 4px;">/1/banhien · /2/banhien</code>
+                    <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 2px;">Số 1 là Nhà Gái, số 2 là Nhà Trai; tên có dấu được lưu riêng để link luôn ngắn.</div>
                   </div>
                 </label>
                 <label style="display: flex; align-items: flex-start; gap: 8px; font-weight: normal; font-size: 13px; cursor: pointer;">
@@ -1939,11 +1939,10 @@ Cô Chú Sáu"></textarea>
       const formatRadio = document.querySelector('input[name="url_format"]:checked');
       const format = formatRadio ? formatRadio.value : 'clean_slug';
 
-      // 1. Clean ASCII slug (e.g. "Em Tú Tôn" -> "Em-Tu-Ton")
+      // 1. Compact ASCII slug (e.g. "Bạn Hiển" -> "banhien")
       const cleanSlug = removeVietnameseTones(trimmedName)
-        .replace(/[^a-zA-Z0-9\s]/g, '')
-        .trim()
-        .replace(/\s+/g, '-');
+        .replace(/[^a-zA-Z0-9]/g, '')
+        .toLowerCase();
 
       // 2. Unicode accented slug (e.g. "Em Tú Tôn" -> "Em-Tú-Tôn")
       const unicodeSlug = trimmedName
@@ -1966,9 +1965,9 @@ Cô Chú Sáu"></textarea>
       } else {
         // clean_slug (Default recommended)
         displaySlug = `${routeCode}/${cleanSlug}`;
-        // The readable ASCII path identifies the guest, while the exact Unicode
-        // name makes the invitation deterministic on every browser/device.
-        url = `${baseUrl}${routeCode}/${cleanSlug}?name=${encodeURIComponent(trimmedName)}`;
+        // The exact Unicode name is stored in the shared guest registry, keeping
+        // the public link short and consistent across browsers and devices.
+        url = `${baseUrl}${routeCode}/${cleanSlug}`;
       }
 
       // Save to guest map dictionary in localStorage for local lookups
@@ -2215,9 +2214,12 @@ Rất mong được đón tiếp ${displayGuestName}!`;
       if (resultBox) resultBox.style.display = 'block';
       if (generateBtn) generateBtn.textContent = '↻ Tạo Lại Link';
       const saveResult = await saveGuestItem(res, true);
-      if (saveResult.saved) {
+      if (saveResult.saved && saveResult.synced) {
         if (slugTag) slugTag.textContent = `✓ Đã tạo và lưu: /${res.slug} · Thiệp: ${res.rawName}`;
         showToast(`✓ Đã tạo và lưu link ${side === 'gai' ? 'Nhà Gái' : 'Nhà Trai'} cho ${res.rawName}`);
+      } else if (saveResult.saved) {
+        if (slugTag) slugTag.textContent = `⚠ Link đã lưu trên máy nhưng chưa đồng bộ tên: /${res.slug}`;
+        showToast('Chưa đồng bộ được tên có dấu. Vui lòng bấm tạo lại sau ít phút.');
       } else if (slugTag) {
         slugTag.textContent = `⚠ Link đã tạo nhưng chưa lưu: /${res.slug}`;
       }
